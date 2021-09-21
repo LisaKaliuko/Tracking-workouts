@@ -14,7 +14,7 @@ const SignInRoute = ({ path }) => {
 
   return (
     <Route path={path}>
-      {!user.isUserIn || !isUserIn ? <SignIn /> : <Redirect to="/calendar" />}
+      {!user.isUserIn && !isUserIn ? <SignIn /> : <Redirect to="/calendar" />}
     </Route>
   );
 };

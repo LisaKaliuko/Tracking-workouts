@@ -14,7 +14,7 @@ const RegistrationRoute = ({ path }) => {
 
   return (
     <Route path={path}>
-      {!user.isUserIn || !isUserIn ? (
+      {!user.isUserIn && !isUserIn ? (
         <Registration />
       ) : (
         <Redirect to="/calendar" />

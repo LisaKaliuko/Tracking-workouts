@@ -45,5 +45,8 @@ export const signInUser = (email, password) => {
 };
 
 export const logOutUser = () => {
-  firebase.logout().then(() => sessionStorage.setItem('isUserIn', false));
+  firebase
+    .logout()
+    .then(() => sessionStorage.setItem('isUserIn', false))
+    .then(() => isSignIn());
 };
