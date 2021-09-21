@@ -1,29 +1,39 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
-import PrivateRoute from './routes/PrivatRoute';
-import SignIn from './routes/SignIn';
-import Calendar from './Components/Calendar';
-import Menu from './Components/Menu';
-import SignInEmail from './Components/SignInEmail';
-import ConnectedRegistration from './Components/Registration';
+import Menu from './components/Menu/Menu';
+import SignInRoute from './routes/SignInRoute';
+import RegistrationRoute from './routes/RegistrationRoute';
+import PrivateRoute from './routes/PrivateRoute';
+import Calendar from './components/Calendar/Calendar';
+import Categories from './components/Categories/Categories';
+import ExercisesList from './components/ExercisesList/ExercisesList';
+import Exercise from './components/Exercise/Exercise';
 
 function App() {
   return (
-    <div>
-      <h1>App</h1>
+    <>
       <Router>
         <Menu />
         <Switch>
+          <Redirect exact from="/" to="/signin" />
+          <RegistrationRoute path="/registration" exact />
+          <SignInRoute path="/signin" exact />
           <PrivateRoute path="/calendar">
             <Calendar />
           </PrivateRoute>
-          <Route path="/registration" component={ConnectedRegistration} />
-          <Route path="/signinemail" component={SignInEmail} />
-          <Route path="/signin" component={SignIn} />
+          <PrivateRoute path="/categories">
+            <Categories />
+          </PrivateRoute>
+          <PrivateRoute path="/exercises">
+            <ExercisesList />
+          </PrivateRoute>
+          <PrivateRoute path="/exercises:id">
+            <Exercise />
+          </PrivateRoute>
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 

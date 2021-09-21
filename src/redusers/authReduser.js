@@ -1,37 +1,37 @@
-import firebase from 'firebase/app';
-
 import Actions from '../actions/actionTypes';
+/**
+ store = {
+   user: {
+     email: test@mail.ru,
+     uid:46ryfhry5746,
+     isUserIn: true,
+     error: null
+   }
+ }
+*/
 
-const initState = {};
+const initialState = {
+  user: {
+    email: null,
+    uid: null,
+    isUserIn: false,
+    error: null,
+  },
+};
 
-// const createNewUser = ({ email, password }) => {
-//   firebase.createUser({ email, password });
-// };
-
-const authReducer = (state = initState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case Actions.REGISTER: {
-      console.log(
-        'register user: ',
-        action.payload.email,
-        action.payload.password
-      );
-      //createNewUser({ ...action.payload });
-      return state;
+      return { ...state, ...action.payload };
     }
     case Actions.SIGN_IN: {
-      console.log(
-        'sign in user: ',
-        action.payload.email,
-        action.payload.password
-      );
-      firebase
-        .login({
-          email: action.payload.email,
-          password: action.payload.password,
-        })
-        .then((response) => console.log('logged', response));
-      return state;
+      return { ...state, ...action.payload };
+    }
+    case Actions.LOG_OUT: {
+      return { ...state, ...action.payload };
+    }
+    case Actions.ERROR: {
+      return { ...state, ...action.payload };
     }
     default: {
       return state;

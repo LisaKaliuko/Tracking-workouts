@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase/app';
@@ -10,13 +12,13 @@ import { createFirestoreInstance } from 'redux-firestore';
 
 import { firebaseConfig } from './config/fbConfig';
 import App from './App';
-import { rootReducer } from './redusers/rootReducer';
+import rootReducer from './redusers/rootReducer';
 
 firebase.initializeApp(firebaseConfig);
-firebase.firestore();
+export const firestore = firebase.firestore();
 
 const initialState = {};
-const store = createStore(rootReducer, initialState);
+export const store = createStore(rootReducer, initialState);
 
 const rrfConfig = {
   userProfile: 'users',

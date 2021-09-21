@@ -3,9 +3,13 @@ import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 
 import authReducer from './authReduser';
+import workoutReducer from './workoutReducer';
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   auth: authReducer,
+  workout: workoutReducer,
 });
+
+export default rootReducer;

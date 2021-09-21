@@ -1,0 +1,25 @@
+.title {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.calendar-table {
+  font-size: 25px;
+
+  width: 60%;
+  margin: auto;
+}
+
+.calendar-table th,
+.calendar-table td {
+  text-align: center;
+
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.calendar-table td a {
+  text-decoration: none;
+  color: #000000;
+}
