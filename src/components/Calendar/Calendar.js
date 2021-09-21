@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './calendar.css';
@@ -164,16 +163,31 @@ const Calendar = () => {
           {calendarMatrix.map((week, i) => (
             <tr key={i}>
               {week.map((day, i) => (
-                <td key={i}>
+                <td
+                  key={i}
+                  className={
+                    year === new Date().getFullYear() &&
+                    month === new Date().getMonth() &&
+                    day === new Date().getDate()
+                      ? 'current-day'
+                      : ''
+                  }
+                >
                   <Link
                     to="/categories"
+                    className={
+                      year > new Date().getFullYear() ||
+                      month > new Date().getMonth() ||
+                      day > new Date().getDate()
+                        ? 'disabled-link'
+                        : ''
+                    }
                     onClick={() => {
                       setWorkoutDay(year, month, day);
                     }}
                   >
                     {day || ' '}
                   </Link>
-
                   {workout.dates.length !== 0
                     ? workout.dates.map((item, i) => {
                         if (
