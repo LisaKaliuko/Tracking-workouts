@@ -13,7 +13,7 @@ const Menu = () => {
       <p className="navbar-brand text-white m-0">Tracking workout</p>
       <div id="navbarNav">
         <ul className="navbar-nav flex-row">
-          {!isUserIn || !user.isUserIn ? (
+          {!isUserIn && !user.isUserIn ? (
             <>
               <li className="nav-item m-3">
                 <Link to="/registration" className="nav-link text-white">
