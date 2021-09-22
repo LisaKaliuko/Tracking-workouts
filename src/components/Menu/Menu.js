@@ -10,7 +10,9 @@ const Menu = () => {
 
   return (
     <nav className="navbar bg-dark text-white justify-content-around">
-      <p className="navbar-brand text-white m-0">Tracking workout</p>
+      <Link className="navbar-brand text-white m-0" to="/calendar">
+        Tracking workout
+      </Link>
       <div id="navbarNav">
         <ul className="navbar-nav flex-row">
           {!isUserIn && !user.isUserIn ? (
