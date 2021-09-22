@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { setExercise } from '../../actions/actionsCreator';
-import { setWorkout } from '../../actions/actionsCreator';
 import PopupForm from '../PopupForm/PopupForm';
 import './exercise.css';
 
@@ -28,14 +27,13 @@ const Exercise = () => {
         history.push(url);
       } else {
         setShowPopup(true);
-        setWorkout();
       }
     }
   }, [doneRepeats]);
 
   return (
     <div className="exercise_container w-50 m-auto">
-      {exercise.img ? (
+      {exercise || exercise.img ? (
         <img src={exercise.img} />
       ) : (
         <p>Извините, картинки нет</p>

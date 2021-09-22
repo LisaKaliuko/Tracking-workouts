@@ -1,17 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
+
+import { setWorkout } from '../../actions/actionsCreator';
+import { setDataToFirestore } from '../../firebase';
 
 const PopupForm = () => {
+  const history = useHistory();
+
   return (
     <form className="position-fixed fixed-top start-50 top-50 translate-middle py-5 border border-secondary bg-light w-50 m-auto">
       <h3 className="m-3">Закончить тренировку?</h3>
       <div>
-        <Link to="/calendar" className="btn btn-primary m-3 px-4">
+        <button
+          className="btn btn-primary m-3 px-4"
+          onClick={(e) => {
+            e.preventDefault();
+            setWorkout();
+            setDataToFirestore(() => history.push('/calendar'));
+          }}
+        >
           Да
-        </Link>
-        <Link to="/exercises" className="btn btn-primary m-3 px-4">
+        </button>
+        <button
+          className="btn btn-primary m-3 px-4"
+          onClick={(e) => {
+            e.preventDefault();
+            history.push('/exercises');
+          }}
+        >
           Нет
-        </Link>
+        </button>
       </div>
     </form>
   );
