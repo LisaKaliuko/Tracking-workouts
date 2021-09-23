@@ -9,17 +9,19 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const user = useSelector((state) => state.auth.user);
 
+  const changeEmail = (e) => setEmail(e.target.value);
+  const changePassword = (e) => setPassword(e.target.value);
+  const enterUser = (e) => {
+    e.preventDefault();
+    signInUser(email, password);
+    setEmail('');
+    setPassword('');
+  };
+
   return (
     <div className="d-flex flex-column w-25 m-auto mt-5">
       <h3>Войти</h3>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          signInUser(email, password);
-          setEmail('');
-          setPassword('');
-        }}
-      >
+      <form onSubmit={enterUser}>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input
@@ -27,7 +29,7 @@ const SignIn = () => {
             type="text"
             name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={changeEmail}
           />
         </div>
         <div className="form-group mt-3">
@@ -37,7 +39,7 @@ const SignIn = () => {
             type="password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={changePassword}
           />
         </div>
         {user.error ? <p className="text-danger mb-0">{user.error}</p> : null}

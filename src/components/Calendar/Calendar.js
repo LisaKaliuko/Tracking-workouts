@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './calendar.css';
 
+import Loader from '../Loader/Loader';
 import { setWorkoutDay } from '../../actions/actionsCreator';
 import { firestore } from '../..';
-import Loader from '../Loader/Loader';
+import './calendar.css';
 
 function getNumberOfCells(firstDay, lastDay, days) {
   // пн вт ср чт пт сб вс
@@ -103,6 +103,42 @@ const Calendar = () => {
     };
   }, []);
 
+  const clickPrevMonth = (e) => {
+    e.preventDefault();
+    if (month === 0) {
+      setMonth(11);
+      setYear(year - 1);
+    } else {
+      setMonth(month - 1);
+    }
+  };
+
+  const clickNextMonth = (e) => {
+    e.preventDefault();
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth(month + 1);
+    }
+  };
+
+  const chooseWorkoutDay = (year, month, day, cb) => {
+    let isRepeatedDay = workouts.find((item) => {
+      if (item.day === day && item.month === month && item.year === year) {
+        return item;
+      }
+    });
+    if (isRepeatedDay === undefined || typeof isRepeatedDay === 'undefined') {
+      setWorkoutDay(year, month, day);
+    } else {
+      cb();
+      alert(
+        'В этот день вы уже тренировались. Пожалуйста, выберите другой день'
+      );
+    }
+  };
+
   return (
     <div className="w-75 m-auto">
       {isLoading ? (
@@ -111,17 +147,7 @@ const Calendar = () => {
         <>
           <h2 className="title">График тренировок</h2>
           <div className="d-flex w-50 m-auto justify-content-around">
-            <a
-              onClick={(e) => {
-                e.preventDefault();
-                if (month === 0) {
-                  setMonth(11);
-                  setYear(year - 1);
-                } else {
-                  setMonth(month - 1);
-                }
-              }}
-            >
+            <a onClick={clickPrevMonth}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
@@ -140,17 +166,7 @@ const Calendar = () => {
               {nameOfMonth}&nbsp;
               {year}
             </h4>
-            <a
-              onClick={(e) => {
-                e.preventDefault();
-                if (month === 11) {
-                  setMonth(0);
-                  setYear(year + 1);
-                } else {
-                  setMonth(month + 1);
-                }
-              }}
-            >
+            <a onClick={clickNextMonth}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="35"
@@ -201,28 +217,11 @@ const Calendar = () => {
                             ? 'disabled-link'
                             : ''
                         }
-                        onClick={(e) => {
-                          let isRepeatedDay = workouts.find((item) => {
-                            if (
-                              item.day === day &&
-                              item.month === month &&
-                              item.year === year
-                            ) {
-                              return item;
-                            }
-                          });
-                          if (
-                            isRepeatedDay === undefined ||
-                            typeof isRepeatedDay === 'undefined'
-                          ) {
-                            setWorkoutDay(year, month, day);
-                          } else {
-                            e.preventDefault();
-                            alert(
-                              'В этот день вы уже тренировались. Пожалуйста, выберите другой день'
-                            );
-                          }
-                        }}
+                        onClick={(e) =>
+                          chooseWorkoutDay(year, month, day, () =>
+                            e.preventDefault()
+                          )
+                        }
                       >
                         {day || ' '}
                       </Link>

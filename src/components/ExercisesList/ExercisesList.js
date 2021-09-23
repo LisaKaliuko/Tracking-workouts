@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './exercisesList.css';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
+import Loader from '../Loader/Loader';
 import { setExercise, setExercises } from '../../actions/actionsCreator';
 import { firestore } from '../../index';
-import Loader from '../Loader/Loader';
+import './exercisesList.css';
 
 const ExercisesList = () => {
   const [arrOfExercises, setArrOfExercises] = useState([]);
@@ -30,6 +30,12 @@ const ExercisesList = () => {
     setExercises(arrOfExercises);
   }, [arrOfExercises]);
 
+  const chooseExercise = (exercise) => {
+    setExercise(exercise);
+    const url = `/exercises:${exercise.id}`;
+    history.push(url);
+  };
+
   return (
     <div className="exercises_container">
       {isLoading ? (
@@ -42,11 +48,7 @@ const ExercisesList = () => {
                   <div
                     className="exercises_item"
                     key={exercise.id}
-                    onClick={() => {
-                      setExercise(exercise);
-                      const url = `/exercises:${exercise.id}`;
-                      history.push(url);
-                    }}
+                    onClick={() => chooseExercise(exercise)}
                   >
                     <img src={exercise.img} className="exercises_item-img" />
                     <div className="exercises_item-text">

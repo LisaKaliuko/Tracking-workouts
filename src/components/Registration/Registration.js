@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { registerUser } from '../../firebase';
@@ -9,17 +8,19 @@ const Registration = () => {
   const [password, setPassword] = useState('');
   const user = useSelector((state) => state.auth.user);
 
+  const changeEmail = (e) => setEmail(e.target.value);
+  const changePassword = (e) => setPassword(e.target.value);
+  const registerNewUser = (e) => {
+    e.preventDefault();
+    registerUser(email, password);
+    setEmail('');
+    setPassword('');
+  };
+
   return (
     <div className="d-flex flex-column w-25 m-auto mt-5">
       <h3>Регистрация</h3>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          registerUser(email, password);
-          setEmail('');
-          setPassword('');
-        }}
-      >
+      <form onSubmit={registerNewUser}>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input
@@ -27,7 +28,7 @@ const Registration = () => {
             type="text"
             name="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={changeEmail}
           />
         </div>
         <div className="form-group mt-3">
@@ -37,7 +38,7 @@ const Registration = () => {
             type="password"
             name="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={changePassword}
           />
         </div>
         {user.error ? <p className="text-danger mb-0">{user.error}</p> : null}

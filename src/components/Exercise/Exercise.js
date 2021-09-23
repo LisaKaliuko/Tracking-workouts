@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { setExercise } from '../../actions/actionsCreator';
 import PopupForm from '../PopupForm/PopupForm';
+import { setExercise } from '../../actions/actionsCreator';
 import './exercise.css';
 
 const Exercise = () => {
@@ -31,6 +31,24 @@ const Exercise = () => {
     }
   }, [doneRepeats]);
 
+  const addInputValue = () => {
+    setInputValue(exercise.repeats);
+  };
+
+  const changeInputValue = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const addDoneRepeats = () => {
+    if (Number(inputValue)) {
+      setDoneRepeats(+doneRepeats + +inputValue);
+      setError('');
+    } else {
+      setError('Пожалуйста введите число');
+    }
+    setInputValue('');
+  };
+
   return (
     <div className="exercise_container w-50 m-auto">
       {exercise || exercise.img ? (
@@ -42,12 +60,7 @@ const Exercise = () => {
       <h2>{exercise.name}</h2>
       <div className="exercise_round_container">
         <div>
-          <p
-            className="exercise_round"
-            onClick={() => {
-              setInputValue(exercise.repeats);
-            }}
-          >
+          <p className="exercise_round" onClick={addInputValue}>
             {exercise.repeats}
           </p>
           <span>Повторений требуется</span>
@@ -66,23 +79,13 @@ const Exercise = () => {
           className="form-control"
           placeholder="Повторений"
           value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value);
-          }}
+          onChange={changeInputValue}
         />
         <div className="input-group-append">
           <button
             className="btn btn-outline-secondary btn-blue"
             type="button"
-            onClick={() => {
-              if (Number(inputValue)) {
-                setDoneRepeats(+doneRepeats + +inputValue);
-                setError('');
-              } else {
-                setError('Пожалуйста введите число');
-              }
-              setInputValue('');
-            }}
+            onClick={addDoneRepeats}
           >
             +
           </button>

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import './categories.css';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
+import Loader from '../Loader/Loader';
 import { setCategory } from '../../actions/actionsCreator';
 import { firestore } from '../..';
-import Loader from '../Loader/Loader';
+import './categories.css';
 
 const Categories = () => {
   const [arrOfCategories, setArrOfCategories] = useState([]);
@@ -23,6 +22,10 @@ const Categories = () => {
       .then(() => setLoading(false));
   }, []);
 
+  const chooseCategory = (category) => {
+    setCategory({ ...category });
+  };
+
   return (
     <div className="categories_container">
       {isLoading ? (
@@ -35,9 +38,7 @@ const Categories = () => {
                   <div
                     className="caregories_item"
                     key={category.id}
-                    onClick={() => {
-                      setCategory({ ...category });
-                    }}
+                    onClick={() => chooseCategory(category)}
                   >
                     <Link to="/exercises" className="category_title">
                       {category.title}
