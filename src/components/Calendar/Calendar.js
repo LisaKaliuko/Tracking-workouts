@@ -195,11 +195,11 @@ const Calendar = () => {
               </tr>
             </thead>
             <tbody>
-              {calendarMatrix.map((week, i) => (
-                <tr key={i}>
-                  {week.map((day, i) => (
+              {calendarMatrix.map((week) => (
+                <tr key={week[0]}>
+                  {week.map((day) => (
                     <td
-                      key={i}
+                      key={Math.trunc(Math.random() * 100000)}
                       className={
                         year === new Date().getFullYear() &&
                         month === new Date().getMonth() &&
@@ -226,7 +226,7 @@ const Calendar = () => {
                         {day || ' '}
                       </Link>
                       {workouts.length !== 0
-                        ? workouts.map((item, i) => {
+                        ? workouts.map((item) => {
                             if (
                               item.year === year &&
                               item.month === month &&
@@ -234,7 +234,7 @@ const Calendar = () => {
                               item.isWorkout === true
                             ) {
                               return (
-                                <span key={i} className="workout-icon">
+                                <span key={item.day} className="workout-icon">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="16"
