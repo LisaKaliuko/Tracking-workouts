@@ -3,14 +3,18 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import Loader from '../Loader/Loader';
-import { setExercise, setExercises } from '../../actions/actionsCreator';
+import {
+  setExercise,
+  setExercises,
+  setLoading,
+} from '../../actions/actionsCreator';
 import { firestore } from '../../index';
 import './exercisesList.css';
 
 const ExercisesList = () => {
   const [arrOfExercises, setArrOfExercises] = useState([]);
-  const [isLoading, setLoading] = useState(true);
   const category = useSelector((state) => state.workout.category);
+  const isLoading = useSelector((state) => state.loader.isLoading);
   const history = useHistory();
 
   useEffect(() => {
@@ -32,6 +36,7 @@ const ExercisesList = () => {
 
   const chooseExercise = (exercise) => {
     setExercise(exercise);
+    setLoading(true);
     const url = `/exercises:${exercise.id}`;
     history.push(url);
   };

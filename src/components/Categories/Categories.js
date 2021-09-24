@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Loader from '../Loader/Loader';
-import { setCategory } from '../../actions/actionsCreator';
+import { setCategory, setLoading } from '../../actions/actionsCreator';
 import { firestore } from '../..';
 import './categories.css';
 
 const Categories = () => {
   const [arrOfCategories, setArrOfCategories] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const isLoading = useSelector((state) => state.loader.isLoading);
 
   useEffect(() => {
     firestore
@@ -24,6 +25,7 @@ const Categories = () => {
 
   const chooseCategory = (category) => {
     setCategory({ ...category });
+    setLoading(true);
   };
 
   return (

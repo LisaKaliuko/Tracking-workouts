@@ -8,6 +8,7 @@ const Actions = {
   ARRAY_OF_EXERCISES: 'Workout/ARRAY_OF_EXERCISES',
   EXERCISE: 'Workout/EXERCISE',
   WORKOUT: 'Workout/WORKOUT',
+  LOADER: 'Loader/LOADER',
 };
 
 export default Actions;

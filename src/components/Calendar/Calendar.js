@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Loader from '../Loader/Loader';
 import { setWorkoutDay } from '../../actions/actionsCreator';
 import { firestore } from '../..';
+import { setLoading } from '../../actions/actionsCreator';
 import './calendar.css';
 
 const getNumberOfCells = (firstDay, lastDay, days) => {
@@ -57,7 +59,9 @@ const Calendar = () => {
   const [year, setYear] = useState(2021);
   const [month, setMonth] = useState(new Date().getMonth());
   const [workouts, setWorkouts] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const isLoading = useSelector((state) => state.loader.isLoading);
+  const userEmail = useSelector((state) => state.auth.user.email);
+
   const allMonthes = [
     'Январь',
     'Февраль',
@@ -92,6 +96,7 @@ const Calendar = () => {
   useEffect(() => {
     firestore
       .collection('users')
+      .where('email', '==', userEmail)
       .get()
       .then((snapshot) => {
         snapshot.docs.map((doc) => setWorkouts(doc.data().dates));
@@ -101,7 +106,7 @@ const Calendar = () => {
     return () => {
       setWorkouts([]);
     };
-  }, []);
+  }, [userEmail]);
 
   const clickPrevMonth = (e) => {
     e.preventDefault();
@@ -137,6 +142,7 @@ const Calendar = () => {
     });
     if (isRepeatedDay === undefined || typeof isRepeatedDay === 'undefined') {
       setWorkoutDay(year, month, day);
+      setLoading(true);
     } else {
       cb();
       alert(

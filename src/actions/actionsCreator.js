@@ -105,3 +105,12 @@ export const setWorkout = () => {
     },
   });
 };
+
+export const setLoading = (boolean) => {
+  store.dispatch({
+    type: Actions.LOADER,
+    payload: {
+      isLoading: boolean,
+    },
+  });
+};
