@@ -30,6 +30,10 @@ const getNumberOfCells = (firstDay, lastDay, days) => {
   return cells;
 };
 
+const randomNumber = () => {
+  return Math.trunc(Math.random() * 100000);
+};
+
 const getCalendarMatrix = (firstDay, lastDay, cells) => {
   if (firstDay === 0) {
     firstDay = 7;
@@ -42,16 +46,18 @@ const getCalendarMatrix = (firstDay, lastDay, cells) => {
     //заполняю массив недель днями
     for (let dayOfWeek = 1; dayOfWeek <= 7; dayOfWeek += 1) {
       if (week === 0 && firstDay - 1 > dayOfWeek) {
-        weekArray.push(0);
+        weekArray.push({ date: 0, id: randomNumber() });
       } else if (dayOfWeek + 7 * week - firstDay + 1 > lastDay) {
-        weekArray.push(0);
+        weekArray.push({ date: 0, id: randomNumber() });
       } else {
-        weekArray.push(dayOfWeek + 7 * week - firstDay + 1);
+        weekArray.push({
+          date: dayOfWeek + 7 * week - firstDay + 1,
+          id: randomNumber(),
+        });
       }
     }
     matrix.push(weekArray);
   }
-
   return matrix;
 };
 
@@ -208,14 +214,14 @@ const Calendar = () => {
             </thead>
             <tbody>
               {calendarMatrix.map((week) => (
-                <tr key={week[0]}>
-                  {week.map((day) => (
+                <tr key={week[0].date}>
+                  {week.map((dayObj) => (
                     <td
-                      key={Math.trunc(Math.random() * 100000)}
+                      key={dayObj.id}
                       className={
                         year === new Date().getFullYear() &&
                         month === new Date().getMonth() &&
-                        day === new Date().getDate()
+                        dayObj.date === new Date().getDate()
                           ? 'current-day'
                           : ''
                       }
@@ -225,24 +231,24 @@ const Calendar = () => {
                         className={
                           year > new Date().getFullYear() ||
                           month > new Date().getMonth() ||
-                          day > new Date().getDate()
+                          dayObj.date > new Date().getDate()
                             ? 'disabled-link'
                             : ''
                         }
                         onClick={(e) =>
-                          chooseWorkoutDay(year, month, day, () =>
+                          chooseWorkoutDay(year, month, dayObj.date, () =>
                             e.preventDefault()
                           )
                         }
                       >
-                        {day || ' '}
+                        {dayObj.date || ' '}
                       </Link>
                       {workouts.length !== 0
                         ? workouts.map((item) => {
                             if (
                               item.year === year &&
                               item.month === month &&
-                              item.day === day &&
+                              item.day === dayObj.date &&
                               item.isWorkout === true
                             ) {
                               return (
