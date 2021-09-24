@@ -6,7 +6,7 @@ import { setWorkoutDay } from '../../actions/actionsCreator';
 import { firestore } from '../..';
 import './calendar.css';
 
-function getNumberOfCells(firstDay, lastDay, days) {
+const getNumberOfCells = (firstDay, lastDay, days) => {
   // пн вт ср чт пт сб вс
   // 1  2  3  4  5  6  7
   if (firstDay === 0) {
@@ -26,9 +26,9 @@ function getNumberOfCells(firstDay, lastDay, days) {
   }
 
   return cells;
-}
+};
 
-function getCalendarMatrix(firstDay, lastDay, cells) {
+const getCalendarMatrix = (firstDay, lastDay, cells) => {
   if (firstDay === 0) {
     firstDay = 7;
   }
@@ -51,7 +51,7 @@ function getCalendarMatrix(firstDay, lastDay, cells) {
   }
 
   return matrix;
-}
+};
 
 const Calendar = () => {
   const [year, setYear] = useState(2021);
@@ -125,7 +125,13 @@ const Calendar = () => {
 
   const chooseWorkoutDay = (year, month, day, cb) => {
     let isRepeatedDay = workouts.find((item) => {
-      if (item.day === day && item.month === month && item.year === year) {
+      const workoutDay = new Date(
+        item.year,
+        item.month,
+        item.day
+      ).toLocaleDateString();
+      const currentDay = new Date(year, month, day).toLocaleDateString();
+      if (workoutDay === currentDay) {
         return item;
       }
     });
