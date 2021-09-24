@@ -24,7 +24,7 @@ const ExercisesList = () => {
         );
       })
       .then(() => setLoading(false));
-  }, []);
+  }, [category.id]);
 
   useEffect(() => {
     setExercises(arrOfExercises);

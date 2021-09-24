@@ -29,7 +29,7 @@ const Exercise = () => {
         setShowPopup(true);
       }
     }
-  }, [doneRepeats]);
+  }, [doneRepeats, arrOfExercises, exercise, history]);
 
   const addInputValue = () => {
     setInputValue(exercise.repeats);
