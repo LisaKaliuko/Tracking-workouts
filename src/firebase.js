@@ -6,6 +6,7 @@ import {
   setUser,
   setLogOut,
   setError,
+  setLoading,
 } from './actions/actionsCreator';
 
 const isSignIn = () => {
@@ -20,6 +21,7 @@ const isSignIn = () => {
 };
 
 export const registerUser = (email, password) => {
+  setLoading(true);
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -31,32 +33,45 @@ export const registerUser = (email, password) => {
       });
     })
     .then((user) => isSignIn(user))
-    .then(() => sessionStorage.setItem('isUserIn', true))
+    .then(() => {
+      sessionStorage.setItem('isUserIn', true);
+      setLoading(false);
+    })
     .catch((error) => {
       setError(error);
       sessionStorage.setItem('isUserIn', false);
+      setLoading(false);
     });
 };
 
 export const signInUser = (email, password) => {
+  setLoading(true);
   firebase
     .login({
       email: email,
       password: password,
     })
     .then((user) => isSignIn(user))
-    .then(() => sessionStorage.setItem('isUserIn', true))
+    .then(() => {
+      sessionStorage.setItem('isUserIn', true);
+      setLoading(false);
+    })
     .catch((error) => {
       setError(error);
       sessionStorage.setItem('isUserIn', false);
+      setLoading(false);
     });
 };
 
 export const logOutUser = () => {
+  setLoading(true);
   firebase
     .logout()
     .then(() => sessionStorage.setItem('isUserIn', false))
-    .then(() => isSignIn());
+    .then(() => {
+      isSignIn();
+      setLoading(false);
+    });
 };
 
 export const setDataToFirestore = (cb) => {
