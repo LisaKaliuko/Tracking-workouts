@@ -5,13 +5,15 @@ import { useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
 import { setCategory, setLoading } from '../../actions/actionsCreator';
 import { firestore } from '../..';
+import { selectLoading } from '../../selectors/selectors';
 import './categories.css';
 
 const Categories = () => {
   const [arrOfCategories, setArrOfCategories] = useState([]);
-  const isLoading = useSelector((state) => state.loader.isLoading);
+  const isLoading = useSelector(selectLoading);
 
   useEffect(() => {
+    setLoading(true);
     firestore
       .collection('categories')
       .get()
@@ -25,7 +27,6 @@ const Categories = () => {
 
   const chooseCategory = (category) => {
     setCategory({ ...category });
-    setLoading(true);
   };
 
   return (

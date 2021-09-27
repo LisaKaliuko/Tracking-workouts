@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { logOutUser } from '../../firebase';
+import { selectUser } from '../../selectors/selectors';
 
 const Menu = () => {
+  const user = useSelector(selectUser);
   const isUserIn = JSON.parse(sessionStorage.getItem('isUserIn'));
-  const user = useSelector((state) => state.auth.user);
 
   return (
     <nav className="navbar bg-dark text-white justify-content-around">

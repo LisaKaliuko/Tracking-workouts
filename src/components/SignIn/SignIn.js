@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import Loader from '../Loader/Loader';
 import { signInUser } from '../../firebase';
-import { setLoading } from '../../actions/actionsCreator';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +15,6 @@ const SignIn = () => {
   const enterUser = (e) => {
     e.preventDefault();
     signInUser(email, password);
-    setLoading(true);
     setEmail('');
     setPassword('');
   };

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import Loader from '../Loader/Loader';
 import { registerUser } from '../../firebase';
-import { setLoading } from '../../actions/actionsCreator';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +15,6 @@ const Registration = () => {
   const registerNewUser = (e) => {
     e.preventDefault();
     registerUser(email, password);
-    setLoading(true);
     setEmail('');
     setPassword('');
   };

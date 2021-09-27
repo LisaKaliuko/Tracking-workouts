@@ -4,12 +4,16 @@ import { useHistory } from 'react-router';
 
 import PopupForm from '../PopupForm/PopupForm';
 import { setExercise } from '../../actions/actionsCreator';
+import {
+  selectArrOfExercises,
+  selectExercise,
+} from '../../selectors/selectors';
 import './exercise.css';
 
 const Exercise = () => {
   const history = useHistory();
-  const arrOfExercises = useSelector((state) => state.workout.arrOfExercises);
-  const exercise = useSelector((state) => state.workout.exercise);
+  const arrOfExercises = useSelector(selectArrOfExercises);
+  const exercise = useSelector(selectExercise);
   const [doneRepeats, setDoneRepeats] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [isError, setError] = useState('');

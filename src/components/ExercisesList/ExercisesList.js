@@ -9,15 +9,17 @@ import {
   setLoading,
 } from '../../actions/actionsCreator';
 import { firestore } from '../../index';
+import { selectLoading, selectCategory } from '../../selectors/selectors';
 import './exercisesList.css';
 
 const ExercisesList = () => {
   const [arrOfExercises, setArrOfExercises] = useState([]);
-  const category = useSelector((state) => state.workout.category);
-  const isLoading = useSelector((state) => state.loader.isLoading);
+  const category = useSelector(selectCategory);
+  const isLoading = useSelector(selectLoading);
   const history = useHistory();
 
   useEffect(() => {
+    setLoading(true);
     firestore
       .collection('exercises')
       .where('categoryId', '==', category.id.trim())
@@ -36,7 +38,6 @@ const ExercisesList = () => {
 
   const chooseExercise = (exercise) => {
     setExercise(exercise);
-    setLoading(true);
     const url = `/exercises:${exercise.id}`;
     history.push(url);
   };
