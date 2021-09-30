@@ -12,9 +12,15 @@
   margin: 10px;
 }
 
+.exercise_round_container img {
+  width: 100%;
+}
+
 .exercise_round {
   border: 5px solid #630da7;
   border-radius: 50%;
+
+  cursor: pointer;
 
   font-size: 40px;
 
@@ -23,6 +29,7 @@
 }
 
 .border-red {
+  cursor: auto;
   border-color: #f45e5e;
 }
 
@@ -33,7 +40,7 @@
 
 .btn-blue {
   background-color: #630da7;
-  color: white;
+  color: #ffffff;
   font-size: 30px;
   font-weight: 800;
 

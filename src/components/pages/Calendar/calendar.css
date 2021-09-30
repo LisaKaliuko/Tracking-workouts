@@ -19,16 +19,21 @@
   padding-bottom: 0px;
 }
 
-.calendar-table .current-day a {
-  color: red;
+.calendar-table .current-day p {
+  color: #ff0000;
   font-weight: 700;
 }
 
-.calendar-table td a {
-  text-decoration: none;
-  color: #000000;
+.calendar-table td p {
+  margin-bottom: 0px;
+  cursor: pointer;
 }
 
 .calendar-table .disabled-link {
   pointer-events: none;
+}
+
+.arrow {
+  cursor: pointer;
+  color: #000000;
 }

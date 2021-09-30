@@ -29,3 +29,8 @@
   color: #000000;
   text-decoration: none;
 }
+
+.category_title:hover {
+  color: #0400ff;
+  cursor: pointer;
+}
