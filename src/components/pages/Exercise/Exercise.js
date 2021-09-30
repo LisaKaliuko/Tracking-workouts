@@ -69,10 +69,15 @@ const Exercise = () => {
     setInputValue(e.target.value);
   };
 
-  const addDoneRepeats = () => {
+  const addDoneRepeats = (e) => {
+    e.preventDefault();
     if (Number(inputValue)) {
-      setDoneRepeats(+doneRepeats + +inputValue);
-      setError('');
+      if (Number(inputValue) > 100) {
+        setError('Слишком большое число');
+      } else {
+        setDoneRepeats(+doneRepeats + +inputValue);
+        setError('');
+      }
     } else {
       setError('Пожалуйста введите число');
     }
@@ -101,7 +106,7 @@ const Exercise = () => {
             </div>
           </div>
           {isError ? <p className="text-danger">{isError}</p> : null}
-          <div className="input-group mb-4">
+          <form onSubmit={addDoneRepeats} className="input-group mb-4">
             <input
               type="text"
               className="form-control"
@@ -112,13 +117,12 @@ const Exercise = () => {
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary btn-blue"
-                type="button"
-                onClick={addDoneRepeats}
+                type="submit"
               >
                 +
               </button>
             </div>
-          </div>
+          </form>
         </>
       ) : null}
     </div>
