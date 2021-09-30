@@ -2,26 +2,38 @@ import firebase from 'firebase/app';
 
 import { firestore, store } from '.';
 import {
-  setNewUser,
   setUser,
   setLogOut,
   setError,
   setLoading,
-} from './actions/actionsCreator';
+} from './core/actions/actionsCreator';
 
-const isSignIn = () => {
+export const isSignIn = () => {
+  setLoading(true);
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      setNewUser(user);
-      setUser(user);
+      firestore
+        .collection('users')
+        .where('email', '==', user.email)
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.map((doc) =>
+            setUser({
+              uid: doc.data().uid,
+              email: doc.data().email,
+              arrOfWorkouts: doc.data().arrOfWorkouts,
+            })
+          );
+        })
+        .then(() => setLoading(false));
     } else {
       setLogOut();
+      setLoading(false);
     }
   });
 };
 
 export const registerUser = (email, password) => {
-  setLoading(true);
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -29,78 +41,45 @@ export const registerUser = (email, password) => {
       firestore.collection('users').doc(resp.user.email).set({
         email: resp.user.email,
         uid: resp.user.uid,
-        dates: [],
+        arrOfWorkouts: [],
       });
     })
     .then((user) => isSignIn(user))
-    .then(() => {
-      sessionStorage.setItem('isUserIn', true);
-      setLoading(false);
-    })
     .catch((error) => {
       setError(error);
-      sessionStorage.setItem('isUserIn', false);
-      setLoading(false);
     });
 };
 
 export const signInUser = (email, password) => {
-  setLoading(true);
   firebase
     .login({
       email: email,
       password: password,
     })
-    .then((user) => isSignIn(user))
-    .then(() => {
-      sessionStorage.setItem('isUserIn', true);
-      setLoading(false);
+    .then((user) => {
+      isSignIn(user);
     })
     .catch((error) => {
       setError(error);
-      sessionStorage.setItem('isUserIn', false);
-      setLoading(false);
     });
 };
 
 export const logOutUser = () => {
-  setLoading(true);
-  firebase
-    .logout()
-    .then(() => sessionStorage.setItem('isUserIn', false))
-    .then(() => {
-      isSignIn();
-      setLoading(false);
-    });
+  firebase.logout().then(() => {
+    isSignIn();
+  });
 };
 
-export const setDataToFirestore = (cb) => {
-  const user = store.getState().auth.user.email;
-  const workout =
-    store.getState().workout.dates[store.getState().workout.dates.length - 1];
-  let docRef;
-  user && workout
-    ? (docRef = firestore.collection('users').doc(user))
-    : console.log('no user or workout');
-
-  docRef
-    ? docRef
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            firestore
-              .collection('users')
-              .doc(user)
-              .set({
-                ...doc.data(),
-                dates: [...doc.data().dates, workout],
-              })
-              .catch((err) => console.log('add day err', err));
-          } else {
-            console.log('doc doesnt exist');
-          }
-        })
-        .then(() => cb())
-        .catch((err) => console.log('error', err))
-    : console.log('no docRef');
+export const setDataToFirestore = (callback) => {
+  setLoading(true);
+  const userEmail = store.getState().auth.user.email;
+  const arrOfWorkouts = store.getState().auth.user.arrOfWorkouts;
+  firestore
+    .collection('users')
+    .doc(userEmail)
+    .update({
+      arrOfWorkouts: arrOfWorkouts,
+    })
+    .then(() => callback())
+    .then(() => setLoading(false));
 };
