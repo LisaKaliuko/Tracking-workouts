@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
 import Menu from './components/Menu/Menu';
 import SignInRoute from './routes/SignInRoute';
 import RegistrationRoute from './routes/RegistrationRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import Calendar from './components/Calendar/Calendar';
-import Categories from './components/Categories/Categories';
-import ExercisesList from './components/ExercisesList/ExercisesList';
-import Exercise from './components/Exercise/Exercise';
+import Calendar from './components/pages/Calendar/Calendar';
+import Categories from './components/pages/Categories/Categories';
+import ExercisesList from './components/pages/ExercisesList/ExercisesList';
+import Exercise from './components/pages/Exercise/Exercise';
+import Loader from './components/Loader/Loader';
+import { isSignIn } from './firebase';
 
 function App() {
+  useEffect(() => {
+    isSignIn();
+  }, []);
+
   return (
     <>
       <Router>
         <Menu />
+        <Loader />
         <Switch>
           <Redirect exact from="/" to="/signin" />
           <RegistrationRoute path="/registration" exact />
