@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Registration from '../components/Registration/Registration';
-import { selectUser } from '../selectors/selectors';
+import Registration from '../components/pages/Registration/Registration';
+import { selectUser } from '../core/selectors/selectors';
 
 /**/
 import PropTypes from 'prop-types';
@@ -11,15 +11,10 @@ import PropTypes from 'prop-types';
 
 const RegistrationRoute = ({ path }) => {
   const user = useSelector(selectUser);
-  const isUserIn = JSON.parse(sessionStorage.getItem('isUserIn'));
 
   return (
     <Route path={path}>
-      {!user.isUserIn && !isUserIn ? (
-        <Registration />
-      ) : (
-        <Redirect to="/calendar" />
-      )}
+      {!user.email ? <Registration /> : <Redirect to="/calendar" />}
     </Route>
   );
 };
