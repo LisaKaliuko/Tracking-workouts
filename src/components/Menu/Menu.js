@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { logOutUser } from '../../firebase';
-import { selectUser } from '../../selectors/selectors';
+import { selectUser } from '../../core/selectors/selectors';
 
 const Menu = () => {
   const user = useSelector(selectUser);
-  const isUserIn = JSON.parse(sessionStorage.getItem('isUserIn'));
 
   return (
     <nav className="navbar bg-dark text-white justify-content-around">
@@ -16,7 +15,7 @@ const Menu = () => {
       </Link>
       <div id="navbarNav">
         <ul className="navbar-nav flex-row">
-          {!isUserIn && !user.isUserIn ? (
+          {!user.email ? (
             <>
               <li className="nav-item m-3">
                 <Link to="/registration" className="nav-link text-white">
@@ -30,7 +29,7 @@ const Menu = () => {
               </li>
             </>
           ) : null}
-          {isUserIn || user.isUserIn ? (
+          {user.email ? (
             <li className="nav-item m-3">
               <Link
                 to="/signin"
