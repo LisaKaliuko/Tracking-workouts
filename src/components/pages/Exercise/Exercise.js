@@ -72,8 +72,10 @@ const Exercise = () => {
   const addDoneRepeats = (e) => {
     e.preventDefault();
     if (Number(inputValue)) {
-      if (Number(inputValue) > 100) {
-        setError('Слишком большое число');
+      if (Number(inputValue) > exercise.repeats * exercise.sets) {
+        setError(
+          `Максимальное количество повторов ${exercise.repeats * exercise.sets}`
+        );
       } else {
         setDoneRepeats(+doneRepeats + +inputValue);
         setError('');
