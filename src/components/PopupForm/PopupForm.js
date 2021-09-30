@@ -1,15 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { setWorkout } from '../../actions/actionsCreator';
+import { setWorkoutToArrOfWorkouts } from '../../core/actions/actionsCreator';
+import { selectWorkoutDate } from '../../core/selectors/selectors';
 import { setDataToFirestore } from '../../firebase';
 
 const PopupForm = () => {
   const history = useHistory();
+  const date = useSelector(selectWorkoutDate);
 
   const clickFinishWorkout = (e) => {
     e.preventDefault();
-    setWorkout();
+    setWorkoutToArrOfWorkouts({ ...date });
     setDataToFirestore(() => history.push('/calendar'));
   };
 
