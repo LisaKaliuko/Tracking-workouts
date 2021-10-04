@@ -18,7 +18,7 @@ const Exercise = () => {
   const history = useHistory();
 
   const [inputValue, setInputValue] = useState('');
-  const [doneRepeats, setDoneRepeats] = useState(0);
+  const [doneSets, setDoneSets] = useState(0);
   const [isError, setError] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
@@ -42,7 +42,7 @@ const Exercise = () => {
 
   useEffect(() => {
     if (exercise) {
-      if (doneRepeats >= exercise.repeats * exercise.sets) {
+      if (doneSets === exercise.sets) {
         const indexOfCurrentExercise = arrOfExercises.findIndex(
           (item) => item.id === exercise.id
         );
@@ -52,14 +52,14 @@ const Exercise = () => {
             arrOfExercises[indexOfCurrentExercise + 1].id
           }`;
           setExercise(arrOfExercises[indexOfCurrentExercise + 1]);
-          setDoneRepeats('');
+          setDoneSets(0);
           history.push(url);
         } else {
           setShowPopup(true);
         }
       }
     }
-  }, [exercise, doneRepeats, arrOfExercises, history]);
+  }, [exercise, arrOfExercises, history, doneSets]);
 
   const addInputValue = () => {
     setInputValue(exercise.repeats);
@@ -69,7 +69,7 @@ const Exercise = () => {
     setInputValue(e.target.value);
   };
 
-  const addDoneRepeats = (e) => {
+  const addSet = (e) => {
     e.preventDefault();
     if (Number(inputValue)) {
       if (Number(inputValue) > exercise.repeats * exercise.sets) {
@@ -77,7 +77,7 @@ const Exercise = () => {
           `Максимальное количество повторов ${exercise.repeats * exercise.sets}`
         );
       } else {
-        setDoneRepeats(+doneRepeats + +inputValue);
+        setDoneSets(doneSets + 1);
         setError('');
       }
     } else {
@@ -102,13 +102,13 @@ const Exercise = () => {
             </div>
             <div>
               <p className="exercise_round border-red">
-                {Math.trunc(doneRepeats / exercise.repeats)}/{exercise.sets}
+                {doneSets}/{exercise.sets}
               </p>
               <span>Подходов выполнено</span>
             </div>
           </div>
           {isError ? <p className="text-danger">{isError}</p> : null}
-          <form onSubmit={addDoneRepeats} className="input-group mb-4">
+          <form onSubmit={addSet} className="input-group mb-4">
             <input
               type="text"
               className="form-control"
