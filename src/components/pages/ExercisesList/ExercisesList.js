@@ -31,7 +31,7 @@ const ExercisesList = () => {
     };
   }, [category]);
 
-  const chooseExercise = (exercise) => {
+  const chooseExercise = (exercise) => () => {
     setExercise(exercise);
     const url = `/exercises:${exercise.id}`;
     history.push(url);
@@ -45,7 +45,7 @@ const ExercisesList = () => {
               <div
                 className="exercises_item"
                 key={exercise.id}
-                onClick={() => chooseExercise(exercise)}
+                onClick={chooseExercise(exercise)}
               >
                 <img src={exercise.img} className="exercises_item-img" />
                 <div className="exercises_item-text">

@@ -28,7 +28,7 @@ const Categories = () => {
     };
   }, []);
 
-  const chooseCategory = (category) => {
+  const chooseCategory = (category) => () => {
     setCategory(category);
     history.push('/exercises');
   };
@@ -40,7 +40,7 @@ const Categories = () => {
           <div
             className="caregories_item"
             key={category.id}
-            onClick={() => chooseCategory(category)}
+            onClick={chooseCategory(category)}
           >
             <p className="category_title">{category.title}</p>
           </div>

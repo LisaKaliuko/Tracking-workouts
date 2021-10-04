@@ -23,6 +23,7 @@ const Calendar = () => {
   const workouts = useSelector(selectArrOfWorkouts);
   const history = useHistory();
 
+  const today = new Date();
   const day = new Date(year, month, 1);
   const firstDay = new Date(day.getFullYear(), day.getMonth(), 1);
   const lastDay = new Date(day.getFullYear(), day.getMonth() + 1, 0);
@@ -59,14 +60,14 @@ const Calendar = () => {
     }
   };
 
-  const chooseWorkoutDay = (year, month, day, cb) => {
-    const isRepeatedDay = checkRepeatedWorkout(workouts, year, month, day);
+  const chooseWorkoutDay = (dayObj) => (e) => {
+    const isRepeatedDay = checkRepeatedWorkout(workouts, year, month, dayObj);
 
     if (isRepeatedDay === undefined) {
-      setDay(year, month, day);
+      setDay(year, month, dayObj);
       history.push('/categories');
     } else {
-      cb();
+      e.preventDefault();
       alert(
         'В этот день вы уже тренировались. Пожалуйста, выберите другой день'
       );
@@ -107,9 +108,9 @@ const Calendar = () => {
                 <td
                   key={dayObj.id}
                   className={
-                    year === new Date().getFullYear() &&
-                    month === new Date().getMonth() &&
-                    dayObj.date === new Date().getDate()
+                    year === today.getFullYear() &&
+                    month === today.getMonth() &&
+                    dayObj.date === today.getDate()
                       ? 'current-day'
                       : ''
                   }
@@ -117,17 +118,11 @@ const Calendar = () => {
                   <p
                     to="/categories"
                     className={
-                      year > new Date().getFullYear() ||
-                      month > new Date().getMonth() ||
-                      dayObj.date > new Date().getDate()
+                      new Date(year, month, dayObj.date) > today
                         ? 'disabled-link'
                         : ''
                     }
-                    onClick={(e) =>
-                      chooseWorkoutDay(year, month, dayObj.date, () =>
-                        e.preventDefault()
-                      )
-                    }
+                    onClick={chooseWorkoutDay(dayObj.date)}
                   >
                     {dayObj.date || ' '}
                   </p>
