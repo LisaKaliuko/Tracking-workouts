@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { signInUser } from '../../../firebase';
-import { selectUser } from '../../../core/selectors/selectors';
+import { signInUser } from '../../firebase';
+import { selectUser } from '../../core/selectors/selectors';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');

@@ -5,10 +5,10 @@ import Menu from './components/Menu/Menu';
 import SignInRoute from './routes/SignInRoute';
 import RegistrationRoute from './routes/RegistrationRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import Calendar from './components/pages/Calendar/Calendar';
-import Categories from './components/pages/Categories/Categories';
-import ExercisesList from './components/pages/ExercisesList/ExercisesList';
-import Exercise from './components/pages/Exercise/Exercise';
+import Calendar from './pages/Calendar/Calendar';
+import Categories from './pages/Categories/Categories';
+import ExercisesList from './pages/ExercisesList/ExercisesList';
+import Exercise from './pages/Exercise/Exercise';
 import Loader from './components/Loader/Loader';
 import { isSignIn } from './firebase';
 

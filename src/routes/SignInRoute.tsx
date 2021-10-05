@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import SignIn from '../components/pages/SignIn/SignIn';
+import SignIn from '../pages/SignIn/SignIn';
 import { selectUser } from '../core/selectors/selectors';
 
 interface SignInRouteProps {

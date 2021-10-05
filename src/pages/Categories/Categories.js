@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import { setLoadingAction } from '../../../core/actions/LoaderActions';
-import { setCategoryAction } from '../../../core/actions/WorkoutActions';
-import { firestore } from '../../..';
+import { setLoadingAction } from '../../core/actions/LoaderActions';
+import { setCategoryAction } from '../../core/actions/WorkoutActions';
+import { firestore } from '../..';
 import './categories.css';
 
 const Categories = () => {

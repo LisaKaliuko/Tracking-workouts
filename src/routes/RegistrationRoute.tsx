@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Registration from '../components/pages/Registration/Registration';
+import Registration from '../pages/Registration/Registration';
 import { selectUser } from '../core/selectors/selectors';
 
 interface RegistrationRouteProps {

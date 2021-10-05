@@ -6,15 +6,11 @@ import {
   getNumberOfCells,
   getCalendarMatrix,
   checkRepeatedWorkout,
-} from '../../../shared/helpers/helpers';
-import { allMonthes } from '../../../constants/constants';
-import {
-  ArrowLeft,
-  ArrowRight,
-  WorkoutIcon,
-} from '../../../shared/icons/icons';
-import { setDayAction } from '../../../core/actions/WorkoutActions';
-import { selectArrOfWorkouts } from '../../../core/selectors/selectors';
+} from '../../shared/helpers/helpers';
+import { allMonthes } from '../../constants/constants';
+import { ArrowLeft, ArrowRight, WorkoutIcon } from '../../shared/icons/icons';
+import { setDayAction } from '../../core/actions/WorkoutActions';
+import { selectArrOfWorkouts } from '../../core/selectors/selectors';
 import './calendar.css';
 
 const Calendar = () => {

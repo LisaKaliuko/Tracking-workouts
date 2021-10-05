@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import PopupForm from '../../PopupForm/PopupForm';
-import { firestore } from '../../../index';
-import {
-  selectCategory,
-  selectExercise,
-} from '../../../core/selectors/selectors';
-import { setExerciseAction } from '../../../core/actions/WorkoutActions';
-import { setLoadingAction } from '../../../core/actions/LoaderActions';
+import PopupForm from '../../components/PopupForm/PopupForm';
+import { firestore } from '../../index';
+import { selectCategory, selectExercise } from '../../core/selectors/selectors';
+import { setExerciseAction } from '../../core/actions/WorkoutActions';
+import { setLoadingAction } from '../../core/actions/LoaderActions';
 import './exercise.css';
 
 const Exercise = () => {
