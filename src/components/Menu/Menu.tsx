@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { logOutUser } from '../../firebase';
 import { selectUser } from '../../core/selectors/selectors';
 
-const Menu = () => {
+const Menu = (): JSX.Element => {
   const user = useSelector(selectUser);
 
   return (
