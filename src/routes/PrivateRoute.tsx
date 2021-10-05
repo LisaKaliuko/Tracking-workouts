@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 
 import { selectUser } from '../core/selectors/selectors';
 
-/** */
-import PropTypes from 'prop-types';
+interface PrivateRouteProps {
+  path: string;
+  children: React.ReactNode;
+}
 
-/**/
-
-const PrivateRoute = ({ path, children }) => {
+const PrivateRoute = ({ path, children }: PrivateRouteProps): JSX.Element => {
   const user = useSelector(selectUser);
 
   return (
@@ -18,12 +18,5 @@ const PrivateRoute = ({ path, children }) => {
     </Route>
   );
 };
-
-/** */
-PrivateRoute.propTypes = {
-  path: PropTypes.string,
-  children: PropTypes.any,
-};
-/** */
 
 export default PrivateRoute;

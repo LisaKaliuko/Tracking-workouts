@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 import SignIn from '../components/pages/SignIn/SignIn';
 import { selectUser } from '../core/selectors/selectors';
 
-/** */
-import PropTypes from 'prop-types';
-/** */
+interface SignInRouteProps {
+  path: string;
+}
 
-const SignInRoute = ({ path }) => {
+const SignInRoute = ({ path }: SignInRouteProps): JSX.Element => {
   const user = useSelector(selectUser);
 
   return (
@@ -18,11 +18,5 @@ const SignInRoute = ({ path }) => {
     </Route>
   );
 };
-
-/** */
-SignInRoute.propTypes = {
-  path: PropTypes.string,
-};
-/** */
 
 export default SignInRoute;

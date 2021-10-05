@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 import Registration from '../components/pages/Registration/Registration';
 import { selectUser } from '../core/selectors/selectors';
 
-/**/
-import PropTypes from 'prop-types';
-/** */
+interface RegistrationRouteProps {
+  path: string;
+}
 
-const RegistrationRoute = ({ path }) => {
+const RegistrationRoute = ({ path }: RegistrationRouteProps): JSX.Element => {
   const user = useSelector(selectUser);
 
   return (
@@ -17,11 +17,6 @@ const RegistrationRoute = ({ path }) => {
       {!user.email ? <Registration /> : <Redirect to="/calendar" />}
     </Route>
   );
-};
-
-/** */
-RegistrationRoute.propTypes = {
-  path: PropTypes.string,
 };
 
 export default RegistrationRoute;
