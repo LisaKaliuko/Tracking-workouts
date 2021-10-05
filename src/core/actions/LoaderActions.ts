@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-enum LoaderActionTypes {
+export enum LoaderActionTypes {
   LOADER = '[LOADER] LOADER',
 }
 
