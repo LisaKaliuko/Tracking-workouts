@@ -13,7 +13,7 @@ import {
   ArrowRight,
   WorkoutIcon,
 } from '../../../shared/icons/icons';
-import { setDayAction } from '../../../core/actions/actionsCreator';
+import { setDayAction } from '../../../core/actions/WorkoutActions';
 import { selectArrOfWorkouts } from '../../../core/selectors/selectors';
 import './calendar.css';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { setWorkoutToArrOfWorkoutsAction } from '../../core/actions/actionsCreator';
+import { setWorkoutToArrOfWorkoutsAction } from '../../core/actions/UserActions';
 import { selectWorkoutDate } from '../../core/selectors/selectors';
 import { setDataToFirestore } from '../../firebase';
 

@@ -1,12 +1,9 @@
 import firebase from 'firebase/app';
 
 import { firestore, store } from '.';
-import {
-  setUserAction,
-  setLogOutAction,
-  setErrorAction,
-  setLoadingAction,
-} from './core/actions/actionsCreator';
+import { setUserAction, setLogOutAction } from './core/actions/UserActions';
+import { setLoadingAction } from './core/actions/LoaderActions';
+import { setErrorAction } from './core/actions/UserActions';
 
 export const isSignIn = () => {
   store.dispatch(setLoadingAction(true));

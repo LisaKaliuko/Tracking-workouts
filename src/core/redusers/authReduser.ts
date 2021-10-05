@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import { handleActions } from 'redux-actions';
 
-import { UserActionsTypes, Day } from '../actions/actionsCreator';
+import { UserActionsTypes, Day } from '../actions/UserActions';
 
 interface InitialStateAuth {
   user: {

@@ -5,10 +5,8 @@ import { useHistory } from 'react-router';
 import { firestore } from '../../../index';
 import { selectCategory } from '../../../core/selectors/selectors';
 import { ArrowRightExercise } from '../../../shared/icons/icons';
-import {
-  setExerciseAction,
-  setLoadingAction,
-} from '../../../core/actions/actionsCreator';
+import { setExerciseAction } from '../../../core/actions/WorkoutActions';
+import { setLoadingAction } from '../../../core/actions/LoaderActions';
 import './exercisesList.css';
 
 const ExercisesList = () => {

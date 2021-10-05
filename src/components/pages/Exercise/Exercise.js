@@ -8,10 +8,8 @@ import {
   selectCategory,
   selectExercise,
 } from '../../../core/selectors/selectors';
-import {
-  setExerciseAction,
-  setLoadingAction,
-} from '../../../core/actions/actionsCreator';
+import { setExerciseAction } from '../../../core/actions/WorkoutActions';
+import { setLoadingAction } from '../../../core/actions/LoaderActions';
 import './exercise.css';
 
 const Exercise = () => {
