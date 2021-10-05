@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import {
@@ -13,7 +13,7 @@ import {
   ArrowRight,
   WorkoutIcon,
 } from '../../../shared/icons/icons';
-import { setDay } from '../../../core/actions/actionsCreator';
+import { setDayAction } from '../../../core/actions/actionsCreator';
 import { selectArrOfWorkouts } from '../../../core/selectors/selectors';
 import './calendar.css';
 
@@ -22,6 +22,7 @@ const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const workouts = useSelector(selectArrOfWorkouts);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const today = new Date();
   const day = new Date(year, month, 1);
@@ -64,7 +65,7 @@ const Calendar = () => {
     const isRepeatedDay = checkRepeatedWorkout(workouts, year, month, dayObj);
 
     if (isRepeatedDay === undefined) {
-      setDay(year, month, dayObj);
+      dispatch(setDayAction(year, month, dayObj));
       history.push('/categories');
     } else {
       e.preventDefault();

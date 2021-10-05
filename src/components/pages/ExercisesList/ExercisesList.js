@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { firestore } from '../../../index';
 import { selectCategory } from '../../../core/selectors/selectors';
 import { ArrowRightExercise } from '../../../shared/icons/icons';
-import { setExercise, setLoading } from '../../../core/actions/actionsCreator';
+import {
+  setExerciseAction,
+  setLoadingAction,
+} from '../../../core/actions/actionsCreator';
 import './exercisesList.css';
 
 const ExercisesList = () => {
   const category = useSelector(selectCategory);
   const [arrOfExercises, setArrOfExercises] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(setLoadingAction(true));
     if (category) {
       firestore
         .collection('exercises')
@@ -23,16 +27,16 @@ const ExercisesList = () => {
         .then((snapshot) => {
           setArrOfExercises(snapshot.docs.map((doc) => ({ ...doc.data() })));
         })
-        .then(() => setLoading(false));
+        .then(() => dispatch(setLoadingAction(false)));
     }
 
     return () => {
       setArrOfExercises([]);
     };
-  }, [category]);
+  }, [category, dispatch]);
 
   const chooseExercise = (exercise) => () => {
-    setExercise(exercise);
+    dispatch(setExerciseAction(exercise));
     const url = `/exercises:${exercise.id}`;
     history.push(url);
   };

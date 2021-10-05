@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import PopupForm from '../../PopupForm/PopupForm';
@@ -8,7 +8,10 @@ import {
   selectCategory,
   selectExercise,
 } from '../../../core/selectors/selectors';
-import { setExercise, setLoading } from '../../../core/actions/actionsCreator';
+import {
+  setExerciseAction,
+  setLoadingAction,
+} from '../../../core/actions/actionsCreator';
 import './exercise.css';
 
 const Exercise = () => {
@@ -16,6 +19,7 @@ const Exercise = () => {
   const exercise = useSelector(selectExercise);
   const [arrOfExercises, setArrOfExercises] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState('');
   const [doneSets, setDoneSets] = useState(0);
@@ -23,7 +27,7 @@ const Exercise = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(setLoadingAction(true));
     if (category) {
       firestore
         .collection('exercises')
@@ -32,13 +36,13 @@ const Exercise = () => {
         .then((snapshot) => {
           setArrOfExercises(snapshot.docs.map((doc) => ({ ...doc.data() })));
         })
-        .then(() => setLoading(false));
+        .then(() => dispatch(setLoadingAction(false)));
     }
 
     return () => {
       setArrOfExercises([]);
     };
-  }, [category]);
+  }, [category, dispatch]);
 
   useEffect(() => {
     if (exercise) {
@@ -51,7 +55,9 @@ const Exercise = () => {
           const url = `/exercises:${
             arrOfExercises[indexOfCurrentExercise + 1].id
           }`;
-          setExercise(arrOfExercises[indexOfCurrentExercise + 1]);
+          dispatch(
+            setExerciseAction(arrOfExercises[indexOfCurrentExercise + 1])
+          );
           setDoneSets(0);
           history.push(url);
         } else {
@@ -59,7 +65,7 @@ const Exercise = () => {
         }
       }
     }
-  }, [exercise, arrOfExercises, history, doneSets]);
+  }, [exercise, arrOfExercises, history, doneSets, dispatch]);
 
   const addInputValue = () => {
     setInputValue(exercise.repeats);
@@ -72,14 +78,8 @@ const Exercise = () => {
   const addSet = (e) => {
     e.preventDefault();
     if (Number(inputValue)) {
-      if (Number(inputValue) > exercise.repeats * exercise.sets) {
-        setError(
-          `Максимальное количество повторов ${exercise.repeats * exercise.sets}`
-        );
-      } else {
-        setDoneSets(doneSets + 1);
-        setError('');
-      }
+      setDoneSets(doneSets + 1);
+      setError('');
     } else {
       setError('Пожалуйста введите число');
     }

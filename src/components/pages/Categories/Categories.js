@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 
-import { setCategory, setLoading } from '../../../core/actions/actionsCreator';
+import {
+  setCategoryAction,
+  setLoadingAction,
+} from '../../../core/actions/actionsCreator';
 import { firestore } from '../../..';
 import './categories.css';
 
 const Categories = () => {
   const [arrOfCategories, setArrOfCategories] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(setLoadingAction(true));
     firestore
       .collection('categories')
       .get()
@@ -21,7 +26,7 @@ const Categories = () => {
         }));
         setArrOfCategories(categories);
       })
-      .then(() => setLoading(false));
+      .then(() => dispatch(setLoadingAction(false)));
 
     return () => {
       setArrOfCategories([]);
@@ -29,7 +34,7 @@ const Categories = () => {
   }, []);
 
   const chooseCategory = (category) => () => {
-    setCategory(category);
+    dispatch(setCategoryAction(category));
     history.push('/exercises');
   };
 

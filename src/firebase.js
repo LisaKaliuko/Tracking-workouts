@@ -2,14 +2,14 @@ import firebase from 'firebase/app';
 
 import { firestore, store } from '.';
 import {
-  setUser,
-  setLogOut,
-  setError,
-  setLoading,
+  setUserAction,
+  setLogOutAction,
+  setErrorAction,
+  setLoadingAction,
 } from './core/actions/actionsCreator';
 
 export const isSignIn = () => {
-  setLoading(true);
+  store.dispatch(setLoadingAction(true));
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       firestore
@@ -18,17 +18,19 @@ export const isSignIn = () => {
         .get()
         .then((snapshot) => {
           snapshot.docs.map((doc) =>
-            setUser({
-              uid: doc.data().uid,
-              email: doc.data().email,
-              arrOfWorkouts: doc.data().arrOfWorkouts,
-            })
+            store.dispatch(
+              setUserAction({
+                uid: doc.data().uid,
+                email: doc.data().email,
+                arrOfWorkouts: doc.data().arrOfWorkouts,
+              })
+            )
           );
         })
-        .then(() => setLoading(false));
+        .then(() => store.dispatch(setLoadingAction(false)));
     } else {
-      setLogOut();
-      setLoading(false);
+      store.dispatch(setLogOutAction());
+      store.dispatch(setLoadingAction(false));
     }
   });
 };
@@ -46,7 +48,7 @@ export const registerUser = (email, password) => {
     })
     .then((user) => isSignIn(user))
     .catch((error) => {
-      setError(error);
+      store.dispatch(setErrorAction(error));
     });
 };
 
@@ -60,7 +62,7 @@ export const signInUser = (email, password) => {
       isSignIn(user);
     })
     .catch((error) => {
-      setError(error);
+      store.dispatch(setErrorAction(error));
     });
 };
 
@@ -71,7 +73,7 @@ export const logOutUser = () => {
 };
 
 export const setDataToFirestore = (callback) => {
-  setLoading(true);
+  store.dispatch(setLoadingAction(true));
   const userEmail = store.getState().auth.user.email;
   const arrOfWorkouts = store.getState().auth.user.arrOfWorkouts;
   firestore
@@ -81,5 +83,5 @@ export const setDataToFirestore = (callback) => {
       arrOfWorkouts: arrOfWorkouts,
     })
     .then(() => callback())
-    .then(() => setLoading(false));
+    .then(() => store.dispatch(setLoadingAction(false)));
 };
