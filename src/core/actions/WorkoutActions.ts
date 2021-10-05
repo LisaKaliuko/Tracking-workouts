@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-enum WorkoutActionsTypes {
+export enum WorkoutActionsTypes {
   DAY = '[WORKOUT] DAY',
   CATEGORY = '[WORKOUT] CATEGORY',
   EXERCISE = '[WORKOUT] EXERCISE',
@@ -11,7 +11,7 @@ export interface Category {
   title: string;
 }
 
-interface Exercise {
+export interface Exercise {
   categoryId: string;
   description: string;
   id: string;
@@ -23,7 +23,9 @@ interface Exercise {
 
 export const setDayAction = createAction(
   WorkoutActionsTypes.DAY,
-  (year: number, month: number, day: number) => ({ payload: year, month, day })
+  (year: number, month: number, day: number) => ({
+    payload: { year, month, day },
+  })
 );
 export const setCategoryAction = createAction(
   WorkoutActionsTypes.CATEGORY,

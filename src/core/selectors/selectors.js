@@ -8,17 +8,17 @@ export const selectUser = createSelector(getAuth, (auth) => auth.user);
 
 export const selectCategory = createSelector(
   getWorkout,
-  (workout) => workout.currentWorkout.category
+  (workout) => workout.category
 );
 
 export const selectExercise = createSelector(
   getWorkout,
-  (workout) => workout.currentWorkout.exercise
+  (workout) => workout.exercise
 );
 
 export const selectWorkoutDate = createSelector(
   getWorkout,
-  (workout) => workout.currentWorkout.date
+  (workout) => workout.date
 );
 
 export const selectArrOfWorkouts = createSelector(
