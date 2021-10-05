@@ -1,21 +1,42 @@
-export const saveState = (state) => {
+import { Day } from '../../core/actions/UserActions';
+import { RootState } from '../../core/redusers/rootReducer';
+
+type DayObject = {
+  id: number;
+  date: number;
+};
+
+const errorMessage = (error: unknown) => {
+  let errorMessage = 'some error';
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+  return errorMessage;
+};
+
+export const saveState = (state: RootState): void => {
   const serialisedState = JSON.stringify(state);
   window.localStorage.setItem('app_state', serialisedState);
 };
 
-export const loadState = () => {
+export const loadState = (): RootState | undefined => {
   try {
     const serialisedState = window.localStorage.getItem('app_state');
 
-    if (!serialisedState) return {};
+    if (!serialisedState) return JSON.parse(JSON.stringify({}));
 
     return JSON.parse(serialisedState);
   } catch (err) {
-    return {};
+    const error = errorMessage(err);
+    console.log(error);
   }
 };
 
-export const getNumberOfCells = (firstDay, lastDay, days) => {
+export const getNumberOfCells = (
+  firstDay: number,
+  lastDay: number,
+  days: number
+): number => {
   // пн вт ср чт пт сб вс
   // 1  2  3  4  5  6  7
   if (firstDay === 0) {
@@ -41,7 +62,11 @@ const randomNumber = () => {
   return Math.trunc(Math.random() * 100000);
 };
 
-export const getCalendarMatrix = (firstDay, lastDay, cells) => {
+export const getCalendarMatrix = (
+  firstDay: number,
+  lastDay: number,
+  cells: number
+): Array<Array<DayObject>> => {
   if (firstDay === 0) {
     firstDay = 7;
   }
@@ -68,7 +93,12 @@ export const getCalendarMatrix = (firstDay, lastDay, cells) => {
   return matrix;
 };
 
-export const checkRepeatedWorkout = (workouts, year, month, day) => {
+export const checkRepeatedWorkout = (
+  workouts: Array<Day>,
+  year: number,
+  month: number,
+  day: number
+): undefined | Day => {
   const result = workouts.find((item) => {
     const workoutDay = new Date(
       item.year,
