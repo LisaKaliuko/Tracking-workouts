@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-import { signInUser } from '../../firebase';
+import { registerUser } from '../../firebase';
 import { selectUser } from '../../core/selectors/selectors';
+import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 
-const SignIn = () => {
+const Registration = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useSelector(selectUser);
+  const user = useTypedSelector(selectUser);
 
-  const changeEmail = (e) => setEmail(e.target.value);
-  const changePassword = (e) => setPassword(e.target.value);
-  const enterUser = (e) => {
+  const changeEmail = (e: ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+
+  const changePassword = (e: ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
+
+  const registerNewUser = (e: FormEvent) => {
     e.preventDefault();
-    signInUser(email, password);
+    registerUser(email, password);
     setEmail('');
     setPassword('');
   };
 
   return (
     <div className="d-flex flex-column w-25 m-auto mt-5">
-      <h3>Войти</h3>
-      <form onSubmit={enterUser}>
+      <h3>Регистрация</h3>
+      <form onSubmit={registerNewUser}>
         <div className="form-group">
           <label htmlFor="email">E-mail</label>
           <input
@@ -44,11 +48,11 @@ const SignIn = () => {
         </div>
         {user.error ? <p className="text-danger mb-0">{user.error}</p> : null}
         <button type="submit" className="btn btn-primary mt-3">
-          Войти
+          Регистрация
         </button>
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export default Registration;

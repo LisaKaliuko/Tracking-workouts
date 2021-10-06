@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { MouseEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import {
@@ -7,16 +7,19 @@ import {
   getCalendarMatrix,
   checkRepeatedWorkout,
 } from '../../shared/helpers/helpers';
+import { Day } from '../../core/actions/UserActions';
 import { allMonthes } from '../../constants/constants';
 import { ArrowLeft, ArrowRight, WorkoutIcon } from '../../shared/icons/icons';
 import { setDayAction } from '../../core/actions/WorkoutActions';
 import { selectArrOfWorkouts } from '../../core/selectors/selectors';
+import { useTypedSelector } from '../../core/hooks/useTypedSelector';
+import { pathes } from '../../constants/constants';
 import './calendar.css';
 
-const Calendar = () => {
+const Calendar = (): JSX.Element => {
   const [year, setYear] = useState(2021);
   const [month, setMonth] = useState(new Date().getMonth());
-  const workouts = useSelector(selectArrOfWorkouts);
+  const workouts = useTypedSelector(selectArrOfWorkouts);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -37,7 +40,7 @@ const Calendar = () => {
     cells
   );
 
-  const clickPrevMonth = (e) => {
+  const clickPrevMonth = (e: MouseEvent) => {
     e.preventDefault();
     if (month === 0) {
       setMonth(11);
@@ -47,7 +50,7 @@ const Calendar = () => {
     }
   };
 
-  const clickNextMonth = (e) => {
+  const clickNextMonth = (e: MouseEvent) => {
     e.preventDefault();
     if (month === 11) {
       setMonth(0);
@@ -57,12 +60,12 @@ const Calendar = () => {
     }
   };
 
-  const chooseWorkoutDay = (dayObj) => (e) => {
+  const chooseWorkoutDay = (dayObj: number) => (e: MouseEvent) => {
     const isRepeatedDay = checkRepeatedWorkout(workouts, year, month, dayObj);
 
     if (isRepeatedDay === undefined) {
       dispatch(setDayAction(year, month, dayObj));
-      history.push('/categories');
+      history.push(pathes.CATEGORIES);
     } else {
       e.preventDefault();
       alert(
@@ -113,7 +116,6 @@ const Calendar = () => {
                   }
                 >
                   <p
-                    to="/categories"
                     className={
                       new Date(year, month, dayObj.date) > today
                         ? 'disabled-link'
@@ -124,7 +126,7 @@ const Calendar = () => {
                     {dayObj.date || ' '}
                   </p>
                   {workouts.length !== 0
-                    ? workouts.map((item) => {
+                    ? workouts.map((item: Day) => {
                         if (
                           item.year === year &&
                           item.month === month &&

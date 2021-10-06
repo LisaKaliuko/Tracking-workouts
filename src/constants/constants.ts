@@ -12,3 +12,11 @@ export const allMonthes = [
   'Ноябрь',
   'Декабрь',
 ];
+
+export const pathes = {
+  SIGN_IN: '/signin',
+  REGISTRATION: '/registration',
+  CALENDAR: '/calendar',
+  CATEGORIES: '/categories',
+  EXERCISES_LIST: '/exercises',
+};
