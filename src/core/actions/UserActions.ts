@@ -13,7 +13,7 @@ export interface Day {
   day: number;
 }
 
-interface User {
+export interface User {
   uid: string;
   email: string;
   arrOfWorkouts: Array<Day>;
