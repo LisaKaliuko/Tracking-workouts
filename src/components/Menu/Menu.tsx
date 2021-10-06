@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import { logOutUser } from '../../firebase';
 import { selectUser } from '../../core/selectors/selectors';
+import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 
 const Menu = (): JSX.Element => {
-  const user = useSelector(selectUser);
+  const user = useTypedSelector(selectUser);
 
   return (
     <nav className="navbar bg-dark text-white justify-content-around">

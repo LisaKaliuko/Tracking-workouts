@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { selectLoading } from '../../core/selectors/selectors';
+import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import './loader.css';
 
 const Loader = (): JSX.Element => {
-  const isLoading = useSelector(selectLoading);
+  const isLoading = useTypedSelector(selectLoading);
 
   if (isLoading) {
     return (

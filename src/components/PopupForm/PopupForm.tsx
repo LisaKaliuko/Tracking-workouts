@@ -1,25 +1,27 @@
 import React, { MouseEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { setWorkoutToArrOfWorkoutsAction } from '../../core/actions/UserActions';
 import { selectWorkoutDate } from '../../core/selectors/selectors';
 import { setDataToFirestore } from '../../firebase';
+import { useTypedSelector } from '../../core/hooks/useTypedSelector';
+import { pathes } from '../../constants/constants';
 
 const PopupForm = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const date = useSelector(selectWorkoutDate);
+  const date = useTypedSelector(selectWorkoutDate);
 
   const clickFinishWorkout = (e: MouseEvent) => {
     e.preventDefault();
     dispatch(setWorkoutToArrOfWorkoutsAction({ ...date }));
-    setDataToFirestore(() => history.push('/calendar'));
+    setDataToFirestore(() => history.push(pathes.CALENDAR));
   };
 
   const clickContinueWorkout = (e: MouseEvent) => {
     e.preventDefault();
-    history.push('/exercises');
+    history.push(pathes.EXERCISES_LIST);
   };
 
   return (
