@@ -16,6 +16,7 @@ import { firebaseConfig } from './config/fbConfig';
 import { saveState, loadState } from './shared/helpers/helpers';
 
 firebase.initializeApp(firebaseConfig);
+export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const initialState = loadState();

@@ -10,12 +10,11 @@ import Categories from './pages/Categories/Categories';
 import ExercisesList from './pages/ExercisesList/ExercisesList';
 import Exercise from './pages/Exercise/Exercise';
 import Loader from './components/Loader/Loader';
+import { pathes } from './constants/constants';
 import { isSignIn } from './firebase';
 
-function App() {
-  useEffect(() => {
-    isSignIn();
-  }, []);
+function App(): JSX.Element {
+  useEffect(() => isSignIn(), []);
 
   return (
     <>
@@ -23,19 +22,19 @@ function App() {
         <Menu />
         <Loader />
         <Switch>
-          <Redirect exact from="/" to="/signin" />
-          <RegistrationRoute path="/registration" exact />
-          <SignInRoute path="/signin" exact />
-          <PrivateRoute path="/calendar">
+          <Redirect exact from="/" to={pathes.SIGN_IN} />
+          <RegistrationRoute path={pathes.REGISTRATION} />
+          <SignInRoute path={pathes.SIGN_IN} />
+          <PrivateRoute path={pathes.CALENDAR}>
             <Calendar />
           </PrivateRoute>
-          <PrivateRoute path="/categories">
+          <PrivateRoute path={pathes.CATEGORIES}>
             <Categories />
           </PrivateRoute>
-          <PrivateRoute path="/exercises">
+          <PrivateRoute path={pathes.EXERCISES_LIST}>
             <ExercisesList />
           </PrivateRoute>
-          <PrivateRoute path="/exercises:id">
+          <PrivateRoute path={`${pathes.EXERCISES_LIST}:id`}>
             <Exercise />
           </PrivateRoute>
         </Switch>
