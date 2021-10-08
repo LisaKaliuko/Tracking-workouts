@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ArrowLeft = (): JSX.Element => {
+export const ArrowLeft: React.FC = (): JSX.Element => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@ export const ArrowLeft = (): JSX.Element => {
   );
 };
 
-export const ArrowRight = (): JSX.Element => {
+export const ArrowRight: React.FC = (): JSX.Element => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ export const ArrowRight = (): JSX.Element => {
   );
 };
 
-export const WorkoutIcon = (): JSX.Element => {
+export const WorkoutIcon: React.FC = (): JSX.Element => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ export const WorkoutIcon = (): JSX.Element => {
   );
 };
 
-export const ArrowRightExercise = (): JSX.Element => {
+export const ArrowRightExercise: React.FC = (): JSX.Element => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

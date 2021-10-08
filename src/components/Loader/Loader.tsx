@@ -4,7 +4,7 @@ import { selectLoading } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import './loader.css';
 
-const Loader = (): JSX.Element => {
+const Loader: React.FC = (): JSX.Element => {
   const isLoading = useTypedSelector(selectLoading);
 
   if (isLoading) {

@@ -6,11 +6,11 @@ import { selectUser } from '../core/selectors/selectors';
 import { useTypedSelector } from '../core/hooks/useTypedSelector';
 import { pathes } from '../constants/constants';
 
-interface SignInRouteProps {
+interface ISignInRouteProps {
   path: string;
 }
 
-const SignInRoute = ({ path }: SignInRouteProps): JSX.Element => {
+const SignInRoute: React.FC<ISignInRouteProps> = ({ path }): JSX.Element => {
   const user = useTypedSelector(selectUser);
 
   return (

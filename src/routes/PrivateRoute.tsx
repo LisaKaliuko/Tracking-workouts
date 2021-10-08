@@ -5,12 +5,15 @@ import { selectUser } from '../core/selectors/selectors';
 import { useTypedSelector } from '../core/hooks/useTypedSelector';
 import { pathes } from '../constants/constants';
 
-interface PrivateRouteProps {
+interface IPrivateRouteProps {
   path: string;
   children: React.ReactNode;
 }
 
-const PrivateRoute = ({ path, children }: PrivateRouteProps): JSX.Element => {
+const PrivateRoute: React.FC<IPrivateRouteProps> = ({
+  path,
+  children,
+}): JSX.Element => {
   const user = useTypedSelector(selectUser);
 
   return (

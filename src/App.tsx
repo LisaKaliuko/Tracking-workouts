@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
 import Menu from './components/Menu/Menu';
@@ -11,10 +11,13 @@ import ExercisesList from './pages/ExercisesList/ExercisesList';
 import Exercise from './pages/Exercise/Exercise';
 import Loader from './components/Loader/Loader';
 import { pathes } from './constants/constants';
-import { isSignIn } from './firebase';
+import { useTypedSelector } from './core/hooks/useTypedSelector';
+import { selectUser } from './core/selectors/selectors';
 
-function App(): JSX.Element {
-  useEffect(() => isSignIn(), []);
+const App: React.FC = (): JSX.Element => {
+  const user = useTypedSelector(selectUser);
+
+  if (!user) return <div></div>;
 
   return (
     <>
@@ -41,6 +44,6 @@ function App(): JSX.Element {
       </Router>
     </>
   );
-}
+};
 
 export default App;

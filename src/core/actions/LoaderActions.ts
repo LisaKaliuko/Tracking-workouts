@@ -6,5 +6,5 @@ export enum LoaderActionTypes {
 
 export const setLoadingAction = createAction(
   LoaderActionTypes.LOADER,
-  (bool: boolean) => ({ payload: { isLoading: bool } })
+  (isLoading: boolean) => ({ payload: { isLoading } })
 );

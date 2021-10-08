@@ -6,11 +6,13 @@ import { selectUser } from '../core/selectors/selectors';
 import { useTypedSelector } from '../core/hooks/useTypedSelector';
 import { pathes } from '../constants/constants';
 
-interface RegistrationRouteProps {
+interface IRegistrationRouteProps {
   path: string;
 }
 
-const RegistrationRoute = ({ path }: RegistrationRouteProps): JSX.Element => {
+const RegistrationRoute: React.FC<IRegistrationRouteProps> = ({
+  path,
+}): JSX.Element => {
   const user = useTypedSelector(selectUser);
 
   return (

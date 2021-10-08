@@ -1,4 +1,4 @@
-import { Day } from '../../core/actions/UserActions';
+import { IDay } from '../../core/interfaces/WorkoutInterfaces';
 import { RootState } from '../../core/redusers/rootReducer';
 
 type DayObject = {
@@ -6,7 +6,7 @@ type DayObject = {
   date: number;
 };
 
-const errorMessage = (error: unknown) => {
+export const errorMessage = (error: unknown): string => {
   let errorMessage = 'some error';
   if (error instanceof Error) {
     errorMessage = error.message;
@@ -94,11 +94,11 @@ export const getCalendarMatrix = (
 };
 
 export const checkRepeatedWorkout = (
-  workouts: Array<Day>,
+  workouts: Array<IDay> = [],
   year: number,
   month: number,
   day: number
-): undefined | Day => {
+): undefined | IDay => {
   const result = workouts.find((item) => {
     const workoutDay = new Date(
       item.year,
