@@ -3,54 +3,32 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import PopupForm from '../../components/PopupForm/PopupForm';
-import { Exercise as ExerciseType } from '../../core/actions/WorkoutActions';
+import { IExercise } from '../../core/interfaces/WorkoutInterfaces';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { firestore } from '../../index';
-import { selectCategory, selectExercise } from '../../core/selectors/selectors';
+import {
+  selectCurrentExercise,
+  selectExercises,
+} from '../../core/selectors/selectors';
 import { setExerciseAction } from '../../core/actions/WorkoutActions';
-import { setLoadingAction } from '../../core/actions/LoaderActions';
 import { pathes } from '../../constants/constants';
 import './exercise.css';
 
-const Exercise = (): JSX.Element => {
-  const category = useTypedSelector(selectCategory);
-  const exercise = useTypedSelector(selectExercise);
-  const [arrOfExercises, setArrOfExercises] = useState<Array<ExerciseType>>([]);
+const Exercise: React.FC = (): JSX.Element => {
+  const exercise = useTypedSelector(selectCurrentExercise);
+  const arrOfExercises = useTypedSelector(selectExercises);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(0);
   const [doneSets, setDoneSets] = useState(0);
   const [isError, setError] = useState('');
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    dispatch(setLoadingAction(true));
-    if (category) {
-      firestore
-        .collection('exercises')
-        .where('categoryId', '==', category.id)
-        .get()
-        .then((snapshot: any) => {
-          console.log('typeof snapshot', typeof snapshot);
-          console.log('snapshot', snapshot);
-          setArrOfExercises(
-            snapshot.docs.map((doc: any) => ({ ...doc.data() }))
-          );
-        })
-        .then(() => dispatch(setLoadingAction(false)));
-    }
-
-    return () => {
-      setArrOfExercises([]);
-    };
-  }, [category, dispatch]);
-
-  useEffect(() => {
-    if (exercise) {
+    if (exercise && arrOfExercises) {
       if (doneSets === exercise.sets) {
         const indexOfCurrentExercise = arrOfExercises.findIndex(
-          (item: ExerciseType) => item.id === exercise.id
+          (item: IExercise) => item.id === exercise.id
         );
 
         if (indexOfCurrentExercise !== arrOfExercises.length - 1) {
@@ -70,11 +48,15 @@ const Exercise = (): JSX.Element => {
   }, [exercise, arrOfExercises, history, doneSets, dispatch]);
 
   const addInputValue = () => {
-    setInputValue(exercise.repeats);
+    if (exercise) setInputValue(exercise.repeats);
   };
 
   const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    setInputValue(+e.target.value);
+    if (!+e.target.value) {
+      setError('Пожалуйста введите число');
+      setInputValue(0);
+    }
   };
 
   const addSet = (e: FormEvent) => {
@@ -85,7 +67,7 @@ const Exercise = (): JSX.Element => {
     } else {
       setError('Пожалуйста введите число');
     }
-    setInputValue('');
+    setInputValue(0);
   };
 
   return (

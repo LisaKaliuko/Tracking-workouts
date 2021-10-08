@@ -2,21 +2,31 @@ import React, { MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { setWorkoutToArrOfWorkoutsAction } from '../../core/actions/UserActions';
-import { selectWorkoutDate } from '../../core/selectors/selectors';
-import { setDataToFirestore } from '../../firebase';
+import { addNewWorkoutDay } from '../../core/actions/UserActions';
+import {
+  selectArrOfWorkouts,
+  selectCurrentDate,
+  selectUser,
+} from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { pathes } from '../../constants/constants';
 
-const PopupForm = (): JSX.Element => {
+const PopupForm: React.FC = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const date = useTypedSelector(selectWorkoutDate);
+  const date = useTypedSelector(selectCurrentDate);
+  const user = useTypedSelector(selectUser);
+  const arrOfWorkouts = useTypedSelector(selectArrOfWorkouts);
 
   const clickFinishWorkout = (e: MouseEvent) => {
     e.preventDefault();
-    dispatch(setWorkoutToArrOfWorkoutsAction({ ...date }));
-    setDataToFirestore(() => history.push(pathes.CALENDAR));
+    if (date && user.email && arrOfWorkouts) {
+      dispatch(
+        addNewWorkoutDay(user.email, arrOfWorkouts, date, () =>
+          history.push(pathes.CALENDAR)
+        )
+      );
+    }
   };
 
   const clickContinueWorkout = (e: MouseEvent) => {

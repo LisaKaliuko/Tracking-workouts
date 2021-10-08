@@ -1,44 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { firestore } from '../../index';
-import { Exercise } from '../../core/actions/WorkoutActions';
-import { selectCategory } from '../../core/selectors/selectors';
+import { IExercise } from '../../core/interfaces/WorkoutInterfaces';
+import {
+  selectCurrentCategory,
+  selectExercises,
+} from '../../core/selectors/selectors';
 import { ArrowRightExercise } from '../../shared/icons/icons';
-import { setExerciseAction } from '../../core/actions/WorkoutActions';
-import { setLoadingAction } from '../../core/actions/LoaderActions';
+import {
+  setExerciseAction,
+  getExercises,
+} from '../../core/actions/WorkoutActions';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { pathes } from '../../constants/constants';
 import './exercisesList.css';
 
-const ExercisesList = (): JSX.Element => {
-  const category = useTypedSelector(selectCategory);
-  const [arrOfExercises, setArrOfExercises] = useState<Array<Exercise>>([]);
+const ExercisesList: React.FC = (): JSX.Element => {
+  const category = useTypedSelector(selectCurrentCategory);
+  const arrOfExercises = useTypedSelector(selectExercises);
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLoadingAction(true));
-    if (category) {
-      firestore
-        .collection('exercises')
-        .where('categoryId', '==', category.id)
-        .get()
-        .then((snapshot: any) => {
-          setArrOfExercises(
-            snapshot.docs.map((doc: any) => ({ ...doc.data() }))
-          );
-        })
-        .then(() => dispatch(setLoadingAction(false)));
-    }
-
-    return () => {
-      setArrOfExercises([]);
-    };
+    if (category) dispatch(getExercises(category.id));
   }, [category, dispatch]);
 
-  const chooseExercise = (exercise: Exercise) => () => {
+  const chooseExercise = (exercise: IExercise) => () => {
     dispatch(setExerciseAction(exercise));
     const url = `${pathes.EXERCISES_LIST}:${exercise.id}`;
     history.push(url);
@@ -46,8 +34,8 @@ const ExercisesList = (): JSX.Element => {
 
   return (
     <div className="exercises_container">
-      {arrOfExercises.length !== 0
-        ? arrOfExercises.map((exercise: Exercise) => {
+      {arrOfExercises && arrOfExercises.length !== 0
+        ? arrOfExercises.map((exercise: IExercise) => {
             return (
               <div
                 className="exercises_item"

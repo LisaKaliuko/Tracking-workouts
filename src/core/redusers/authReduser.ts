@@ -1,21 +1,20 @@
 import { AnyAction } from 'redux';
 import { handleActions } from 'redux-actions';
 
-import { UserActionsTypes, Day } from '../actions/UserActions';
+import { UserActionsTypes } from '../actions/UserActions';
+import { IDay } from '../interfaces/WorkoutInterfaces';
 
 interface InitialStateAuth {
   user: {
     email: string | null;
-    uid: string | null;
     error: string | null;
-    arrOfWorkouts: Array<Day>;
+    arrOfWorkouts: Array<IDay>;
   };
 }
 
 const initialState: InitialStateAuth = {
   user: {
     email: null,
-    uid: null,
     error: null,
     arrOfWorkouts: [],
   },
@@ -23,40 +22,36 @@ const initialState: InitialStateAuth = {
 
 const authReducer = handleActions<InitialStateAuth>(
   {
-    [UserActionsTypes.SIGN_IN]: (
+    [UserActionsTypes.SIGN_IN_SUCCESS]: (
       state: InitialStateAuth,
       action: AnyAction
     ) => ({
       ...state,
-      user: {
-        ...state.user,
-        error: null,
-        uid: action.payload.uid,
-        email: action.payload.email,
-        arrOfWorkouts: action.payload.arrOfWorkouts,
-      },
+      user: { ...state.user, ...action.payload },
     }),
-    [UserActionsTypes.LOG_OUT]: (state: InitialStateAuth) => ({
+
+    [UserActionsTypes.REGISTER_SUCCESS]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
       ...state,
-      user: {
-        email: null,
-        uid: null,
-        error: null,
-        arrOfWorkouts: [],
-      },
+      user: { ...state.user, ...action.payload },
     }),
+
+    [UserActionsTypes.LOG_OUT]: () => initialState,
+
     [UserActionsTypes.ERROR]: (state: InitialStateAuth, action: AnyAction) => ({
       ...state,
       user: { ...state.user, error: action.payload },
     }),
-    [UserActionsTypes.WORKOUT]: (
+
+    [UserActionsTypes.SET_WORKOUTS]: (
       state: InitialStateAuth,
       action: AnyAction
-    ) => {
-      const prevDates = state.user.arrOfWorkouts;
-      const newDates = [...prevDates, action.payload];
-      return { ...state, user: { ...state.user, arrOfWorkouts: newDates } };
-    },
+    ) => ({
+      ...state,
+      user: { ...state.user, arrOfWorkouts: action.payload },
+    }),
   },
   initialState
 );

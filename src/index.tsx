@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase/app';
+import createSagaMiddleware from '@redux-saga/core';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { applyMiddleware } from 'redux';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import 'firebase/auth';
@@ -13,6 +15,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import App from './App';
 import rootReducer from './core/redusers/rootReducer';
 import { firebaseConfig } from './config/fbConfig';
+import { rootSaga } from './core/saga/root';
 import { saveState, loadState } from './shared/helpers/helpers';
 
 firebase.initializeApp(firebaseConfig);
@@ -20,7 +23,16 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const initialState = loadState();
-export const store = createStore(rootReducer, initialState);
+
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = createStore(
+  rootReducer,
+  initialState,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(rootSaga);
 
 const rrfConfig = {
   userProfile: 'users',

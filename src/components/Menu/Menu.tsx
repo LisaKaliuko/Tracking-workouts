@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { logOutUser } from '../../firebase';
 import { selectUser } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
+import { logOut } from '../../core/actions/UserActions';
 
-const Menu = (): JSX.Element => {
+const Menu: React.FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const logOutUser = () => dispatch(logOut());
 
   return (
     <nav className="navbar bg-dark text-white justify-content-around">

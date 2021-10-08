@@ -1,13 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-import { signInUser } from '../../firebase';
 import { selectUser } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
+import { signin } from '../../core/actions/UserActions';
+import { useDispatch } from 'react-redux';
 
-const SignIn = (): JSX.Element => {
+const SignIn: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useTypedSelector(selectUser);
+  const dispatch = useDispatch();
 
   const changeEmail = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
@@ -17,7 +19,7 @@ const SignIn = (): JSX.Element => {
 
   const enterUser = (e: FormEvent) => {
     e.preventDefault();
-    signInUser(email, password);
+    dispatch(signin(email, password));
     setEmail('');
     setPassword('');
   };

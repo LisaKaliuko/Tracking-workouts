@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -7,18 +7,23 @@ import {
   getCalendarMatrix,
   checkRepeatedWorkout,
 } from '../../shared/helpers/helpers';
-import { Day } from '../../core/actions/UserActions';
+import { IDay } from '../../core/interfaces/WorkoutInterfaces';
 import { allMonthes } from '../../constants/constants';
 import { ArrowLeft, ArrowRight, WorkoutIcon } from '../../shared/icons/icons';
 import { setDayAction } from '../../core/actions/WorkoutActions';
-import { selectArrOfWorkouts } from '../../core/selectors/selectors';
+import { getWorkouts } from '../../core/actions/UserActions';
+import {
+  selectArrOfWorkouts,
+  selectUser,
+} from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { pathes } from '../../constants/constants';
 import './calendar.css';
 
-const Calendar = (): JSX.Element => {
+const Calendar: React.FC = (): JSX.Element => {
   const [year, setYear] = useState(2021);
   const [month, setMonth] = useState(new Date().getMonth());
+  const user = useTypedSelector(selectUser);
   const workouts = useTypedSelector(selectArrOfWorkouts);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -39,6 +44,10 @@ const Calendar = (): JSX.Element => {
     lastDay.getDate(),
     cells
   );
+
+  useEffect(() => {
+    if (user.email) dispatch(getWorkouts(user.email));
+  }, [dispatch, user.email]);
 
   const clickPrevMonth = (e: MouseEvent) => {
     e.preventDefault();
@@ -125,8 +134,8 @@ const Calendar = (): JSX.Element => {
                   >
                     {dayObj.date || ' '}
                   </p>
-                  {workouts.length !== 0
-                    ? workouts.map((item: Day) => {
+                  {workouts && workouts.length !== 0
+                    ? workouts.map((item: IDay) => {
                         if (
                           item.year === year &&
                           item.month === month &&
