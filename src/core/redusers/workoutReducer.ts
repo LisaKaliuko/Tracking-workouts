@@ -1,19 +1,19 @@
 import { AnyAction } from 'redux';
 import { handleActions } from 'redux-actions';
 
-import { IDay } from '../interfaces/WorkoutInterfaces';
-import { ICategory, IExercise } from '../interfaces/WorkoutInterfaces';
+import { Day } from '../interfaces/WorkoutInterfaces';
+import { Category, Exercise } from '../interfaces/WorkoutInterfaces';
 import { WorkoutActionsTypes } from '../actions/WorkoutActions';
 
 interface InitialStateWorkout {
   currentWorkout: {
-    date: IDay | null;
-    category: ICategory | null;
-    exercise: IExercise | null;
+    date: Day | null;
+    category: Category | null;
+    exercise: Exercise | null;
   };
   data: {
-    categories: Array<ICategory> | null;
-    exercises: Array<IExercise> | null;
+    categories: Array<Category> | null;
+    exercises: Array<Exercise> | null;
   };
   serverError: string | null;
 }

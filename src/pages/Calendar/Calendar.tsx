@@ -7,7 +7,7 @@ import {
   getCalendarMatrix,
   checkRepeatedWorkout,
 } from '../../shared/helpers/helpers';
-import { IDay } from '../../core/interfaces/WorkoutInterfaces';
+import { Day } from '../../core/interfaces/WorkoutInterfaces';
 import { allMonthes } from '../../constants/constants';
 import { ArrowLeft, ArrowRight, WorkoutIcon } from '../../shared/icons/icons';
 import { setDayAction } from '../../core/actions/WorkoutActions';
@@ -135,7 +135,7 @@ const Calendar: React.FC = (): JSX.Element => {
                     {dayObj.date || ' '}
                   </p>
                   {workouts && workouts.length !== 0
-                    ? workouts.map((item: IDay) => {
+                    ? workouts.map((item: Day) => {
                         if (
                           item.year === year &&
                           item.month === month &&

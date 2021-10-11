@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { IDay } from '../interfaces/WorkoutInterfaces';
+import { Day } from '../interfaces/WorkoutInterfaces';
 
 export enum UserActionsTypes {
   SIGN_IN = '[USER] SIGN_IN',
@@ -48,12 +48,12 @@ export const getWorkouts = createAction(
 
 export const setWorkouts = createAction(
   UserActionsTypes.SET_WORKOUTS,
-  (array: Array<IDay>) => ({ payload: array })
+  (array: Array<Day>) => ({ payload: array })
 );
 
 export const addNewWorkoutDay = createAction(
   UserActionsTypes.ADD_WORKOUT_DAY,
-  (email: string, arr: Array<IDay>, date: IDay, cb: () => void) => ({
+  (email: string, arr: Array<Day>, date: Day, cb: () => void) => ({
     payload: { email, arr, date, cb },
   })
 );

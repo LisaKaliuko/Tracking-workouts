@@ -18,7 +18,7 @@ import {
 import { setLoadingAction } from '../actions/LoaderActions';
 import { Action } from '../interfaces/Action';
 import { errorMessage } from '../../shared/helpers/helpers';
-import { IDay } from '../interfaces/WorkoutInterfaces';
+import { Day } from '../interfaces/WorkoutInterfaces';
 
 function* registerSaga(action: Action<UserActionsTypes>) {
   yield put(setLoadingAction(true));
@@ -70,7 +70,7 @@ function* logOutSaga() {
 function* getWorkoutsSaga(action: Action<UserActionsTypes>) {
   yield put(setLoadingAction(true));
   try {
-    const arr: Array<IDay> = yield call(getWorkouts, action.payload);
+    const arr: Array<Day> = yield call(getWorkouts, action.payload);
     if (arr) yield put(setWorkouts(arr));
     yield put(setLoadingAction(false));
   } catch (e) {

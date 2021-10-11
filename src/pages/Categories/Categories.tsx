@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import { ICategory } from '../../core/interfaces/WorkoutInterfaces';
+import { Category } from '../../core/interfaces/WorkoutInterfaces';
 import {
   setCategoryAction,
   getCategories,
@@ -21,7 +21,7 @@ const Categories: React.FC = (): JSX.Element => {
     dispatch(getCategories());
   }, [dispatch]);
 
-  const chooseCategory = (category: ICategory) => () => {
+  const chooseCategory = (category: Category) => () => {
     dispatch(setCategoryAction(category));
     history.push(pathes.EXERCISES_LIST);
   };
@@ -29,7 +29,7 @@ const Categories: React.FC = (): JSX.Element => {
   return (
     <div className="categories_container">
       {arrOfCategories
-        ? arrOfCategories.map((category: ICategory) => {
+        ? arrOfCategories.map((category: Category) => {
             return (
               <div
                 className="caregories_item"

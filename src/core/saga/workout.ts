@@ -9,13 +9,13 @@ import {
 import { getCategories, getExercises } from '../services/workoutServices';
 import { setLoadingAction } from '../actions/LoaderActions';
 import { Action } from '../interfaces/Action';
-import { ICategory, IExercise } from '../interfaces/WorkoutInterfaces';
+import { Category, Exercise } from '../interfaces/WorkoutInterfaces';
 import { errorMessage } from '../../shared/helpers/helpers';
 
 function* getCategoriesSaga() {
   yield put(setLoadingAction(true));
   try {
-    const data: Array<ICategory> = yield call(getCategories);
+    const data: Array<Category> = yield call(getCategories);
     if (data) yield put(setCategories(data));
     yield put(setLoadingAction(false));
   } catch (e) {
@@ -28,7 +28,7 @@ function* getCategoriesSaga() {
 function* getExercisesSaga(action: Action<WorkoutActionsTypes>) {
   yield put(setLoadingAction(true));
   try {
-    const data: Array<IExercise> = yield call(getExercises, action.payload);
+    const data: Array<Exercise> = yield call(getExercises, action.payload);
     if (data) yield put(setExercises(data));
     yield put(setLoadingAction(false));
   } catch (e) {

@@ -1,7 +1,7 @@
 import { firestore } from '../..';
-import { ICategory, IExercise } from '../interfaces/WorkoutInterfaces';
+import { Category, Exercise } from '../interfaces/WorkoutInterfaces';
 
-export const getCategories = (): Promise<Array<ICategory>> => {
+export const getCategories = (): Promise<Array<Category>> => {
   return firestore
     .collection('categories')
     .get()
@@ -10,10 +10,10 @@ export const getCategories = (): Promise<Array<ICategory>> => {
     );
 };
 
-export const getExercises = (categoryId: string): Promise<IExercise[]> => {
+export const getExercises = (categoryId: string): Promise<Exercise[]> => {
   return firestore
     .collection('exercises')
     .where('categoryId', '==', categoryId)
     .get()
-    .then((snapshot) => snapshot.docs.map((doc) => doc.data() as IExercise));
+    .then((snapshot) => snapshot.docs.map((doc) => doc.data() as Exercise));
 };

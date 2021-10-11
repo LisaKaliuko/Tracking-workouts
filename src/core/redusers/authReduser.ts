@@ -2,13 +2,13 @@ import { AnyAction } from 'redux';
 import { handleActions } from 'redux-actions';
 
 import { UserActionsTypes } from '../actions/UserActions';
-import { IDay } from '../interfaces/WorkoutInterfaces';
+import { Day } from '../interfaces/WorkoutInterfaces';
 
 interface InitialStateAuth {
   user: {
     email: string | null;
     error: string | null;
-    arrOfWorkouts: Array<IDay>;
+    arrOfWorkouts: Array<Day>;
   };
 }
 

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import PopupForm from '../../components/PopupForm/PopupForm';
-import { IExercise } from '../../core/interfaces/WorkoutInterfaces';
+import { Exercise as ExerciseType } from '../../core/interfaces/WorkoutInterfaces';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import {
   selectCurrentExercise,
@@ -28,7 +28,7 @@ const Exercise: React.FC = (): JSX.Element => {
     if (exercise && arrOfExercises) {
       if (doneSets === exercise.sets) {
         const indexOfCurrentExercise = arrOfExercises.findIndex(
-          (item: IExercise) => item.id === exercise.id
+          (item: ExerciseType) => item.id === exercise.id
         );
 
         if (indexOfCurrentExercise !== arrOfExercises.length - 1) {

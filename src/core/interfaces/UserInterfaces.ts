@@ -1,7 +1,7 @@
-import { IDay } from './WorkoutInterfaces';
+import { Day } from './WorkoutInterfaces';
 
-export interface IUser {
+export interface User {
   uid: string;
   email: string;
-  arrOfWorkouts: Array<IDay>;
+  arrOfWorkouts: Array<Day>;
 }

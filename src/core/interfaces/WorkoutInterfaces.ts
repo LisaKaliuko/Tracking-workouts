@@ -1,15 +1,15 @@
-export interface IDay {
+export interface Day {
   year: number;
   month: number;
   day: number;
 }
 
-export interface ICategory {
+export interface Category {
   id: string;
   title: string;
 }
 
-export interface IExercise {
+export interface Exercise {
   categoryId: string;
   description: string;
   id: string;

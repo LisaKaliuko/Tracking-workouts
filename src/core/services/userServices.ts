@@ -1,5 +1,5 @@
 import { auth, firestore } from '../..';
-import { IDay } from '../interfaces/WorkoutInterfaces';
+import { Day } from '../interfaces/WorkoutInterfaces';
 
 export const registerUser = (email: string, password: string): string => {
   auth.createUserWithEmailAndPassword(email, password).then((resp) => {
@@ -24,7 +24,7 @@ export const signInUser = (
 
 export const logOutUser = (): Promise<void> => auth.signOut();
 
-export const getWorkouts = (email: string): Promise<Array<IDay>> => {
+export const getWorkouts = (email: string): Promise<Array<Day>> => {
   return firestore
     .collection('users')
     .doc(email)
@@ -34,8 +34,8 @@ export const getWorkouts = (email: string): Promise<Array<IDay>> => {
 
 export const addNewWorkoutDay = (
   email: string,
-  arr: Array<IDay>,
-  day: IDay,
+  arr: Array<Day>,
+  day: Day,
   cb: () => void
 ): void => {
   const newDates = [...arr, day];

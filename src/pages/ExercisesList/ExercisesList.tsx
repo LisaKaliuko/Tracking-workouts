@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { IExercise } from '../../core/interfaces/WorkoutInterfaces';
+import { Exercise } from '../../core/interfaces/WorkoutInterfaces';
 import {
   selectCurrentCategory,
   selectExercises,
@@ -26,7 +26,7 @@ const ExercisesList: React.FC = (): JSX.Element => {
     if (category) dispatch(getExercises(category.id));
   }, [category, dispatch]);
 
-  const chooseExercise = (exercise: IExercise) => () => {
+  const chooseExercise = (exercise: Exercise) => () => {
     dispatch(setExerciseAction(exercise));
     const url = `${pathes.EXERCISES_LIST}:${exercise.id}`;
     history.push(url);
@@ -35,7 +35,7 @@ const ExercisesList: React.FC = (): JSX.Element => {
   return (
     <div className="exercises_container">
       {arrOfExercises && arrOfExercises.length !== 0
-        ? arrOfExercises.map((exercise: IExercise) => {
+        ? arrOfExercises.map((exercise: Exercise) => {
             return (
               <div
                 className="exercises_item"

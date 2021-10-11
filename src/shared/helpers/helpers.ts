@@ -1,4 +1,4 @@
-import { IDay } from '../../core/interfaces/WorkoutInterfaces';
+import { Day } from '../../core/interfaces/WorkoutInterfaces';
 import { RootState } from '../../core/redusers/rootReducer';
 
 type DayObject = {
@@ -94,11 +94,11 @@ export const getCalendarMatrix = (
 };
 
 export const checkRepeatedWorkout = (
-  workouts: Array<IDay> = [],
+  workouts: Array<Day> = [],
   year: number,
   month: number,
   day: number
-): undefined | IDay => {
+): undefined | Day => {
   const result = workouts.find((item) => {
     const workoutDay = new Date(
       item.year,

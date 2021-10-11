@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { ICategory, IExercise } from '../interfaces/WorkoutInterfaces';
+import { Category, Exercise } from '../interfaces/WorkoutInterfaces';
 
 export enum WorkoutActionsTypes {
   GET_CATEGORIES = '[WORKOUT] GET_CATEGORIES',
@@ -17,7 +17,7 @@ export const getCategories = createAction(WorkoutActionsTypes.GET_CATEGORIES);
 
 export const setCategories = createAction(
   WorkoutActionsTypes.SET_CATEGORIES,
-  (array: Array<ICategory>) => ({ payload: array })
+  (array: Array<Category>) => ({ payload: array })
 );
 
 export const getExercises = createAction(
@@ -27,7 +27,7 @@ export const getExercises = createAction(
 
 export const setExercises = createAction(
   WorkoutActionsTypes.SET_EXERCISES,
-  (array: Array<IExercise>) => ({ payload: array })
+  (array: Array<Exercise>) => ({ payload: array })
 );
 
 export const setDayAction = createAction(
@@ -39,12 +39,12 @@ export const setDayAction = createAction(
 
 export const setCategoryAction = createAction(
   WorkoutActionsTypes.CATEGORY,
-  (category: ICategory) => ({ payload: category })
+  (category: Category) => ({ payload: category })
 );
 
 export const setExerciseAction = createAction(
   WorkoutActionsTypes.EXERCISE,
-  (exercise: IExercise) => ({ payload: exercise })
+  (exercise: Exercise) => ({ payload: exercise })
 );
 
 export const setServerError = createAction(
