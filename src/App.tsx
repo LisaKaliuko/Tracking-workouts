@@ -11,14 +11,8 @@ import ExercisesList from './pages/ExercisesList/ExercisesList';
 import Exercise from './pages/Exercise/Exercise';
 import Loader from './components/Loader/Loader';
 import { pathes } from './constants/constants';
-import { useTypedSelector } from './core/hooks/useTypedSelector';
-import { selectUser } from './core/selectors/selectors';
 
 const App: FC = (): JSX.Element => {
-  const user = useTypedSelector(selectUser);
-
-  if (!user) return <div></div>;
-
   return (
     <>
       <Router>
