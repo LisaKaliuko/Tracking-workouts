@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -6,7 +6,7 @@ import { selectUser } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { logOut } from '../../core/actions/UserActions';
 
-const Menu: React.FC = (): JSX.Element => {
+const Menu: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
   const dispatch = useDispatch();
 

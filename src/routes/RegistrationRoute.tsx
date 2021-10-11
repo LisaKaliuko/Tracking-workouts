@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import Registration from '../pages/Registration/Registration';
@@ -10,7 +10,7 @@ interface IRegistrationRouteProps {
   path: string;
 }
 
-const RegistrationRoute: React.FC<IRegistrationRouteProps> = ({
+const RegistrationRoute: FC<IRegistrationRouteProps> = ({
   path,
 }): JSX.Element => {
   const user = useTypedSelector(selectUser);

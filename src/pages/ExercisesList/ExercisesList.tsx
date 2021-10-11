@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -16,7 +16,7 @@ import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { pathes } from '../../constants/constants';
 import './exercisesList.css';
 
-const ExercisesList: React.FC = (): JSX.Element => {
+const ExercisesList: FC = (): JSX.Element => {
   const category = useTypedSelector(selectCurrentCategory);
   const arrOfExercises = useTypedSelector(selectExercises);
   const history = useHistory();

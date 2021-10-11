@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from 'react';
+import React, { MouseEvent, useEffect, useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -20,7 +20,7 @@ import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { pathes } from '../../constants/constants';
 import './calendar.css';
 
-const Calendar: React.FC = (): JSX.Element => {
+const Calendar: FC = (): JSX.Element => {
   const [year, setYear] = useState(2021);
   const [month, setMonth] = useState(new Date().getMonth());
   const user = useTypedSelector(selectUser);

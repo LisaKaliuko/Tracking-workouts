@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
+import React, { useEffect, useState, ChangeEvent, FormEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -13,7 +13,7 @@ import { setExerciseAction } from '../../core/actions/WorkoutActions';
 import { pathes } from '../../constants/constants';
 import './exercise.css';
 
-const Exercise: React.FC = (): JSX.Element => {
+const Exercise: FC = (): JSX.Element => {
   const exercise = useTypedSelector(selectCurrentExercise);
   const arrOfExercises = useTypedSelector(selectExercises);
   const history = useHistory();

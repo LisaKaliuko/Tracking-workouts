@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { selectUser } from '../core/selectors/selectors';
@@ -7,10 +7,10 @@ import { pathes } from '../constants/constants';
 
 interface IPrivateRouteProps {
   path: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const PrivateRoute: React.FC<IPrivateRouteProps> = ({
+const PrivateRoute: FC<IPrivateRouteProps> = ({
   path,
   children,
 }): JSX.Element => {

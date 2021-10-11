@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -11,7 +11,7 @@ import {
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { pathes } from '../../constants/constants';
 
-const PopupForm: React.FC = (): JSX.Element => {
+const PopupForm: FC = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const date = useTypedSelector(selectCurrentDate);

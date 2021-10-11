@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
 import Menu from './components/Menu/Menu';
@@ -14,7 +14,7 @@ import { pathes } from './constants/constants';
 import { useTypedSelector } from './core/hooks/useTypedSelector';
 import { selectUser } from './core/selectors/selectors';
 
-const App: React.FC = (): JSX.Element => {
+const App: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
 
   if (!user) return <div></div>;

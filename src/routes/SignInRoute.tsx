@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import SignIn from '../pages/SignIn/SignIn';
@@ -10,7 +10,7 @@ interface ISignInRouteProps {
   path: string;
 }
 
-const SignInRoute: React.FC<ISignInRouteProps> = ({ path }): JSX.Element => {
+const SignInRoute: FC<ISignInRouteProps> = ({ path }): JSX.Element => {
   const user = useTypedSelector(selectUser);
 
   return (

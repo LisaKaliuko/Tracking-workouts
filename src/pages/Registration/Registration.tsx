@@ -1,11 +1,11 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { register } from '../../core/actions/UserActions';
 import { selectUser } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 
-const Registration: React.FC = (): JSX.Element => {
+const Registration: FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useTypedSelector(selectUser);
