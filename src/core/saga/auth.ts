@@ -4,12 +4,14 @@ import {
   UserActionsTypes,
   signinSuccess,
   registerSuccess,
-  logOut,
-  setWorkouts,
+  getWorkoutsSuccess,
   signinError,
   registerError,
   getWorkoutsError,
-  addNewWorkoutDayError,
+  logOutSuccess,
+  logOutError,
+  addWorkoutDaySuccess,
+  addWorkoutDayError,
 } from '../actions/UserActions';
 import {
   signInUser,
@@ -45,28 +47,34 @@ function* signInSaga(action: Action<UserActionsTypes>) {
 }
 
 function* logOutSaga() {
-  yield call(logOutUser);
-  return put(logOut());
+  try {
+    yield call(logOutUser);
+    yield put(logOutSuccess());
+  } catch (e) {
+    const error = errorMessage(e);
+    yield put(logOutError(error));
+  }
 }
 
 function* getWorkoutsSaga(action: Action<UserActionsTypes>) {
   const email = action.payload;
   try {
     const arr: Array<Day> = yield call(getWorkouts, email);
-    if (arr) yield put(setWorkouts(arr));
+    if (arr) yield put(getWorkoutsSuccess(arr));
   } catch (e) {
     const error = errorMessage(e);
     yield put(getWorkoutsError(error));
   }
 }
 
-function* addNewWorkoutDaySaga(action: Action<UserActionsTypes>) {
+function* addWorkoutDaySaga(action: Action<UserActionsTypes>) {
   const { email, arr, date, cb } = action.payload;
   try {
     yield call(addNewWorkoutDay, email, arr, date, cb);
+    yield put(addWorkoutDaySuccess());
   } catch (e) {
     const error = errorMessage(e);
-    yield put(addNewWorkoutDayError(error));
+    yield put(addWorkoutDayError(error));
   }
 }
 
@@ -75,5 +83,5 @@ export function* authWatcher(): Generator {
   yield takeEvery(UserActionsTypes.REGISTER, registerSaga);
   yield takeEvery(UserActionsTypes.LOG_OUT, logOutSaga);
   yield takeEvery(UserActionsTypes.GET_WORKOUTS, getWorkoutsSaga);
-  yield takeEvery(UserActionsTypes.ADD_WORKOUT_DAY, addNewWorkoutDaySaga);
+  yield takeEvery(UserActionsTypes.ADD_WORKOUT_DAY, addWorkoutDaySaga);
 }

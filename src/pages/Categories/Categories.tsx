@@ -28,7 +28,7 @@ const Categories: FC = (): JSX.Element => {
 
   return (
     <div className="categories_container">
-      {arrOfCategories
+      {arrOfCategories && arrOfCategories.length !== 0
         ? arrOfCategories.map((category: Category) => {
             return (
               <div

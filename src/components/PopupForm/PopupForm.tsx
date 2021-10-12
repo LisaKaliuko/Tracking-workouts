@@ -2,7 +2,7 @@ import React, { MouseEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { addNewWorkoutDay } from '../../core/actions/UserActions';
+import { addWorkoutDay } from '../../core/actions/UserActions';
 import {
   selectArrOfWorkouts,
   selectCurrentDate,
@@ -22,9 +22,12 @@ const PopupForm: FC = (): JSX.Element => {
     e.preventDefault();
     if (date && user.email && arrOfWorkouts) {
       dispatch(
-        addNewWorkoutDay(user.email, arrOfWorkouts, date, () =>
-          history.push(PATHES.CALENDAR)
-        )
+        addWorkoutDay({
+          email: user.email,
+          arr: arrOfWorkouts,
+          date: date,
+          cb: () => history.push(PATHES.CALENDAR),
+        })
       );
     }
   };

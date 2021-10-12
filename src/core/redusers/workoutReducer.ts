@@ -12,10 +12,11 @@ interface InitialStateWorkout {
     exercise: Exercise | null;
   };
   data: {
-    categories: Array<Category> | null;
-    exercises: Array<Exercise> | null;
+    categories: Array<Category>;
+    exercises: Array<Exercise>;
+    categoriesError: string | null;
+    exercisesError: string | null;
   };
-  serverError: string | null;
   isLoading: boolean;
 }
 
@@ -26,10 +27,11 @@ const initialState: InitialStateWorkout = {
     exercise: null,
   },
   data: {
-    categories: null,
-    exercises: null,
+    categories: [],
+    exercises: [],
+    categoriesError: null,
+    exercisesError: null,
   },
-  serverError: null,
   isLoading: false,
 };
 
@@ -40,12 +42,30 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       isLoading: true,
     }),
 
+    [WorkoutActionsTypes.GET_CATEGORIES_SUCCESS]: (
+      state: InitialStateWorkout,
+      action: AnyAction
+    ) => ({
+      ...state,
+      data: { ...state.data, ...action.payload },
+      isLoading: false,
+    }),
+
+    [WorkoutActionsTypes.GET_CATEGORIES_ERROR]: (
+      state: InitialStateWorkout,
+      action: AnyAction
+    ) => ({
+      ...state,
+      data: { ...state.data, ...action.payload },
+      isLoading: false,
+    }),
+
     [WorkoutActionsTypes.GET_EXERCISES]: (state: InitialStateWorkout) => ({
       ...state,
       isLoading: true,
     }),
 
-    [WorkoutActionsTypes.SET_CATEGORIES]: (
+    [WorkoutActionsTypes.GET_EXERCISES_SUCCESS]: (
       state: InitialStateWorkout,
       action: AnyAction
     ) => ({
@@ -54,7 +74,7 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       isLoading: false,
     }),
 
-    [WorkoutActionsTypes.SET_EXERCISES]: (
+    [WorkoutActionsTypes.GET_EXERCISES_ERROR]: (
       state: InitialStateWorkout,
       action: AnyAction
     ) => ({
@@ -62,11 +82,6 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       data: { ...state.data, ...action.payload },
       isLoading: false,
     }),
-
-    [WorkoutActionsTypes.SERVER_ERROR]: (
-      state: InitialStateWorkout,
-      action: AnyAction
-    ) => ({ ...state, serverError: action.payload }),
 
     [WorkoutActionsTypes.DAY]: (
       state: InitialStateWorkout,

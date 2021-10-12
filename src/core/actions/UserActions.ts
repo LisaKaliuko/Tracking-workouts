@@ -12,12 +12,15 @@ export enum UserActionsTypes {
   REGISTER_ERROR = '[USER] REGISTER_ERROR',
 
   LOG_OUT = '[USER] LOG_OUT',
+  LOG_OUT_SUCCESS = '[USER] LOG_OUT_SUCCESS',
+  LOG_OUT_ERROR = '[USER] LOG_OUT_ERROR',
 
   GET_WORKOUTS = '[USER] GET_WORKOUTS_FROM_FIREBASE',
+  GET_WORKOUTS_SUCCESS = '[USER] GET_WORKOUTS_SUCCESS',
   GET_WORKOUTS_ERROR = '[USER] GET_WORKOUTS_FROM_FIREBASE_ERROR',
-  SET_WORKOUTS = '[USER] SET_WORKOUTS_TO_STORE',
 
   ADD_WORKOUT_DAY = '[USER] ADD_WORKOUT_DAY',
+  ADD_WORKOUT_DAY_SUCCESS = '[USER] ADD_WORKOUT_DAY_SUCCESS',
   ADD_WORKOUT_DAY_ERROR = '[USER] ADD_WORKOUT_DAY_ERROR',
 }
 
@@ -47,29 +50,32 @@ export const registerError = createAction(
 
 export const logOut = createAction(UserActionsTypes.LOG_OUT);
 
+export const logOutSuccess = createAction(UserActionsTypes.LOG_OUT_SUCCESS);
+
+export const logOutError = createAction(
+  UserActionsTypes.LOG_OUT_ERROR,
+  (logOutError: string) => ({ logOutError })
+);
+
 export const getWorkouts = createAction(UserActionsTypes.GET_WORKOUTS);
+
+export const getWorkoutsSuccess = createAction(
+  UserActionsTypes.GET_WORKOUTS_SUCCESS,
+  (array: Array<Day>) => ({ array })
+);
 
 export const getWorkoutsError = createAction(
   UserActionsTypes.GET_WORKOUTS_ERROR,
   (workoutsError: string) => ({ workoutsError })
 );
 
-export const setWorkouts = createAction(
-  UserActionsTypes.SET_WORKOUTS,
-  (array: Array<Day>) => ({ array })
+export const addWorkoutDay = createAction(UserActionsTypes.ADD_WORKOUT_DAY);
+
+export const addWorkoutDaySuccess = createAction(
+  UserActionsTypes.ADD_WORKOUT_DAY_SUCCESS
 );
 
-export const addNewWorkoutDay = createAction(
-  UserActionsTypes.ADD_WORKOUT_DAY,
-  (email: string, arr: Array<Day>, date: Day, cb: () => void) => ({
-    email,
-    arr,
-    date,
-    cb,
-  })
-);
-
-export const addNewWorkoutDayError = createAction(
+export const addWorkoutDayError = createAction(
   UserActionsTypes.ADD_WORKOUT_DAY_ERROR,
   (addWorkoutDayError: string) => ({ addWorkoutDayError })
 );

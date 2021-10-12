@@ -76,11 +76,34 @@ const authReducer = handleActions<InitialStateAuth>(
       isLoading: false,
     }),
 
-    [UserActionsTypes.LOG_OUT]: () => initialState,
+    [UserActionsTypes.LOG_OUT]: (state: InitialStateAuth) => ({
+      ...state,
+      isLoading: true,
+    }),
+
+    [UserActionsTypes.LOG_OUT_SUCCESS]: () => initialState,
+
+    [UserActionsTypes.LOG_OUT_ERROR]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
+      ...state,
+      user: { ...action.payload },
+      isLoading: false,
+    }),
 
     [UserActionsTypes.GET_WORKOUTS]: (state: InitialStateAuth) => ({
       ...state,
       isLoading: true,
+    }),
+
+    [UserActionsTypes.GET_WORKOUTS_SUCCESS]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
+      ...state,
+      user: { ...state.user, arrOfWorkouts: action.payload.array },
+      isLoading: false,
     }),
 
     [UserActionsTypes.GET_WORKOUTS_ERROR]: (
@@ -92,12 +115,13 @@ const authReducer = handleActions<InitialStateAuth>(
       isLoading: false,
     }),
 
-    [UserActionsTypes.SET_WORKOUTS]: (
-      state: InitialStateAuth,
-      action: AnyAction
-    ) => ({
+    [UserActionsTypes.ADD_WORKOUT_DAY]: (state: InitialStateAuth) => ({
       ...state,
-      user: { ...state.user, arrOfWorkouts: action.payload.array },
+      isLoading: true,
+    }),
+
+    [UserActionsTypes.ADD_WORKOUT_DAY_SUCCESS]: (state: InitialStateAuth) => ({
+      ...state,
       isLoading: false,
     }),
 
