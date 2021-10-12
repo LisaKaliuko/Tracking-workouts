@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Registration from '../pages/Registration/Registration';
 import { selectUser } from '../core/selectors/selectors';
 import { useTypedSelector } from '../core/hooks/useTypedSelector';
-import { pathes } from '../constants/constants';
+import { PATHES } from '../constants/constants';
 
 interface IRegistrationRouteProps {
   path: string;
@@ -17,7 +17,7 @@ const RegistrationRoute: FC<IRegistrationRouteProps> = ({
 
   return (
     <Route path={path}>
-      {!user.email ? <Registration /> : <Redirect to={pathes.CALENDAR} />}
+      {!user.email ? <Registration /> : <Redirect to={PATHES.CALENDAR} />}
     </Route>
   );
 };

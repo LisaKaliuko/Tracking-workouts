@@ -13,7 +13,7 @@ import {
   getExercises,
 } from '../../core/actions/WorkoutActions';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { pathes } from '../../constants/constants';
+import { PATHES } from '../../constants/constants';
 import './exercisesList.css';
 
 const ExercisesList: FC = (): JSX.Element => {
@@ -28,7 +28,7 @@ const ExercisesList: FC = (): JSX.Element => {
 
   const chooseExercise = (exercise: Exercise) => () => {
     dispatch(setExerciseAction(exercise));
-    const url = `${pathes.EXERCISES_LIST}:${exercise.id}`;
+    const url = `${PATHES.EXERCISES_LIST}:${exercise.id}`;
     history.push(url);
   };
 

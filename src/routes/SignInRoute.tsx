@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import SignIn from '../pages/SignIn/SignIn';
 import { selectUser } from '../core/selectors/selectors';
 import { useTypedSelector } from '../core/hooks/useTypedSelector';
-import { pathes } from '../constants/constants';
+import { PATHES } from '../constants/constants';
 
 interface ISignInRouteProps {
   path: string;
@@ -15,7 +15,7 @@ const SignInRoute: FC<ISignInRouteProps> = ({ path }): JSX.Element => {
 
   return (
     <Route path={path}>
-      {!user.email ? <SignIn /> : <Redirect to={pathes.CALENDAR} />}
+      {!user.email ? <SignIn /> : <Redirect to={PATHES.CALENDAR} />}
     </Route>
   );
 };

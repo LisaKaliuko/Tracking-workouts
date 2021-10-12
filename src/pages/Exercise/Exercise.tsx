@@ -10,7 +10,7 @@ import {
   selectExercises,
 } from '../../core/selectors/selectors';
 import { setExerciseAction } from '../../core/actions/WorkoutActions';
-import { pathes } from '../../constants/constants';
+import { PATHES } from '../../constants/constants';
 import './exercise.css';
 
 const Exercise: FC = (): JSX.Element => {
@@ -32,7 +32,7 @@ const Exercise: FC = (): JSX.Element => {
         );
 
         if (indexOfCurrentExercise !== arrOfExercises.length - 1) {
-          const url = `${pathes.EXERCISES_LIST}:${
+          const url = `${PATHES.EXERCISES_LIST}:${
             arrOfExercises[indexOfCurrentExercise + 1].id
           }`;
           dispatch(

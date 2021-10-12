@@ -8,7 +8,7 @@ import {
   getCategories,
 } from '../../core/actions/WorkoutActions';
 import { selectAllCategories } from '../../core/selectors/selectors';
-import { pathes } from '../../constants/constants';
+import { PATHES } from '../../constants/constants';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import './categories.css';
 
@@ -23,7 +23,7 @@ const Categories: FC = (): JSX.Element => {
 
   const chooseCategory = (category: Category) => () => {
     dispatch(setCategoryAction(category));
-    history.push(pathes.EXERCISES_LIST);
+    history.push(PATHES.EXERCISES_LIST);
   };
 
   return (

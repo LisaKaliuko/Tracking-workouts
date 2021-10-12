@@ -8,7 +8,7 @@ import {
   checkRepeatedWorkout,
 } from '../../shared/helpers/helpers';
 import { Day } from '../../core/interfaces/WorkoutInterfaces';
-import { allMonthes } from '../../constants/constants';
+import { ALL_MONTHES } from '../../constants/constants';
 import { ArrowLeft, ArrowRight, WorkoutIcon } from '../../shared/icons/icons';
 import { setDayAction } from '../../core/actions/WorkoutActions';
 import { getWorkouts } from '../../core/actions/UserActions';
@@ -17,7 +17,7 @@ import {
   selectUser,
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { pathes } from '../../constants/constants';
+import { PATHES } from '../../constants/constants';
 import './calendar.css';
 
 const Calendar: FC = (): JSX.Element => {
@@ -32,7 +32,7 @@ const Calendar: FC = (): JSX.Element => {
   const day = new Date(year, month, 1);
   const firstDay = new Date(day.getFullYear(), day.getMonth(), 1);
   const lastDay = new Date(day.getFullYear(), day.getMonth() + 1, 0);
-  const nameOfMonth = allMonthes[day.getMonth()];
+  const nameOfMonth = ALL_MONTHES[day.getMonth()];
 
   const cells = getNumberOfCells(
     firstDay.getDay(),
@@ -74,7 +74,7 @@ const Calendar: FC = (): JSX.Element => {
 
     if (isRepeatedDay === undefined) {
       dispatch(setDayAction(year, month, dayObj));
-      history.push(pathes.CATEGORIES);
+      history.push(PATHES.CATEGORIES);
     } else {
       e.preventDefault();
       alert(

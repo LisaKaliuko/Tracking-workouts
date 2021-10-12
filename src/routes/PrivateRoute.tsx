@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { selectUser } from '../core/selectors/selectors';
 import { useTypedSelector } from '../core/hooks/useTypedSelector';
-import { pathes } from '../constants/constants';
+import { PATHES } from '../constants/constants';
 
 interface IPrivateRouteProps {
   path: string;
@@ -18,7 +18,7 @@ const PrivateRoute: FC<IPrivateRouteProps> = ({
 
   return (
     <Route path={path}>
-      {user.email ? children : <Redirect to={pathes.SIGN_IN} />}
+      {user.email ? children : <Redirect to={PATHES.SIGN_IN} />}
     </Route>
   );
 };

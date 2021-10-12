@@ -9,7 +9,7 @@ import {
   selectUser,
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { pathes } from '../../constants/constants';
+import { PATHES } from '../../constants/constants';
 
 const PopupForm: FC = (): JSX.Element => {
   const history = useHistory();
@@ -23,7 +23,7 @@ const PopupForm: FC = (): JSX.Element => {
     if (date && user.email && arrOfWorkouts) {
       dispatch(
         addNewWorkoutDay(user.email, arrOfWorkouts, date, () =>
-          history.push(pathes.CALENDAR)
+          history.push(PATHES.CALENDAR)
         )
       );
     }
@@ -31,7 +31,7 @@ const PopupForm: FC = (): JSX.Element => {
 
   const clickContinueWorkout = (e: MouseEvent) => {
     e.preventDefault();
-    history.push(pathes.EXERCISES_LIST);
+    history.push(PATHES.EXERCISES_LIST);
   };
 
   return (

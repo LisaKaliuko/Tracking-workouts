@@ -10,7 +10,7 @@ import Categories from './pages/Categories/Categories';
 import ExercisesList from './pages/ExercisesList/ExercisesList';
 import Exercise from './pages/Exercise/Exercise';
 import Loader from './components/Loader/Loader';
-import { pathes } from './constants/constants';
+import { PATHES } from './constants/constants';
 
 const App: FC = (): JSX.Element => {
   return (
@@ -19,19 +19,19 @@ const App: FC = (): JSX.Element => {
         <Menu />
         <Loader />
         <Switch>
-          <Redirect exact from="/" to={pathes.SIGN_IN} />
-          <RegistrationRoute path={pathes.REGISTRATION} />
-          <SignInRoute path={pathes.SIGN_IN} />
-          <PrivateRoute path={pathes.CALENDAR}>
+          <Redirect exact from="/" to={PATHES.SIGN_IN} />
+          <RegistrationRoute path={PATHES.REGISTRATION} />
+          <SignInRoute path={PATHES.SIGN_IN} />
+          <PrivateRoute path={PATHES.CALENDAR}>
             <Calendar />
           </PrivateRoute>
-          <PrivateRoute path={pathes.CATEGORIES}>
+          <PrivateRoute path={PATHES.CATEGORIES}>
             <Categories />
           </PrivateRoute>
-          <PrivateRoute path={pathes.EXERCISES_LIST}>
+          <PrivateRoute path={PATHES.EXERCISES_LIST}>
             <ExercisesList />
           </PrivateRoute>
-          <PrivateRoute path={`${pathes.EXERCISES_LIST}:id`}>
+          <PrivateRoute path={`${PATHES.EXERCISES_LIST}:id`}>
             <Exercise />
           </PrivateRoute>
         </Switch>

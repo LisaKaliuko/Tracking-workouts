@@ -1,4 +1,4 @@
-export const allMonthes = [
+export const ALL_MONTHES = [
   'Январь',
   'Февраль',
   'Март',
@@ -13,7 +13,7 @@ export const allMonthes = [
   'Декабрь',
 ];
 
-export const pathes = {
+export const PATHES = {
   SIGN_IN: '/signin',
   REGISTRATION: '/registration',
   CALENDAR: '/calendar',
