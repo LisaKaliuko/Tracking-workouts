@@ -16,6 +16,7 @@ interface InitialStateWorkout {
     exercises: Array<Exercise> | null;
   };
   serverError: string | null;
+  isLoading: boolean;
 }
 
 const initialState: InitialStateWorkout = {
@@ -29,16 +30,19 @@ const initialState: InitialStateWorkout = {
     exercises: null,
   },
   serverError: null,
+  isLoading: false,
 };
 
 const workoutReducer = handleActions<InitialStateWorkout>(
   {
     [WorkoutActionsTypes.GET_CATEGORIES]: (state: InitialStateWorkout) => ({
       ...state,
+      isLoading: true,
     }),
 
     [WorkoutActionsTypes.GET_EXERCISES]: (state: InitialStateWorkout) => ({
       ...state,
+      isLoading: true,
     }),
 
     [WorkoutActionsTypes.SET_CATEGORIES]: (
@@ -47,12 +51,17 @@ const workoutReducer = handleActions<InitialStateWorkout>(
     ) => ({
       ...state,
       data: { ...state.data, ...action.payload },
+      isLoading: false,
     }),
 
     [WorkoutActionsTypes.SET_EXERCISES]: (
       state: InitialStateWorkout,
       action: AnyAction
-    ) => ({ ...state, data: { ...state.data, ...action.payload } }),
+    ) => ({
+      ...state,
+      data: { ...state.data, ...action.payload },
+      isLoading: false,
+    }),
 
     [WorkoutActionsTypes.SERVER_ERROR]: (
       state: InitialStateWorkout,

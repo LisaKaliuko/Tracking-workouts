@@ -3,7 +3,6 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../redusers/rootReducer';
 
 const getAuth = (state: RootState) => state.auth;
-const getLoader = (state: RootState) => state.loader;
 const getWorkout = (state: RootState) => state.workout;
 
 export const selectUser = createSelector(getAuth, (auth) => auth.user);
@@ -38,7 +37,12 @@ export const selectArrOfWorkouts = createSelector(
   (auth) => auth.user.arrOfWorkouts
 );
 
-export const selectLoading = createSelector(
-  getLoader,
-  (loader) => loader.isLoading
+export const selectAuthLoading = createSelector(
+  getAuth,
+  (auth) => auth.isLoading
+);
+
+export const selectWorkoutLoading = createSelector(
+  getWorkout,
+  (auth) => auth.isLoading
 );

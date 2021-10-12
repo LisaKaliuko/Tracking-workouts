@@ -13,6 +13,7 @@ interface InitialStateAuth {
     addWorkoutDayError: string | null;
     arrOfWorkouts: Array<Day>;
   };
+  isLoading: boolean;
 }
 
 const initialState: InitialStateAuth = {
@@ -24,12 +25,14 @@ const initialState: InitialStateAuth = {
     addWorkoutDayError: null,
     arrOfWorkouts: [],
   },
+  isLoading: false,
 };
 
 const authReducer = handleActions<InitialStateAuth>(
   {
     [UserActionsTypes.SIGN_IN]: (state: InitialStateAuth) => ({
       ...state,
+      isLoading: true,
     }),
 
     [UserActionsTypes.SIGN_IN_SUCCESS]: (
@@ -38,6 +41,7 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      isLoading: false,
     }),
 
     [UserActionsTypes.SIGN_IN_ERROR]: (
@@ -46,10 +50,12 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      isLoading: false,
     }),
 
     [UserActionsTypes.REGISTER]: (state: InitialStateAuth) => ({
       ...state,
+      isLoading: true,
     }),
 
     [UserActionsTypes.REGISTER_SUCCESS]: (
@@ -58,6 +64,7 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      isLoading: false,
     }),
 
     [UserActionsTypes.REGISTER_ERROR]: (
@@ -66,12 +73,14 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      isLoading: false,
     }),
 
     [UserActionsTypes.LOG_OUT]: () => initialState,
 
     [UserActionsTypes.GET_WORKOUTS]: (state: InitialStateAuth) => ({
       ...state,
+      isLoading: true,
     }),
 
     [UserActionsTypes.GET_WORKOUTS_ERROR]: (
@@ -80,6 +89,7 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      isLoading: false,
     }),
 
     [UserActionsTypes.SET_WORKOUTS]: (
@@ -88,6 +98,7 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...state.user, arrOfWorkouts: action.payload.array },
+      isLoading: false,
     }),
 
     [UserActionsTypes.ADD_WORKOUT_DAY_ERROR]: (
