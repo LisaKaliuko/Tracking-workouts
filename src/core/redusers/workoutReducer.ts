@@ -33,15 +33,26 @@ const initialState: InitialStateWorkout = {
 
 const workoutReducer = handleActions<InitialStateWorkout>(
   {
+    [WorkoutActionsTypes.GET_CATEGORIES]: (state: InitialStateWorkout) => ({
+      ...state,
+    }),
+
+    [WorkoutActionsTypes.GET_EXERCISES]: (state: InitialStateWorkout) => ({
+      ...state,
+    }),
+
     [WorkoutActionsTypes.SET_CATEGORIES]: (
       state: InitialStateWorkout,
       action: AnyAction
-    ) => ({ ...state, data: { ...state.data, categories: action.payload } }),
+    ) => ({
+      ...state,
+      data: { ...state.data, ...action.payload },
+    }),
 
     [WorkoutActionsTypes.SET_EXERCISES]: (
       state: InitialStateWorkout,
       action: AnyAction
-    ) => ({ ...state, data: { ...state.data, exercises: action.payload } }),
+    ) => ({ ...state, data: { ...state.data, ...action.payload } }),
 
     [WorkoutActionsTypes.SERVER_ERROR]: (
       state: InitialStateWorkout,
@@ -61,7 +72,7 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       action: AnyAction
     ) => ({
       ...state,
-      currentWorkout: { ...state.currentWorkout, category: action.payload },
+      currentWorkout: { ...state.currentWorkout, ...action.payload },
     }),
 
     [WorkoutActionsTypes.EXERCISE]: (
@@ -69,7 +80,7 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       action: AnyAction
     ) => ({
       ...state,
-      currentWorkout: { ...state.currentWorkout, exercise: action.payload },
+      currentWorkout: { ...state.currentWorkout, ...action.payload },
     }),
   },
   initialState

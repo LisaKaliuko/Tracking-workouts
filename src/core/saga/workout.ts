@@ -26,9 +26,10 @@ function* getCategoriesSaga() {
 }
 
 function* getExercisesSaga(action: Action<WorkoutActionsTypes>) {
+  const { id } = action.payload;
   yield put(setLoadingAction(true));
   try {
-    const data: Array<Exercise> = yield call(getExercises, action.payload);
+    const data: Array<Exercise> = yield call(getExercises, id);
     if (data) yield put(setExercises(data));
     yield put(setLoadingAction(false));
   } catch (e) {

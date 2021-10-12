@@ -1,15 +1,18 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction } from 'redux-actions';
 
 import { Category, Exercise } from '../interfaces/WorkoutInterfaces';
 
 export enum WorkoutActionsTypes {
   GET_CATEGORIES = '[WORKOUT] GET_CATEGORIES',
   SET_CATEGORIES = '[WORKOUT] SET_CATEGORIES',
+
   GET_EXERCISES = '[WORKOUT] GET_EXERCISES',
   SET_EXERCISES = '[WORKOUT] SET_EXERCISES',
+
   DAY = '[WORKOUT] DAY',
   CATEGORY = '[WORKOUT] CATEGORY',
   EXERCISE = '[WORKOUT] EXERCISE',
+
   SERVER_ERROR = '[WORKOUT] SERVER_ERROR',
 }
 
@@ -17,34 +20,33 @@ export const getCategories = createAction(WorkoutActionsTypes.GET_CATEGORIES);
 
 export const setCategories = createAction(
   WorkoutActionsTypes.SET_CATEGORIES,
-  (array: Array<Category>) => ({ payload: array })
+  (categories: Array<Category>) => ({ categories })
 );
 
-export const getExercises = createAction(
-  WorkoutActionsTypes.GET_EXERCISES,
-  (categoryId: string) => ({ payload: categoryId })
-);
+export const getExercises = createAction(WorkoutActionsTypes.GET_EXERCISES);
 
 export const setExercises = createAction(
   WorkoutActionsTypes.SET_EXERCISES,
-  (array: Array<Exercise>) => ({ payload: array })
+  (exercises: Array<Exercise>) => ({ exercises })
 );
 
 export const setDayAction = createAction(
   WorkoutActionsTypes.DAY,
   (year: number, month: number, day: number) => ({
-    payload: { year, month, day },
+    year,
+    month,
+    day,
   })
 );
 
 export const setCategoryAction = createAction(
   WorkoutActionsTypes.CATEGORY,
-  (category: Category) => ({ payload: category })
+  (category: Category) => ({ category })
 );
 
 export const setExerciseAction = createAction(
   WorkoutActionsTypes.EXERCISE,
-  (exercise: Exercise) => ({ payload: exercise })
+  (exercise: Exercise) => ({ exercise })
 );
 
 export const setServerError = createAction(

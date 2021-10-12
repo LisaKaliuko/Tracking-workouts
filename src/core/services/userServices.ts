@@ -1,16 +1,19 @@
 import { auth, firestore } from '../..';
 import { Day } from '../interfaces/WorkoutInterfaces';
 
-export const registerUser = (email: string, password: string): string => {
-  auth.createUserWithEmailAndPassword(email, password).then((resp) => {
-    if (resp.user && resp.user.email) {
-      firestore.collection('users').doc(resp.user.email).set({
-        email: resp.user.email,
-        arrOfWorkouts: [],
-      });
-    }
-  });
-  return email;
+export const registerUser = (
+  email: string,
+  password: string
+): Promise<string | null | undefined> => {
+  if (email && password) {
+    firestore.collection('users').doc(email).set({
+      email: email,
+      arrOfWorkouts: [],
+    });
+  }
+  return auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((resp) => resp.user?.email);
 };
 
 export const signInUser = (

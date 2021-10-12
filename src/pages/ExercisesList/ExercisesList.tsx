@@ -23,7 +23,7 @@ const ExercisesList: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (category) dispatch(getExercises(category.id));
+    if (category) dispatch(getExercises(category));
   }, [category, dispatch]);
 
   const chooseExercise = (exercise: Exercise) => () => {

@@ -7,7 +7,10 @@ import { Day } from '../interfaces/WorkoutInterfaces';
 interface InitialStateAuth {
   user: {
     email: string | null;
-    error: string | null;
+    signinError: string | null;
+    registerError: string | null;
+    workoutsError: string | null;
+    addWorkoutDayError: string | null;
     arrOfWorkouts: Array<Day>;
   };
 }
@@ -15,19 +18,38 @@ interface InitialStateAuth {
 const initialState: InitialStateAuth = {
   user: {
     email: null,
-    error: null,
+    signinError: null,
+    registerError: null,
+    workoutsError: null,
+    addWorkoutDayError: null,
     arrOfWorkouts: [],
   },
 };
 
 const authReducer = handleActions<InitialStateAuth>(
   {
+    [UserActionsTypes.SIGN_IN]: (state: InitialStateAuth) => ({
+      ...state,
+    }),
+
     [UserActionsTypes.SIGN_IN_SUCCESS]: (
       state: InitialStateAuth,
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...state.user, ...action.payload },
+      user: { ...action.payload },
+    }),
+
+    [UserActionsTypes.SIGN_IN_ERROR]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
+      ...state,
+      user: { ...action.payload },
+    }),
+
+    [UserActionsTypes.REGISTER]: (state: InitialStateAuth) => ({
+      ...state,
     }),
 
     [UserActionsTypes.REGISTER_SUCCESS]: (
@@ -35,14 +57,29 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...state.user, ...action.payload },
+      user: { ...action.payload },
+    }),
+
+    [UserActionsTypes.REGISTER_ERROR]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
+      ...state,
+      user: { ...action.payload },
     }),
 
     [UserActionsTypes.LOG_OUT]: () => initialState,
 
-    [UserActionsTypes.ERROR]: (state: InitialStateAuth, action: AnyAction) => ({
+    [UserActionsTypes.GET_WORKOUTS]: (state: InitialStateAuth) => ({
       ...state,
-      user: { ...state.user, error: action.payload },
+    }),
+
+    [UserActionsTypes.GET_WORKOUTS_ERROR]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
+      ...state,
+      user: { ...action.payload },
     }),
 
     [UserActionsTypes.SET_WORKOUTS]: (
@@ -50,9 +87,18 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...state.user, arrOfWorkouts: action.payload },
+      user: { ...state.user, arrOfWorkouts: action.payload.array },
+    }),
+
+    [UserActionsTypes.ADD_WORKOUT_DAY_ERROR]: (
+      state: InitialStateAuth,
+      action: AnyAction
+    ) => ({
+      ...state,
+      user: { ...action.payload },
     }),
   },
+
   initialState
 );
 

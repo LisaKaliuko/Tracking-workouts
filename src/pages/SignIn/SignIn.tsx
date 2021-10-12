@@ -19,7 +19,7 @@ const SignIn: FC = (): JSX.Element => {
 
   const enterUser = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    dispatch(signin({ email, password }));
     setEmail('');
     setPassword('');
   };
@@ -48,7 +48,9 @@ const SignIn: FC = (): JSX.Element => {
             onChange={changePassword}
           />
         </div>
-        {user.error ? <p className="text-danger mb-0">{user.error}</p> : null}
+        {user.signinError ? (
+          <p className="text-danger mb-0">{user.signinError}</p>
+        ) : null}
         <button type="submit" className="btn btn-primary mt-3">
           Войти
         </button>

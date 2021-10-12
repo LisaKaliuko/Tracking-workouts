@@ -19,7 +19,7 @@ const Registration: FC = (): JSX.Element => {
 
   const registerNewUser = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(register(email, password));
+    dispatch(register({ email, password }));
     setEmail('');
     setPassword('');
   };
@@ -48,7 +48,9 @@ const Registration: FC = (): JSX.Element => {
             onChange={changePassword}
           />
         </div>
-        {user.error ? <p className="text-danger mb-0">{user.error}</p> : null}
+        {user.registerError ? (
+          <p className="text-danger mb-0">{user.registerError}</p>
+        ) : null}
         <button type="submit" className="btn btn-primary mt-3">
           Регистрация
         </button>
