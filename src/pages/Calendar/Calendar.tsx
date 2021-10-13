@@ -1,4 +1,5 @@
 import React, { MouseEvent, useEffect, useState, FC } from 'react';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -19,6 +20,59 @@ import {
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { PATHES } from '../../constants/constants';
 import './calendar.css';
+
+const CalendarPageContainer = styled.div`
+  width: 75%;
+
+  margin: auto;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+
+  margin-top: 20px;
+  margin-bottom: 70px;
+`;
+
+const MonthContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+
+  width: 50%;
+
+  margin: auto;
+`;
+
+const Arrow = styled.a`
+  cursor: pointer;
+  color: #000000;
+`;
+
+const CalendarTable = styled.table`
+  font-size: 25px;
+
+  width: 50%;
+  margin: auto;
+
+  th,
+  td {
+    text-align: center;
+
+    padding: 10px;
+    padding-bottom: 0px;
+  }
+`;
+
+const DayItem = styled.p`
+  margin-bottom: 0px;
+
+  cursor: pointer;
+
+  &:hover {
+    font-weight: 500;
+    color: #0094d4;
+  }
+`;
 
 const Calendar: FC = (): JSX.Element => {
   const [year, setYear] = useState(2021);
@@ -84,21 +138,20 @@ const Calendar: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="w-75 m-auto">
-      <h2 className="title">График тренировок</h2>
-      <div className="d-flex w-50 m-auto justify-content-around">
-        <a onClick={clickPrevMonth} className="arrow">
+    <CalendarPageContainer>
+      <Title>График тренировок</Title>
+      <MonthContainer>
+        <Arrow onClick={clickPrevMonth}>
           <ArrowLeft />
-        </a>
+        </Arrow>
         <h4>
-          {nameOfMonth}&nbsp;
-          {year}
+          {nameOfMonth}&nbsp;{year}
         </h4>
-        <a onClick={clickNextMonth} className="arrow">
+        <Arrow onClick={clickNextMonth}>
           <ArrowRight />
-        </a>
-      </div>
-      <table className="calendar-table">
+        </Arrow>
+      </MonthContainer>
+      <CalendarTable>
         <thead>
           <tr>
             <th>Пн</th>
@@ -124,7 +177,7 @@ const Calendar: FC = (): JSX.Element => {
                       : ''
                   }
                 >
-                  <p
+                  <DayItem
                     className={
                       new Date(year, month, dayObj.date) > today
                         ? 'disabled-link'
@@ -133,7 +186,7 @@ const Calendar: FC = (): JSX.Element => {
                     onClick={chooseWorkoutDay(dayObj.date)}
                   >
                     {dayObj.date || ' '}
-                  </p>
+                  </DayItem>
                   {workouts && workouts.length !== 0
                     ? workouts.map((item: Day) => {
                         if (
@@ -142,7 +195,7 @@ const Calendar: FC = (): JSX.Element => {
                           item.day === dayObj.date
                         ) {
                           return (
-                            <span key={item.day} className="workout-icon">
+                            <span key={item.day}>
                               <WorkoutIcon />
                             </span>
                           );
@@ -155,8 +208,8 @@ const Calendar: FC = (): JSX.Element => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </CalendarTable>
+    </CalendarPageContainer>
   );
 };
 

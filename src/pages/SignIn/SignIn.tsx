@@ -1,9 +1,20 @@
 import React, { useState, ChangeEvent, FormEvent, FC } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import { selectUser } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { signin } from '../../core/actions/UserActions';
-import { useDispatch } from 'react-redux';
+import { Input, Warning, Button } from '../../styles/sharedStyles';
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 25%;
+  margin: auto;
+  margin-top: 40px;
+`;
 
 const SignIn: FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -25,37 +36,31 @@ const SignIn: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="d-flex flex-column w-25 m-auto mt-5">
+    <FormContainer>
       <h3>Войти</h3>
       <form onSubmit={enterUser}>
-        <div className="form-group">
+        <div>
           <label htmlFor="email">E-mail</label>
-          <input
-            className="form-control"
+          <Input
             type="text"
             name="email"
             value={email}
             onChange={changeEmail}
           />
         </div>
-        <div className="form-group mt-3">
+        <div>
           <label htmlFor="password">Пароль</label>
-          <input
-            className="form-control"
+          <Input
             type="password"
             name="password"
             value={password}
             onChange={changePassword}
           />
         </div>
-        {user.signinError ? (
-          <p className="text-danger mb-0">{user.signinError}</p>
-        ) : null}
-        <button type="submit" className="btn btn-primary mt-3">
-          Войти
-        </button>
+        {user.signinError ? <Warning>{user.signinError}</Warning> : null}
+        <Button type="submit">Войти</Button>
       </form>
-    </div>
+    </FormContainer>
   );
 };
 

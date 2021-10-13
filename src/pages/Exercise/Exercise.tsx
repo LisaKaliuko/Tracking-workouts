@@ -1,4 +1,5 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent, FC } from 'react';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -11,7 +12,62 @@ import {
 } from '../../core/selectors/selectors';
 import { setExerciseAction } from '../../core/actions/WorkoutActions';
 import { PATHES } from '../../constants/constants';
-import './exercise.css';
+import { Input, Button, Warning } from '../../styles/sharedStyles';
+
+const ExerciseContainer = styled.div`
+  text-align: center;
+
+  margin: auto;
+
+  width: 50%;
+`;
+
+const CirclesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  div {
+    margin: 10px;
+  }
+`;
+
+const BlueCircle = styled.p`
+  border: 5px solid #630da7;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  font-size: 40px;
+
+  padding: 30px 35px;
+  margin: 15px;
+`;
+
+const RedButton = styled(BlueCircle)`
+  cursor: auto;
+  border-color: #f45e5e;
+`;
+
+const Form = styled.form`
+  display: flex;
+  width: 40%;
+
+  margin: auto;
+  margin-bottom: 25px;
+`;
+
+const ButtonAdd = styled(Button)`
+  font-size: 20px;
+  font-weight: 800;
+
+  min-width: 40px;
+  height: 40px;
+
+  margin: 0px 0px 0px 3px;
+  padding: 0px;
+`;
 
 const Exercise: FC = (): JSX.Element => {
   const exercise = useTypedSelector(selectCurrentExercise);
@@ -71,47 +127,39 @@ const Exercise: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="exercise_container w-50 m-auto">
+    <ExerciseContainer>
       {exercise ? (
         <>
           <img src={exercise.img} />
           {showPopup ? <PopupForm /> : null}
           <h2>{exercise.name}</h2>
-          <div className="exercise_round_container">
+          <CirclesContainer>
             <div>
-              <p className="exercise_round" onClick={addInputValue}>
+              <BlueCircle onClick={addInputValue}>
                 {exercise.repeats}
-              </p>
+              </BlueCircle>
               <span>Повторений требуется</span>
             </div>
             <div>
-              <p className="exercise_round border-red">
+              <RedButton>
                 {doneSets}/{exercise.sets}
-              </p>
+              </RedButton>
               <span>Подходов выполнено</span>
             </div>
-          </div>
-          {isError ? <p className="text-danger">{isError}</p> : null}
-          <form onSubmit={addSet} className="input-group mb-4">
-            <input
+          </CirclesContainer>
+          {isError ? <Warning>{isError}</Warning> : null}
+          <Form onSubmit={addSet}>
+            <Input
               type="text"
-              className="form-control"
               placeholder="Повторений"
               value={inputValue}
               onChange={changeInputValue}
             />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary btn-blue"
-                type="submit"
-              >
-                +
-              </button>
-            </div>
-          </form>
+            <ButtonAdd type="submit">+</ButtonAdd>
+          </Form>
         </>
       ) : null}
-    </div>
+    </ExerciseContainer>
   );
 };
 

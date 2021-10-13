@@ -1,4 +1,5 @@
 import React, { MouseEvent, FC } from 'react';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -10,6 +11,38 @@ import {
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { PATHES } from '../../constants/constants';
+import { Button } from '../../styles/sharedStyles';
+
+const Form = styled.form`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border: 1px solid #6c757d;
+  background-color: #e6e6e6;
+
+  width: 50%;
+
+  padding: 3rem 0rem;
+  margin: auto;
+`;
+
+const Title = styled.h3`
+  margin: 1rem 0;
+`;
+
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const PopupButton = styled(Button)`
+  margin: 0px 20px;
+
+  width: 75px;
+`;
 
 const PopupForm: FC = (): JSX.Element => {
   const history = useHistory();
@@ -38,23 +71,13 @@ const PopupForm: FC = (): JSX.Element => {
   };
 
   return (
-    <form className="position-fixed fixed-top start-50 top-50 translate-middle py-5 border border-secondary bg-light w-50 m-auto">
-      <h3 className="m-3">Закончить тренировку?</h3>
-      <div>
-        <button
-          className="btn btn-primary m-3 px-4"
-          onClick={clickFinishWorkout}
-        >
-          Да
-        </button>
-        <button
-          className="btn btn-primary m-3 px-4"
-          onClick={clickContinueWorkout}
-        >
-          Нет
-        </button>
-      </div>
-    </form>
+    <Form>
+      <Title>Закончить тренировку?</Title>
+      <ButtonsContainer>
+        <PopupButton onClick={clickFinishWorkout}>Да</PopupButton>
+        <PopupButton onClick={clickContinueWorkout}>Нет</PopupButton>
+      </ButtonsContainer>
+    </Form>
   );
 };
 

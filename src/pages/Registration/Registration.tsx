@@ -1,9 +1,20 @@
 import React, { useState, ChangeEvent, FormEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import { register } from '../../core/actions/UserActions';
 import { selectUser } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
+import { Input, Button, Warning } from '../../styles/sharedStyles';
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 25%;
+  margin: auto;
+  margin-top: 40px;
+`;
 
 const Registration: FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -25,37 +36,31 @@ const Registration: FC = (): JSX.Element => {
   };
 
   return (
-    <div className="d-flex flex-column w-25 m-auto mt-5">
+    <FormContainer>
       <h3>Регистрация</h3>
       <form onSubmit={registerNewUser}>
-        <div className="form-group">
+        <div>
           <label htmlFor="email">E-mail</label>
-          <input
-            className="form-control"
+          <Input
             type="text"
             name="email"
             value={email}
             onChange={changeEmail}
           />
         </div>
-        <div className="form-group mt-3">
+        <div>
           <label htmlFor="password">Пароль</label>
-          <input
-            className="form-control"
+          <Input
             type="password"
             name="password"
             value={password}
             onChange={changePassword}
           />
         </div>
-        {user.registerError ? (
-          <p className="text-danger mb-0">{user.registerError}</p>
-        ) : null}
-        <button type="submit" className="btn btn-primary mt-3">
-          Регистрация
-        </button>
+        {user.registerError ? <Warning>{user.registerError}</Warning> : null}
+        <Button type="submit">Регистрация</Button>
       </form>
-    </div>
+    </FormContainer>
   );
 };
 

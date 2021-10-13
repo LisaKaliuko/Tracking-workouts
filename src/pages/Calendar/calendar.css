@@ -1,39 +1,8 @@
-.title {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 70px;
-}
-
-.calendar-table {
-  font-size: 25px;
-
-  width: 60%;
-  margin: auto;
-}
-
-.calendar-table th,
-.calendar-table td {
-  text-align: center;
-
-  padding: 10px;
-  padding-bottom: 0px;
-}
-
-.calendar-table .current-day p {
+.current-day p {
   color: #ff0000;
   font-weight: 700;
 }
 
-.calendar-table td p {
-  margin-bottom: 0px;
-  cursor: pointer;
-}
-
-.calendar-table .disabled-link {
+.disabled-link {
   pointer-events: none;
-}
-
-.arrow {
-  cursor: pointer;
-  color: #000000;
 }
