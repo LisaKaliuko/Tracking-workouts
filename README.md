@@ -12,20 +12,24 @@
 
 `npm install`
 
-## How to run the app (project)
+## How to run the app (dev)
 
 Go to folder tracking-app
+
 Command `npm install` in console
+
 Command `npm start`
 
 ## How to run the app (build)
 
 Go to folder tracking-app
+
 Command `npm build` in console
 
 ## How to change theme
 
 src/styles/themes.ts
+
 Change const CURRENT_THEME on needed theme
 
 ## Database snapshot
@@ -40,17 +44,15 @@ Collection categories contains information about workout categories and consists
 
 Collection exercises contains information about workout exercises and consists of next fields:
 
-| Field name  |   Type |                                    Example | Description                                             |
-| ----------- | -----: | -----------------------------------------: | ------------------------------------------------------- |
-| categoryId  | string |                       L8bzTSHCywTjjYCAioKb | Id of category to which the exercise belongs            |
-| description | string |                                10x20x30 кг | Description of exercise                                 |
-| id          | string |                       22qqIbA2tdG1Ugdns0QZ | Exercise id                                             |
-| img         | string | https://xmuskul.ru/uprazhneniya/wp-content | Link on exercise picture                                |
-|             |        | /uploads/2017/05/tyagi-shtangi-stoya-v-nak |                                                         |
-|             |        |                                   lone.jpg |                                                         |
-| name        | string |                    Упражнение для ягодиц 2 | Exercise name                                           |
-| repeats     | number |                                         20 | How many times app recommends to do exercise in one set |
-| sets        | number |                                          2 | How many sets app recommends to do                      |
+| Field name  |   Type |                 Example | Description                                             |
+| ----------- | -----: | ----------------------: | ------------------------------------------------------- |
+| categoryId  | string |    L8bzTSHCywTjjYCAioKb | Id of category to which the exercise belongs            |
+| description | string |             10x20x30 кг | Description of exercise                                 |
+| id          | string |    22qqIbA2tdG1Ugdns0QZ | Exercise id                                             |
+| img         | string |                         | Link on exercise picture                                |
+| name        | string | Упражнение для ягодиц 2 | Exercise name                                           |
+| repeats     | number |                      20 | How many times app recommends to do exercise in one set |
+| sets        | number |                       2 | How many sets app recommends to do                      |
 
 Collection users contains information about users in app and consists of next fields:
 
@@ -62,19 +64,33 @@ Collection users contains information about users in app and consists of next fi
 ## Application stack
 
 React
+
 React-redux
+
 React-redux-dom
+
 React-redux-firebase
+
 Redux
+
 Redux-toolkit
+
 Redux-actions
+
 Redux-firestore
+
 Redux-saga
+
 Firebase
+
 Styled-components
+
 Typescript
+
 Bootstrap
+
 Bootstrap-icons
+
 Eslint
 
 ## Project structure
