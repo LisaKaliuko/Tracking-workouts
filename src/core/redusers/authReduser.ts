@@ -7,11 +7,13 @@ import { Day } from '../interfaces/WorkoutInterfaces';
 interface InitialStateAuth {
   user: {
     email: string | null;
+    arrOfWorkouts: Array<Day>;
+  };
+  errors: {
     signinError: string | null;
     registerError: string | null;
     workoutsError: string | null;
     addWorkoutDayError: string | null;
-    arrOfWorkouts: Array<Day>;
   };
   isLoading: boolean;
 }
@@ -19,11 +21,13 @@ interface InitialStateAuth {
 const initialState: InitialStateAuth = {
   user: {
     email: null,
+    arrOfWorkouts: [],
+  },
+  errors: {
     signinError: null,
     registerError: null,
     workoutsError: null,
     addWorkoutDayError: null,
-    arrOfWorkouts: [],
   },
   isLoading: false,
 };
@@ -41,6 +45,7 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      errors: { ...initialState.errors },
       isLoading: false,
     }),
 
@@ -49,7 +54,7 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...action.payload },
+      errors: { ...action.payload },
       isLoading: false,
     }),
 
@@ -64,6 +69,7 @@ const authReducer = handleActions<InitialStateAuth>(
     ) => ({
       ...state,
       user: { ...action.payload },
+      errors: { ...initialState.errors },
       isLoading: false,
     }),
 
@@ -72,7 +78,7 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...action.payload },
+      errors: { ...action.payload },
       isLoading: false,
     }),
 
@@ -88,7 +94,7 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...action.payload },
+      errors: { ...action.payload },
       isLoading: false,
     }),
 
@@ -111,7 +117,7 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...action.payload },
+      errors: { ...action.payload },
       isLoading: false,
     }),
 
@@ -130,7 +136,8 @@ const authReducer = handleActions<InitialStateAuth>(
       action: AnyAction
     ) => ({
       ...state,
-      user: { ...action.payload },
+      errors: { ...action.payload },
+      isLoading: false,
     }),
   },
 

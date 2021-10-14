@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { register } from '../../core/actions/UserActions';
-import { selectUser } from '../../core/selectors/selectors';
+import { selectAuthErrors } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { Input, Button, Warning } from '../../styles/sharedStyles';
 
@@ -19,7 +19,7 @@ const FormContainer = styled.div`
 const Registration: FC = (): JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const user = useTypedSelector(selectUser);
+  const errors = useTypedSelector(selectAuthErrors);
   const dispatch = useDispatch();
 
   const changeEmail = (e: ChangeEvent<HTMLInputElement>) =>
@@ -57,7 +57,9 @@ const Registration: FC = (): JSX.Element => {
             onChange={changePassword}
           />
         </div>
-        {user.registerError ? <Warning>{user.registerError}</Warning> : null}
+        {errors.registerError ? (
+          <Warning>{errors.registerError}</Warning>
+        ) : null}
         <Button type="submit">Регистрация</Button>
       </form>
     </FormContainer>

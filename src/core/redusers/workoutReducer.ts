@@ -14,6 +14,8 @@ interface InitialStateWorkout {
   data: {
     categories: Array<Category>;
     exercises: Array<Exercise>;
+  };
+  errors: {
     categoriesError: string | null;
     exercisesError: string | null;
   };
@@ -29,6 +31,8 @@ const initialState: InitialStateWorkout = {
   data: {
     categories: [],
     exercises: [],
+  },
+  errors: {
     categoriesError: null,
     exercisesError: null,
   },
@@ -56,7 +60,7 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       action: AnyAction
     ) => ({
       ...state,
-      data: { ...state.data, ...action.payload },
+      errors: { ...state.errors, ...action.payload },
       isLoading: false,
     }),
 
@@ -79,7 +83,7 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       action: AnyAction
     ) => ({
       ...state,
-      data: { ...state.data, ...action.payload },
+      errors: { ...state.errors, ...action.payload },
       isLoading: false,
     }),
 

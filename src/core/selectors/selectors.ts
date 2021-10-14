@@ -7,6 +7,8 @@ const getWorkout = (state: RootState) => state.workout;
 
 export const selectUser = createSelector(getAuth, (auth) => auth.user);
 
+export const selectAuthErrors = createSelector(getAuth, (auth) => auth.errors);
+
 export const selectAllCategories = createSelector(
   getWorkout,
   (workout) => workout.data.categories
