@@ -1,5 +1,4 @@
 import React, { MouseEvent, FC } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -11,38 +10,7 @@ import {
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { PATHES } from '../../constants/constants';
-import { Button } from '../../styles/sharedStyles';
-
-const Form = styled.form`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  border: 1px solid #6c757d;
-  background-color: #e6e6e6;
-
-  width: 50%;
-
-  padding: 3rem 0rem;
-  margin: auto;
-`;
-
-const Title = styled.h3`
-  margin: 1rem 0;
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const PopupButton = styled(Button)`
-  margin: 0px 20px;
-
-  width: 75px;
-`;
+import { Form, Title, ButtonsContainer, PopupButton } from './styles';
 
 const PopupForm: FC = (): JSX.Element => {
   const history = useHistory();

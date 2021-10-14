@@ -1,5 +1,4 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent, FC } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -12,62 +11,15 @@ import {
 } from '../../core/selectors/selectors';
 import { setExerciseAction } from '../../core/actions/WorkoutActions';
 import { PATHES } from '../../constants/constants';
-import { Input, Button, Warning } from '../../styles/sharedStyles';
-
-const ExerciseContainer = styled.div`
-  text-align: center;
-
-  margin: auto;
-
-  width: 50%;
-`;
-
-const CirclesContainer = styled.div`
-  display: flex;
-  justify-content: center;
-
-  margin-bottom: 15px;
-
-  div {
-    margin: 10px;
-  }
-`;
-
-const BlueCircle = styled.p`
-  border: 5px solid #630da7;
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  font-size: 40px;
-
-  padding: 30px 35px;
-  margin: 15px;
-`;
-
-const RedButton = styled(BlueCircle)`
-  cursor: auto;
-  border-color: #f45e5e;
-`;
-
-const Form = styled.form`
-  display: flex;
-  width: 40%;
-
-  margin: auto;
-  margin-bottom: 25px;
-`;
-
-const ButtonAdd = styled(Button)`
-  font-size: 20px;
-  font-weight: 800;
-
-  min-width: 40px;
-  height: 40px;
-
-  margin: 0px 0px 0px 3px;
-  padding: 0px;
-`;
+import { Input, Warning } from '../../styles/sharedStyles';
+import {
+  ExerciseContainer,
+  CirclesContainer,
+  RepeatsCircle,
+  SetsCircle,
+  Form,
+  ButtonAdd,
+} from './styles';
 
 const Exercise: FC = (): JSX.Element => {
   const exercise = useTypedSelector(selectCurrentExercise);
@@ -135,15 +87,15 @@ const Exercise: FC = (): JSX.Element => {
           <h2>{exercise.name}</h2>
           <CirclesContainer>
             <div>
-              <BlueCircle onClick={addInputValue}>
+              <RepeatsCircle onClick={addInputValue}>
                 {exercise.repeats}
-              </BlueCircle>
+              </RepeatsCircle>
               <span>Повторений требуется</span>
             </div>
             <div>
-              <RedButton>
+              <SetsCircle>
                 {doneSets}/{exercise.sets}
-              </RedButton>
+              </SetsCircle>
               <span>Подходов выполнено</span>
             </div>
           </CirclesContainer>

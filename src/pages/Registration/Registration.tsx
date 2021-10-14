@@ -1,20 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 
 import { register } from '../../core/actions/UserActions';
 import { selectAuthErrors } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { Input, Button, Warning } from '../../styles/sharedStyles';
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 25%;
-  margin: auto;
-  margin-top: 40px;
-`;
+import { FormContainer } from './styles';
 
 const Registration: FC = (): JSX.Element => {
   const [email, setEmail] = useState('');

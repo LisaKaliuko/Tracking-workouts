@@ -46,5 +46,5 @@ export const selectAuthLoading = createSelector(
 
 export const selectWorkoutLoading = createSelector(
   getWorkout,
-  (auth) => auth.isLoading
+  (workout) => workout.isLoading
 );

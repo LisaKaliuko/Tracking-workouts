@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -11,51 +10,7 @@ import {
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { logOut } from '../../core/actions/UserActions';
 import { PATHES } from '../../constants/constants';
-import { CURRENT_THEME } from '../../styles/themes';
-
-const MenuBlock = styled.nav`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  position: relative;
-
-  padding: 10px 0;
-
-  background-color: ${CURRENT_THEME.main_color};
-
-  a {
-    color: ${CURRENT_THEME.menu_text_color};
-    font-weight: bold;
-    font-size: 30px;
-    text-decoration: none;
-
-    padding: 10px 0;
-
-    &:hover {
-      color: ${CURRENT_THEME.menu_text_hover};
-    }
-  }
-`;
-
-const Ul = styled.ul`
-  display: flex;
-  flex-direction: row;
-
-  margin: 0;
-
-  list-style: none;
-`;
-
-const Li = styled.li`
-  margin: 10px;
-
-  a {
-    color: ${CURRENT_THEME.menu_text_color};
-    font-size: 20px;
-    font-weight: normal;
-  }
-`;
+import { MenuBlock, LinksContainer, LinkItem } from './styles';
 
 const Menu: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
@@ -68,37 +23,37 @@ const Menu: FC = (): JSX.Element => {
   return (
     <MenuBlock>
       <Link to={PATHES.CALENDAR}>Tracking workout</Link>
-      <Ul>
+      <LinksContainer>
         {!user.email ? (
           <>
-            <Li>
+            <LinkItem>
               <Link to={PATHES.REGISTRATION}>Регистрация</Link>
-            </Li>
-            <Li>
+            </LinkItem>
+            <LinkItem>
               <Link to={PATHES.SIGN_IN}>Вход</Link>
-            </Li>
+            </LinkItem>
           </>
         ) : null}
         {user.email ? (
           <>
             {date ? (
-              <Li>
+              <LinkItem>
                 <Link to={PATHES.CATEGORIES}>Категории</Link>
-              </Li>
+              </LinkItem>
             ) : null}
             {category ? (
-              <Li>
+              <LinkItem>
                 <Link to={PATHES.EXERCISES_LIST}>Упражнения</Link>
-              </Li>
+              </LinkItem>
             ) : null}
-            <Li>
+            <LinkItem>
               <Link to={PATHES.SIGN_IN} onClick={logOutUser}>
                 Выход
               </Link>
-            </Li>
+            </LinkItem>
           </>
         ) : null}
-      </Ul>
+      </LinksContainer>
     </MenuBlock>
   );
 };

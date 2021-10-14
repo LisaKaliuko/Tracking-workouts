@@ -1,5 +1,4 @@
 import React, { MouseEvent, useEffect, useState, FC } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -9,7 +8,7 @@ import {
   checkRepeatedWorkout,
 } from '../../shared/helpers/helpers';
 import { Day } from '../../core/interfaces/WorkoutInterfaces';
-import { ALL_MONTHES } from '../../constants/constants';
+import { ALL_MONTHES, PATHES } from '../../constants/constants';
 import { ArrowLeft, ArrowRight, WorkoutIcon } from '../../shared/icons/icons';
 import { setDayAction } from '../../core/actions/WorkoutActions';
 import { getWorkouts } from '../../core/actions/UserActions';
@@ -18,61 +17,15 @@ import {
   selectUser,
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { PATHES } from '../../constants/constants';
+import {
+  CalendarPageContainer,
+  Title,
+  MonthContainer,
+  Arrow,
+  CalendarTable,
+  DayItem,
+} from './styles';
 import './calendar.css';
-
-const CalendarPageContainer = styled.div`
-  width: 75%;
-
-  margin: auto;
-`;
-
-const Title = styled.h2`
-  text-align: center;
-
-  margin-top: 20px;
-  margin-bottom: 70px;
-`;
-
-const MonthContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-
-  width: 50%;
-
-  margin: auto;
-`;
-
-const Arrow = styled.a`
-  cursor: pointer;
-  color: #000000;
-`;
-
-const CalendarTable = styled.table`
-  font-size: 25px;
-
-  width: 50%;
-  margin: auto;
-
-  th,
-  td {
-    text-align: center;
-
-    padding: 10px;
-    padding-bottom: 0px;
-  }
-`;
-
-const DayItem = styled.p`
-  margin-bottom: 0px;
-
-  cursor: pointer;
-
-  &:hover {
-    font-weight: 500;
-    color: #0094d4;
-  }
-`;
 
 const Calendar: FC = (): JSX.Element => {
   const [year, setYear] = useState(2021);

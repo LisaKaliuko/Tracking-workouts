@@ -1,5 +1,4 @@
 import React, { useEffect, FC } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -15,52 +14,7 @@ import {
 } from '../../core/actions/WorkoutActions';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { PATHES } from '../../constants/constants';
-
-const ExercisesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  margin: 10px 30px;
-`;
-
-const ExerciseItem = styled.div`
-  display: flex;
-  align-items: center;
-
-  text-decoration: none;
-  color: #000000;
-  cursor: pointer;
-
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-
-  margin: 20px;
-  padding: 15px;
-
-  img {
-    width: 130px;
-  }
-`;
-
-const TextBlock = styled.div`
-  margin-left: -63px;
-  padding: 7px 0px;
-  background-color: #ffffff;
-`;
-
-const ExerciseTitle = styled.p`
-  font-size: 18px;
-
-  margin-bottom: 5px;
-`;
-
-const ExerciseDescription = styled.p`
-  color: #c4c4c4;
-  font-size: 14px;
-
-  margin-bottom: 5px;
-`;
+import { Container, Item, ImageBlock, Title, Description } from './styles';
 
 const ExercisesList: FC = (): JSX.Element => {
   const category = useTypedSelector(selectCurrentCategory);
@@ -79,27 +33,24 @@ const ExercisesList: FC = (): JSX.Element => {
   };
 
   return (
-    <ExercisesContainer>
+    <Container>
       {arrOfExercises && arrOfExercises.length !== 0
         ? arrOfExercises.map((exercise: Exercise) => {
             return (
-              <ExerciseItem
-                key={exercise.id}
-                onClick={chooseExercise(exercise)}
-              >
-                <img src={exercise.img} />
-                <TextBlock>
-                  <ExerciseTitle>{exercise.name}</ExerciseTitle>
-                  <ExerciseDescription>
-                    {exercise.description}
-                  </ExerciseDescription>
-                </TextBlock>
+              <Item key={exercise.id} onClick={chooseExercise(exercise)}>
+                <ImageBlock>
+                  <img src={exercise.img} />
+                </ImageBlock>
+                <div>
+                  <Title>{exercise.name}</Title>
+                  <Description>{exercise.description}</Description>
+                </div>
                 <ArrowRightExercise />
-              </ExerciseItem>
+              </Item>
             );
           })
         : null}
-    </ExercisesContainer>
+    </Container>
   );
 };
 
