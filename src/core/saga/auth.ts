@@ -23,6 +23,7 @@ import {
 import { Action } from '../interfaces/Action';
 import { errorMessage } from '../../shared/helpers/helpers';
 import { Day } from '../interfaces/WorkoutInterfaces';
+import { logOutWorkout } from '../actions/WorkoutActions';
 
 function* registerSaga(action: Action<UserActionsTypes>) {
   const { email, password } = action.payload;
@@ -50,6 +51,7 @@ function* logOutSaga() {
   try {
     yield call(logOutUser);
     yield put(logOutSuccess());
+    yield put(logOutWorkout());
   } catch (e) {
     const error = errorMessage(e);
     yield put(logOutError(error));

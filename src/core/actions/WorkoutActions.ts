@@ -14,6 +14,8 @@ export enum WorkoutActionsTypes {
   DAY = '[WORKOUT] DAY',
   CATEGORY = '[WORKOUT] CATEGORY',
   EXERCISE = '[WORKOUT] EXERCISE',
+
+  LOG_OUT_WORKOUT = '[WORKOUT] LOG_OUT_WORKOUT',
 }
 
 export const getCategories = createAction(WorkoutActionsTypes.GET_CATEGORIES);
@@ -58,3 +60,5 @@ export const setExerciseAction = createAction(
   WorkoutActionsTypes.EXERCISE,
   (exercise: Exercise) => ({ exercise })
 );
+
+export const logOutWorkout = createAction(WorkoutActionsTypes.LOG_OUT_WORKOUT);

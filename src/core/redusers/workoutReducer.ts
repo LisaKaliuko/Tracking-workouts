@@ -106,6 +106,8 @@ const workoutReducer = handleActions<InitialStateWorkout>(
       ...state,
       currentWorkout: { ...state.currentWorkout, ...action.payload },
     }),
+
+    [WorkoutActionsTypes.LOG_OUT_WORKOUT]: () => initialState,
   },
   initialState
 );
