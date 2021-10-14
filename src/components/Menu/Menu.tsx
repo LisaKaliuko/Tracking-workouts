@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { selectUser } from '../../core/selectors/selectors';
+import {
+  selectUser,
+  selectCurrentCategory,
+  selectCurrentDate,
+} from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { logOut } from '../../core/actions/UserActions';
 import { PATHES } from '../../constants/constants';
@@ -55,6 +59,8 @@ const Li = styled.li`
 
 const Menu: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
+  const category = useTypedSelector(selectCurrentCategory);
+  const date = useTypedSelector(selectCurrentDate);
   const dispatch = useDispatch();
 
   const logOutUser = () => dispatch(logOut());
@@ -74,11 +80,23 @@ const Menu: FC = (): JSX.Element => {
           </>
         ) : null}
         {user.email ? (
-          <Li>
-            <Link to={PATHES.SIGN_IN} onClick={logOutUser}>
-              Выход
-            </Link>
-          </Li>
+          <>
+            {date ? (
+              <Li>
+                <Link to={PATHES.CATEGORIES}>Категории</Link>
+              </Li>
+            ) : null}
+            {category ? (
+              <Li>
+                <Link to={PATHES.EXERCISES_LIST}>Упражнения</Link>
+              </Li>
+            ) : null}
+            <Li>
+              <Link to={PATHES.SIGN_IN} onClick={logOutUser}>
+                Выход
+              </Link>
+            </Li>
+          </>
         ) : null}
       </Ul>
     </MenuBlock>
