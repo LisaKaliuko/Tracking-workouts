@@ -73,8 +73,6 @@ React-redux-firebase
 
 Redux
 
-Redux-toolkit
-
 Redux-actions
 
 Redux-firestore
@@ -86,6 +84,8 @@ Firebase
 Styled-components
 
 Typescript
+
+Reselect
 
 Bootstrap
 
