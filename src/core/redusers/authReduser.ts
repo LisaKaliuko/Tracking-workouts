@@ -145,20 +145,10 @@ const authReducer = handleActions<InitialStateAuth>(
       isLoading: false,
     }),
 
-    [UserActionsTypes.TOGGLE_THEME]: (state: InitialStateAuth) => {
-      console.log('state', {
-        ...state,
-        creative_theme: !state.creative_theme,
-      });
-      return {
-        ...state,
-        creative_theme: !state.creative_theme,
-      };
-    },
-    // ({
-    //   ...state,
-    //   creative_theme: !state.creative_theme,
-    // }),
+    [UserActionsTypes.TOGGLE_THEME]: (state: InitialStateAuth) => ({
+      ...state,
+      creative_theme: !state.creative_theme,
+    }),
   },
 
   initialState
