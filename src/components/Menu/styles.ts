@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const MenuBlock = styled.nav`
   display: flex;
@@ -84,20 +84,11 @@ export const Switch = styled.label`
     }
 
     &:focus + ${Slider} {
-      box-shadow: 0 0 1px ${(props) =>
-        props.theme.menu.creative_radio_bg_color};
+      box-shadow: 0 0 1px ${(props) => props.theme.menu.creative_radio_bg_color};
     }
 
-    ${(props) =>
-      props.className?.includes('on')
-        ? css`
-            &:checked + ${Slider}:before {
-              transform: translateX(26px);
-            }
-          `
-        : css`
-            &:checked + ${Slider}:before {
-              transform: translateX(26px);
-            }
-          `}
+    &:checked + ${Slider}:before {
+      transform: translateX(26px);
+    }
+  }
 `;

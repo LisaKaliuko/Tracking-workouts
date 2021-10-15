@@ -56,12 +56,9 @@ const Menu: FC = (): JSX.Element => {
             </LinkItem>
           </>
         ) : null}
-        <Switch>
+        <Switch className={creative_theme ? 'on' : 'off'}>
           <input type="checkbox" />
-          <Slider
-            onClick={changeTheme}
-            className={creative_theme ? 'on' : 'off'}
-          ></Slider>
+          <Slider onClick={changeTheme}></Slider>
         </Switch>
       </LinksContainer>
     </MenuBlock>
