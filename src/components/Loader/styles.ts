@@ -8,7 +8,7 @@ export const LoaderContainer = styled.div`
   position: absolute;
   z-index: 9999;
 
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.loader.bg_color};
 `;
 
 const spin = keyframes`
@@ -29,8 +29,8 @@ export const LoaderItem = styled.div`
   top: 50%;
   left: 50%;
 
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #424242;
+  border: 16px solid ${(props) => props.theme.loader.overlay_color};
+  border-top: 16px solid ${(props) => props.theme.loader.spin_color};
   border-radius: 50%;
 
   animation: ${spin} 1s linear infinite;

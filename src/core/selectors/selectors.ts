@@ -48,3 +48,8 @@ export const selectWorkoutLoading = createSelector(
   getWorkout,
   (workout) => workout.isLoading
 );
+
+export const selectTheme = createSelector(
+  getAuth,
+  (auth) => auth.creative_theme
+);

@@ -6,19 +6,22 @@ import {
   selectUser,
   selectCurrentCategory,
   selectCurrentDate,
+  selectTheme,
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { logOut } from '../../core/actions/UserActions';
+import { logOut, toggleTheme } from '../../core/actions/UserActions';
 import { PATHES } from '../../constants/constants';
-import { MenuBlock, LinksContainer, LinkItem } from './styles';
+import { MenuBlock, LinksContainer, LinkItem, Switch, Slider } from './styles';
 
 const Menu: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
   const category = useTypedSelector(selectCurrentCategory);
   const date = useTypedSelector(selectCurrentDate);
+  const creative_theme = useTypedSelector(selectTheme);
   const dispatch = useDispatch();
 
   const logOutUser = () => dispatch(logOut());
+  const changeTheme = () => dispatch(toggleTheme());
 
   return (
     <MenuBlock>
@@ -53,6 +56,13 @@ const Menu: FC = (): JSX.Element => {
             </LinkItem>
           </>
         ) : null}
+        <Switch>
+          <input type="checkbox" />
+          <Slider
+            onClick={changeTheme}
+            className={creative_theme ? 'on' : 'off'}
+          ></Slider>
+        </Switch>
       </LinksContainer>
     </MenuBlock>
   );

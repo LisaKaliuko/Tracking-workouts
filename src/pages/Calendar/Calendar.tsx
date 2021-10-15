@@ -18,14 +18,14 @@ import {
 } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import {
-  CalendarPageContainer,
+  CalendarContainer,
   Title,
   MonthContainer,
   Arrow,
   CalendarTable,
+  TableData,
   DayItem,
 } from './styles';
-import './calendar.css';
 
 const Calendar: FC = (): JSX.Element => {
   const [year, setYear] = useState(2021);
@@ -91,7 +91,7 @@ const Calendar: FC = (): JSX.Element => {
   };
 
   return (
-    <CalendarPageContainer>
+    <CalendarContainer>
       <Title>График тренировок</Title>
       <MonthContainer>
         <Arrow onClick={clickPrevMonth}>
@@ -120,7 +120,7 @@ const Calendar: FC = (): JSX.Element => {
           {calendarMatrix.map((week) => (
             <tr key={week[0].date}>
               {week.map((dayObj) => (
-                <td
+                <TableData
                   key={dayObj.id}
                   className={
                     year === today.getFullYear() &&
@@ -156,13 +156,13 @@ const Calendar: FC = (): JSX.Element => {
                         return;
                       })
                     : null}
-                </td>
+                </TableData>
               ))}
             </tr>
           ))}
         </tbody>
       </CalendarTable>
-    </CalendarPageContainer>
+    </CalendarContainer>
   );
 };
 

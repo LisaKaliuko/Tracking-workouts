@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { register } from '../../core/actions/UserActions';
 import { selectAuthErrors } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { Input, Button, Warning } from '../../styles/sharedStyles';
+import { Input, Button, Warning } from '../../shared/styles/sharedStyles';
 import { FormContainer } from './styles';
 
 const Registration: FC = (): JSX.Element => {

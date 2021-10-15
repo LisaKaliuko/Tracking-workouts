@@ -11,7 +11,7 @@ import {
 } from '../../core/selectors/selectors';
 import { setExerciseAction } from '../../core/actions/WorkoutActions';
 import { PATHES } from '../../constants/constants';
-import { Input, Warning } from '../../styles/sharedStyles';
+import { Input, Warning } from '../../shared/styles/sharedStyles';
 import {
   ExerciseContainer,
   CirclesContainer,

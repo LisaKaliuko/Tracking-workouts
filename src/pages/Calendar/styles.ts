@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const CalendarPageContainer = styled.div`
+export const CalendarContainer = styled.div`
   width: 75%;
 
   margin: auto;
@@ -24,7 +24,7 @@ export const MonthContainer = styled.div`
 
 export const Arrow = styled.a`
   cursor: pointer;
-  color: #000000;
+  color: ${(props) => props.theme.calendar.arrow_color};
 `;
 
 export const CalendarTable = styled.table`
@@ -42,13 +42,33 @@ export const CalendarTable = styled.table`
   }
 `;
 
+export const TableData = styled.td`
+  p {
+    ${(props) =>
+      props.className?.includes('current-day')
+        ? css`
+            font-weight: 700;
+            color: ${(props) => props.theme.calendar.current_day_color};
+          `
+        : ''}
+  }
+`;
+
 export const DayItem = styled.p`
   margin-bottom: 0px;
 
   cursor: pointer;
+  ${(props) =>
+    props.className?.includes('disabled-link')
+      ? css`
+          pointer-events: none;
+        `
+      : css`
+          pointer-events: inherit;
+        `}
 
   &:hover {
     font-weight: 500;
-    color: #0094d4;
+    color: ${(props) => props.theme.calendar.day_hover};
   }
 `;

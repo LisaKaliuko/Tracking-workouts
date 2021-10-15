@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { selectAuthErrors } from '../../core/selectors/selectors';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { signin } from '../../core/actions/UserActions';
-import { Input, Warning, Button } from '../../styles/sharedStyles';
+import { Input, Warning, Button } from '../../shared/styles/sharedStyles';
 import { FormContainer } from './styles';
 
 const SignIn: FC = (): JSX.Element => {

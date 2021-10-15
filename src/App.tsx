@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import Menu from './components/Menu/Menu';
 import SignInRoute from './routes/SignInRoute';
@@ -11,10 +12,15 @@ import ExercisesList from './pages/ExercisesList/ExercisesList';
 import Exercise from './pages/Exercise/Exercise';
 import Loader from './components/Loader/Loader';
 import { PATHES } from './constants/constants';
+import { themePink, themeBlack } from './theme/index';
+import { useTypedSelector } from './core/hooks/useTypedSelector';
+import { selectTheme } from './core/selectors/selectors';
 
 const App: FC = (): JSX.Element => {
+  const creative_theme = useTypedSelector(selectTheme);
+
   return (
-    <>
+    <ThemeProvider theme={creative_theme ? themePink : themeBlack}>
       <Router>
         <Menu />
         <Loader />
@@ -36,7 +42,7 @@ const App: FC = (): JSX.Element => {
           </PrivateRoute>
         </Switch>
       </Router>
-    </>
+    </ThemeProvider>
   );
 };
 

@@ -16,6 +16,7 @@ interface InitialStateAuth {
     addWorkoutDayError: string | null;
   };
   isLoading: boolean;
+  creative_theme: boolean;
 }
 
 const initialState: InitialStateAuth = {
@@ -30,6 +31,7 @@ const initialState: InitialStateAuth = {
     addWorkoutDayError: null,
   },
   isLoading: false,
+  creative_theme: false,
 };
 
 const authReducer = handleActions<InitialStateAuth>(
@@ -87,7 +89,10 @@ const authReducer = handleActions<InitialStateAuth>(
       isLoading: true,
     }),
 
-    [UserActionsTypes.LOG_OUT_SUCCESS]: () => initialState,
+    [UserActionsTypes.LOG_OUT_SUCCESS]: (state: InitialStateAuth) => ({
+      ...initialState,
+      creative_theme: state.creative_theme,
+    }),
 
     [UserActionsTypes.LOG_OUT_ERROR]: (
       state: InitialStateAuth,
@@ -139,6 +144,21 @@ const authReducer = handleActions<InitialStateAuth>(
       errors: { ...action.payload },
       isLoading: false,
     }),
+
+    [UserActionsTypes.TOGGLE_THEME]: (state: InitialStateAuth) => {
+      console.log('state', {
+        ...state,
+        creative_theme: !state.creative_theme,
+      });
+      return {
+        ...state,
+        creative_theme: !state.creative_theme,
+      };
+    },
+    // ({
+    //   ...state,
+    //   creative_theme: !state.creative_theme,
+    // }),
   },
 
   initialState

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Button } from '../../styles/sharedStyles';
+import { Button } from '../../shared/styles/sharedStyles';
 
 export const Form = styled.form`
   position: fixed;
@@ -9,8 +9,8 @@ export const Form = styled.form`
 
   transform: translate(-50%, -50%);
 
-  border: 1px solid #6c757d;
-  background-color: #e6e6e6;
+  border: 1px solid ${(prop) => prop.theme.popup.border};
+  background-color: ${(prop) => prop.theme.popup.bg_color};
 
   width: 50%;
 

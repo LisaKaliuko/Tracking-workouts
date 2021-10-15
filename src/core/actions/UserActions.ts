@@ -22,6 +22,8 @@ export enum UserActionsTypes {
   ADD_WORKOUT_DAY = '[USER] ADD_WORKOUT_DAY',
   ADD_WORKOUT_DAY_SUCCESS = '[USER] ADD_WORKOUT_DAY_SUCCESS',
   ADD_WORKOUT_DAY_ERROR = '[USER] ADD_WORKOUT_DAY_ERROR',
+
+  TOGGLE_THEME = '[USER] TOGGLE_THEME',
 }
 
 export const signin = createAction(UserActionsTypes.SIGN_IN);
@@ -79,3 +81,5 @@ export const addWorkoutDayError = createAction(
   UserActionsTypes.ADD_WORKOUT_DAY_ERROR,
   (addWorkoutDayError: string) => ({ addWorkoutDayError })
 );
+
+export const toggleTheme = createAction(UserActionsTypes.TOGGLE_THEME);

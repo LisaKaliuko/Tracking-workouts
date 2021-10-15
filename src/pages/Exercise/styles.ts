@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Button } from '../../styles/sharedStyles';
+import { Button } from '../../shared/styles/sharedStyles';
 
 export const ExerciseContainer = styled.div`
   text-align: center;
@@ -22,7 +22,7 @@ export const CirclesContainer = styled.div`
 `;
 
 export const RepeatsCircle = styled.p`
-  border: 5px solid #630da7;
+  border: 5px solid ${(props) => props.theme.exercise.repeats_circle_color};
   border-radius: 50%;
 
   cursor: pointer;
@@ -35,7 +35,7 @@ export const RepeatsCircle = styled.p`
 
 export const SetsCircle = styled(RepeatsCircle)`
   cursor: auto;
-  border-color: #f45e5e;
+  border-color: ${(props) => props.theme.exercise.sets_circle_color};
 `;
 
 export const Form = styled.form`

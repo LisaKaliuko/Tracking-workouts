@@ -10,7 +10,7 @@ import {
 import { selectAllCategories } from '../../core/selectors/selectors';
 import { PATHES } from '../../constants/constants';
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
-import { CategoriesContainer, CategoriesItem, Title } from './styles';
+import { CategoriesContainer, Item, Title } from './styles';
 
 const Categories: FC = (): JSX.Element => {
   const arrOfCategories = useTypedSelector(selectAllCategories);
@@ -31,12 +31,9 @@ const Categories: FC = (): JSX.Element => {
       {arrOfCategories && arrOfCategories.length !== 0
         ? arrOfCategories.map((category: Category) => {
             return (
-              <CategoriesItem
-                key={category.id}
-                onClick={chooseCategory(category)}
-              >
+              <Item key={category.id} onClick={chooseCategory(category)}>
                 <Title>{category.title}</Title>
-              </CategoriesItem>
+              </Item>
             );
           })
         : null}
