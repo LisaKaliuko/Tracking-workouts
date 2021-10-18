@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const MenuBlock = styled.nav`
   display: flex;
@@ -43,59 +43,49 @@ export const LinkItem = styled.li`
   }
 `;
 
-export const Slider = styled.span`
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: ${(props) => props.theme.menu.radio_bg_color};
-  border-radius: 34px;
-  transition: 0.4s;
-
-  &:before {
-    position: absolute;
-    content: '';
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: ${(props) => props.theme.menu.toggle_color};
-    border-radius: 34px;
-    transition: 0.4s;
-  }
-`;
-
-export const Switch = styled.label`
+export const CheckBoxWrapper = styled.div`
   position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  margin: auto;
 `;
 
-export const ThemeInput = styled.input`
+export const CheckBoxLabel = styled.label`
+  position: absolute;
+  top: 23%;
+  left: 0;
+  width: 42px;
+  height: 26px;
+  border-radius: 15px;
+  background: ${(props) => props.theme.menu.radio_bg_color};
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+    background: ${(props) => props.theme.menu.toggle_color};
+    transition: 0.3s;
+  }
+`;
+export const CheckBox = styled.input`
   opacity: 0;
-  width: 0;
-  height: 0;
+  z-index: 1;
+  border-radius: 15px;
+  width: 42px;
+  height: 26px;
 
-  &:checked + ${Slider} {
-    background-color: ${(props) => props.theme.menu.creative_radio_bg_color};
-  }
+  &:checked + ${CheckBoxLabel} {
+    background: ${(props) => props.theme.menu.creative_radio_bg_color};
 
-  &:focus + ${Slider} {
-    box-shadow: 0 0 1px ${(props) => props.theme.menu.creative_radio_bg_color};
-  }
-
-  &:checked + ${Slider}:before {
-    ${(props) =>
-      props.className?.includes('on')
-        ? css`
-            transform: translateX(26px);
-          `
-        : css`
-            transform: translateX(0px);
-          `}
+    &::after {
+      content: '';
+      display: block;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      margin-left: 21px;
+      transition: 0.3s;
+    }
   }
 `;

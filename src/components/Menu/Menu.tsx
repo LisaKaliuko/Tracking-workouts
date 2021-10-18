@@ -15,9 +15,9 @@ import {
   MenuBlock,
   LinksContainer,
   LinkItem,
-  Switch,
-  Slider,
-  ThemeInput,
+  CheckBoxWrapper,
+  CheckBox,
+  CheckBoxLabel,
 } from './styles';
 
 const Menu: FC = (): JSX.Element => {
@@ -64,13 +64,10 @@ const Menu: FC = (): JSX.Element => {
             </LinkItem>
           </>
         ) : null}
-        <Switch>
-          <ThemeInput
-            type="checkbox"
-            className={creative_theme ? 'on' : 'off'}
-          />
-          <Slider onClick={changeTheme}></Slider>
-        </Switch>
+        <CheckBoxWrapper>
+          <CheckBox id="checkbox" type="checkbox" onClick={changeTheme} />
+          <CheckBoxLabel htmlFor="checkbox" />
+        </CheckBoxWrapper>
       </LinksContainer>
     </MenuBlock>
   );
