@@ -11,13 +11,21 @@ import {
 import { useTypedSelector } from '../../core/hooks/useTypedSelector';
 import { logOut, toggleTheme } from '../../core/actions/UserActions';
 import { PATHES } from '../../constants/constants';
-import { MenuBlock, LinksContainer, LinkItem, Switch, Slider } from './styles';
+import {
+  MenuBlock,
+  LinksContainer,
+  LinkItem,
+  Switch,
+  Slider,
+  ThemeInput,
+} from './styles';
 
 const Menu: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
   const category = useTypedSelector(selectCurrentCategory);
   const date = useTypedSelector(selectCurrentDate);
   const creative_theme = useTypedSelector(selectTheme);
+  console.log('creative_theme', creative_theme);
   const dispatch = useDispatch();
 
   const logOutUser = () => dispatch(logOut());
@@ -56,8 +64,11 @@ const Menu: FC = (): JSX.Element => {
             </LinkItem>
           </>
         ) : null}
-        <Switch className={creative_theme ? 'on' : 'off'}>
-          <input type="checkbox" />
+        <Switch>
+          <ThemeInput
+            type="checkbox"
+            className={creative_theme ? 'on' : 'off'}
+          />
           <Slider onClick={changeTheme}></Slider>
         </Switch>
       </LinksContainer>

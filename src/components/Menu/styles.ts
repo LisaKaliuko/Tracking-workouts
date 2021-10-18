@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const MenuBlock = styled.nav`
   display: flex;
@@ -73,22 +73,29 @@ export const Switch = styled.label`
   width: 60px;
   height: 34px;
   margin: auto;
+`;
 
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+export const ThemeInput = styled.input`
+  opacity: 0;
+  width: 0;
+  height: 0;
 
-    &:checked + ${Slider} {
-      background-color: ${(props) => props.theme.menu.creative_radio_bg_color};
-    }
+  &:checked + ${Slider} {
+    background-color: ${(props) => props.theme.menu.creative_radio_bg_color};
+  }
 
-    &:focus + ${Slider} {
-      box-shadow: 0 0 1px ${(props) => props.theme.menu.creative_radio_bg_color};
-    }
+  &:focus + ${Slider} {
+    box-shadow: 0 0 1px ${(props) => props.theme.menu.creative_radio_bg_color};
+  }
 
-    &:checked + ${Slider}:before {
-      transform: translateX(26px);
-    }
+  &:checked + ${Slider}:before {
+    ${(props) =>
+      props.className?.includes('on')
+        ? css`
+            transform: translateX(26px);
+          `
+        : css`
+            transform: translateX(0px);
+          `}
   }
 `;
