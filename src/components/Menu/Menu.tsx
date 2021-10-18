@@ -65,7 +65,12 @@ const Menu: FC = (): JSX.Element => {
           </>
         ) : null}
         <CheckBoxWrapper>
-          <CheckBox id="checkbox" type="checkbox" onClick={changeTheme} />
+          <CheckBox
+            id="checkbox"
+            type="checkbox"
+            onClick={changeTheme}
+            defaultChecked={creative_theme}
+          />
           <CheckBoxLabel htmlFor="checkbox" />
         </CheckBoxWrapper>
       </LinksContainer>
