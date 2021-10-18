@@ -26,12 +26,6 @@ Go to folder tracking-app
 
 Command `npm build` in console
 
-## How to change theme
-
-src/styles/themes.ts
-
-Change const CURRENT_THEME on needed theme
-
 ## Database snapshot
 
 In this project there are 3 collections: categories, exercises and users.
@@ -127,4 +121,6 @@ Eslint
 
 `src/shared/icons` - folder contains .tsx file with bootstrap icons
 
-`src/styles` - folder contains .ts files with themes for app and common styles for items
+`src/shared/styles` - folder contains .ts file with styled items which different components use
+
+`src/theme` - folder contains .ts files with themes for app
