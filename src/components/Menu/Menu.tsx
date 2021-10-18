@@ -25,7 +25,6 @@ const Menu: FC = (): JSX.Element => {
   const category = useTypedSelector(selectCurrentCategory);
   const date = useTypedSelector(selectCurrentDate);
   const creative_theme = useTypedSelector(selectTheme);
-  console.log('creative_theme', creative_theme);
   const dispatch = useDispatch();
 
   const logOutUser = () => dispatch(logOut());
