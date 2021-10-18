@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
 
+import { DEVICES } from '../../constants/constants';
+
 export const CalendarContainer = styled.div`
-  width: 75%;
+  width: 95%;
 
   margin: auto;
 `;
@@ -10,16 +12,36 @@ export const Title = styled.h2`
   text-align: center;
 
   margin-top: 20px;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
+
+  @media ${DEVICES.desktop} {
+    font-size: 55px;
+  }
 `;
 
 export const MonthContainer = styled.div`
   display: flex;
   justify-content: space-around;
 
-  width: 50%;
+  width: 90%;
 
   margin: auto;
+
+  @media ${DEVICES.mobileL} {
+    width: 80%;
+  }
+
+  @media ${DEVICES.tablet} {
+    width: 50%;
+  }
+
+  @media ${DEVICES.desktop} {
+    width: 20%;
+
+    h4 {
+      font-size: 35px;
+    }
+  }
 `;
 
 export const Arrow = styled.a`
@@ -28,17 +50,28 @@ export const Arrow = styled.a`
 `;
 
 export const CalendarTable = styled.table`
-  font-size: 25px;
-
   width: 50%;
   margin: auto;
 
+  @media ${DEVICES.laptopL} {
+    width: 37%;
+  }
+
   th,
   td {
+    font-size: 16px;
     text-align: center;
 
     padding: 10px;
     padding-bottom: 0px;
+
+    @media ${DEVICES.mobileL} {
+      font-size: 25px;
+    }
+
+    @media ${DEVICES.desktop} {
+      font-size: 45px;
+    }
   }
 `;
 

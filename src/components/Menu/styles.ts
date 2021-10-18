@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { DEVICES } from '../../constants/constants';
+
 export const MenuBlock = styled.nav`
   display: flex;
   align-items: center;
@@ -11,7 +13,12 @@ export const MenuBlock = styled.nav`
 
   background-color: ${(props) => props.theme.menu.color};
 
+  @media ${DEVICES.desktop} {
+    padding: 10px 220px;
+  }
+
   a {
+    display: none;
     color: ${(props) => props.theme.menu.text_color};
     font-weight: bold;
     font-size: 30px;
@@ -22,6 +29,14 @@ export const MenuBlock = styled.nav`
     &:hover {
       color: ${(props) => props.theme.menu.text_hover};
     }
+
+    @media ${DEVICES.tablet} {
+      display: inline-block;
+    }
+
+    @media ${DEVICES.desktop} {
+      font-size: 50px;
+    }
   }
 `;
 
@@ -30,6 +45,7 @@ export const LinksContainer = styled.ul`
   flex-direction: row;
 
   margin: 0;
+  padding-left: 0;
 
   list-style: none;
 `;
@@ -38,8 +54,17 @@ export const LinkItem = styled.li`
   margin: 10px;
 
   a {
-    font-size: 20px;
+    display: inline-block;
+    font-size: 16px;
     font-weight: normal;
+
+    @media ${DEVICES.tablet} {
+      font-size: 20px;
+    }
+
+    @media ${DEVICES.desktop} {
+      font-size: 35px;
+    }
   }
 `;
 
@@ -57,6 +82,11 @@ export const CheckBoxLabel = styled.label`
   background: ${(props) => props.theme.menu.radio_bg_color};
   cursor: pointer;
 
+  @media ${DEVICES.desktop} {
+    width: 70px;
+    height: 35px;
+  }
+
   &::after {
     content: '';
     display: block;
@@ -66,6 +96,11 @@ export const CheckBoxLabel = styled.label`
     margin: 3px;
     background: ${(props) => props.theme.menu.toggle_color};
     transition: 0.3s;
+
+    @media ${DEVICES.desktop} {
+      width: 28px;
+      height: 28px;
+    }
   }
 `;
 export const CheckBox = styled.input`

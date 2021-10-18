@@ -1,13 +1,37 @@
 import styled from 'styled-components';
 
 import { Button } from '../../shared/styles/sharedStyles';
+import { DEVICES } from '../../constants/constants';
 
 export const ExerciseContainer = styled.div`
   text-align: center;
 
   margin: auto;
 
-  width: 50%;
+  width: 95%;
+
+  @media ${DEVICES.tablet} {
+    width: 80%;
+  }
+
+  @media ${DEVICES.laptop} {
+    width: 65%;
+  }
+
+  @media ${DEVICES.laptopL} {
+    width: 60%;
+
+    h2 {
+      font-size: 50px;
+    }
+  }
+
+  img {
+    width: 90%;
+
+    @media ${DEVICES.desktop} {
+      width: 75%;
+  }
 `;
 
 export const CirclesContainer = styled.div`
@@ -19,6 +43,12 @@ export const CirclesContainer = styled.div`
   div {
     margin: 10px;
   }
+
+  @media ${DEVICES.desktop} {
+    span {
+      font-size: 35px;
+    }
+  }
 `;
 
 export const RepeatsCircle = styled.p`
@@ -27,23 +57,54 @@ export const RepeatsCircle = styled.p`
 
   cursor: pointer;
 
-  font-size: 40px;
+  font-size: 25px;
 
-  padding: 30px 35px;
+  padding: 25px;
   margin: 15px;
+
+  @media ${DEVICES.mobileM} {
+    font-size: 40px;
+  }
+
+  @media ${DEVICES.tablet} {
+    padding: 30px;
+  }
+
+  @media ${DEVICES.desktop} {
+    font-size: 78px;
+    padding: 90px 45px;
+  }
 `;
 
 export const SetsCircle = styled(RepeatsCircle)`
   cursor: auto;
   border-color: ${(props) => props.theme.exercise.sets_circle_color};
+
+  @media ${DEVICES.desktop} {
+    padding: 90px 45px;
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
-  width: 40%;
+  width: 80%;
 
   margin: auto;
   margin-bottom: 25px;
+
+  @media ${DEVICES.tablet} {
+    width: 60%;
+  }
+
+  @media ${DEVICES.laptopL} {
+    width: 40%;
+  }
+
+  @media ${DEVICES.desktop} {
+    input {
+      font-size: 55px;
+    }
+  }
 `;
 
 export const ButtonAdd = styled(Button)`
@@ -55,4 +116,10 @@ export const ButtonAdd = styled(Button)`
 
   margin: 0px 0px 0px 3px;
   padding: 0px;
+
+  @media ${DEVICES.desktop} {
+    font-size: 55px; 
+
+    min-width: 93px;
+    height: 93px;
 `;

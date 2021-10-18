@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { DEVICES } from '../../constants/constants';
+
 export const CategoriesContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -14,13 +16,33 @@ export const Item = styled.div`
   width: 520px;
   height: 270px;
   margin: 30px;
-  padding: 6% 0px;
+  padding: 33% 0px;
 
   border: 2px solid ${(prop) => prop.theme.categories.item_border};
   border-radius: 10px;
 
   background-image: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/woman-works-out-at-home-royalty-free-image-1617639949.');
   background-size: cover;
+
+  @media ${DEVICES.mobileL} {
+    padding: 25% 0px;
+  }
+
+  @media ${DEVICES.tablet} {
+    padding: 14% 0px;
+  }
+
+  @media ${DEVICES.laptop} {
+    padding: 10% 0px;
+  }
+
+  @media ${DEVICES.laptopL} {
+    padding: 7% 0px;
+  }
+
+  @media ${DEVICES.desktop} {
+    padding: 4% 0px;
+  }
 `;
 
 export const Title = styled.p`
@@ -28,7 +50,7 @@ export const Title = styled.p`
 
   background-color: ${(prop) => prop.theme.categories.title_background};
 
-  font-size: 40px;
+  font-size: 30px;
   text-align: center;
   color: ${(prop) => prop.theme.categories.text_color};
   text-decoration: none;
@@ -36,5 +58,13 @@ export const Title = styled.p`
   &:hover {
     color: ${(prop) => prop.theme.categories.text_hover};
     cursor: pointer;
+  }
+
+  @media ${DEVICES.mobileL} {
+    font-size: 37px;
+  }
+
+  @media ${DEVICES.laptopL} {
+    font-size: 45px;
   }
 `;
