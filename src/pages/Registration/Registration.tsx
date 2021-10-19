@@ -48,8 +48,8 @@ const Registration: FC = (): JSX.Element => {
             onChange={changePassword}
           />
         </div>
-        {errors.registerError ? (
-          <Warning>{errors.registerError}</Warning>
+        {errors?.registerError ? (
+          <Warning>{errors?.registerError}</Warning>
         ) : null}
         <Button type="submit">Регистрация</Button>
       </form>

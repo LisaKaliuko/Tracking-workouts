@@ -48,7 +48,7 @@ const SignIn: FC = (): JSX.Element => {
             onChange={changePassword}
           />
         </div>
-        {errors.signinError ? <Warning>{errors.signinError}</Warning> : null}
+        {errors?.signinError ? <Warning>{errors?.signinError}</Warning> : null}
         <Button type="submit">Войти</Button>
       </form>
     </FormContainer>
