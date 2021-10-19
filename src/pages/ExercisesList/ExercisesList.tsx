@@ -37,13 +37,13 @@ const ExercisesList: FC = (): JSX.Element => {
       {arrOfExercises && arrOfExercises.length !== 0
         ? arrOfExercises.map((exercise: Exercise) => {
             return (
-              <Item key={exercise.id} onClick={chooseExercise(exercise)}>
+              <Item key={exercise?.id} onClick={chooseExercise(exercise)}>
                 <ImageBlock>
-                  <img src={exercise.img} />
+                  <img src={exercise?.img} />
                 </ImageBlock>
                 <div>
-                  <Title>{exercise.name}</Title>
-                  <Description>{exercise.description}</Description>
+                  <Title>{exercise?.name}</Title>
+                  <Description>{exercise?.description}</Description>
                 </div>
                 <ArrowRightExercise />
               </Item>

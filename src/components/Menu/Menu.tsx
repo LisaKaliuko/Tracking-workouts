@@ -34,7 +34,7 @@ const Menu: FC = (): JSX.Element => {
     <MenuBlock>
       <Link to={PATHES.CALENDAR}>Tracking workout</Link>
       <LinksContainer>
-        {!user.email ? (
+        {!user?.email ? (
           <>
             <LinkItem>
               <Link to={PATHES.REGISTRATION}>Регистрация</Link>
@@ -44,7 +44,7 @@ const Menu: FC = (): JSX.Element => {
             </LinkItem>
           </>
         ) : null}
-        {user.email ? (
+        {user?.email ? (
           <>
             {date ? (
               <LinkItem>

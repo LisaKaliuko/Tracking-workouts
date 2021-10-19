@@ -31,8 +31,8 @@ const Categories: FC = (): JSX.Element => {
       {arrOfCategories && arrOfCategories.length !== 0
         ? arrOfCategories.map((category: Category) => {
             return (
-              <Item key={category.id} onClick={chooseCategory(category)}>
-                <Title>{category.title}</Title>
+              <Item key={category?.id} onClick={chooseCategory(category)}>
+                <Title>{category?.title}</Title>
               </Item>
             );
           })

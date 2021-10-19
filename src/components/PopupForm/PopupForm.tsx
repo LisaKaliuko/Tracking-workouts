@@ -21,10 +21,10 @@ const PopupForm: FC = (): JSX.Element => {
 
   const clickFinishWorkout = (e: MouseEvent) => {
     e.preventDefault();
-    if (date && user.email && arrOfWorkouts) {
+    if (date && user?.email && arrOfWorkouts) {
       dispatch(
         addWorkoutDay({
-          email: user.email,
+          email: user?.email,
           arr: arrOfWorkouts,
           date: date,
           cb: () => history.push(PATHES.CALENDAR),

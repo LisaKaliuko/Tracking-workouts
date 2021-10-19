@@ -82,19 +82,19 @@ const Exercise: FC = (): JSX.Element => {
     <ExerciseContainer>
       {exercise ? (
         <>
-          <img src={exercise.img} />
+          <img src={exercise?.img} />
           {showPopup ? <PopupForm /> : null}
-          <h2>{exercise.name}</h2>
+          <h2>{exercise?.name}</h2>
           <CirclesContainer>
             <div>
               <RepeatsCircle onClick={addInputValue}>
-                {exercise.repeats}
+                {exercise?.repeats}
               </RepeatsCircle>
               <span>Повторений требуется</span>
             </div>
             <div>
               <SetsCircle>
-                {doneSets}/{exercise.sets}
+                {doneSets}/{exercise?.sets}
               </SetsCircle>
               <span>Подходов выполнено</span>
             </div>
