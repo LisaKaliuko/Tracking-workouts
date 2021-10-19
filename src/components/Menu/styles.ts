@@ -19,7 +19,7 @@ export const MenuBlock = styled.nav`
 
   a {
     display: none;
-    color: ${(props) => props.theme.menu.text_color};
+    color: ${(props) => props.theme.menu.textColor};
     font-weight: bold;
     font-size: 30px;
     text-decoration: none;
@@ -27,7 +27,7 @@ export const MenuBlock = styled.nav`
     padding: 10px 0;
 
     &:hover {
-      color: ${(props) => props.theme.menu.text_hover};
+      color: ${(props) => props.theme.menu.textHover};
     }
 
     @media ${DEVICES.tablet} {
@@ -79,7 +79,7 @@ export const CheckBoxLabel = styled.label`
   width: 42px;
   height: 26px;
   border-radius: 15px;
-  background: ${(props) => props.theme.menu.radio_bg_color};
+  background: ${(props) => props.theme.menu.radioBgColor};
   cursor: pointer;
 
   @media ${DEVICES.desktop} {
@@ -94,7 +94,7 @@ export const CheckBoxLabel = styled.label`
     width: 18px;
     height: 18px;
     margin: 3px;
-    background: ${(props) => props.theme.menu.toggle_color};
+    background: ${(props) => props.theme.menu.toggleColor};
     transition: 0.3s;
 
     @media ${DEVICES.desktop} {
@@ -111,7 +111,7 @@ export const CheckBox = styled.input`
   height: 26px;
 
   &:checked + ${CheckBoxLabel} {
-    background: ${(props) => props.theme.menu.creative_radio_bg_color};
+    background: ${(props) => props.theme.menu.creativeRadioBgColor};
 
     &::after {
       content: '';

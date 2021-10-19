@@ -15,11 +15,11 @@ export const Item = styled.div`
   align-items: center;
 
   text-decoration: none;
-  color: ${(props) => props.theme.exercises_list.text_color};
+  color: ${(props) => props.theme.exercisesList.textColor};
   cursor: pointer;
 
-  border-top: 1px solid ${(props) => props.theme.exercises_list.border_color};
-  border-bottom: 1px solid ${(props) => props.theme.exercises_list.border_color};
+  border-top: 1px solid ${(props) => props.theme.exercisesList.borderColor};
+  border-bottom: 1px solid ${(props) => props.theme.exercisesList.borderColor};
 
   margin: 20px 0px;
   padding: 15px 0px;

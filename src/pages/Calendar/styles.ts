@@ -46,7 +46,7 @@ export const MonthContainer = styled.div`
 
 export const Arrow = styled.a`
   cursor: pointer;
-  color: ${(props) => props.theme.calendar.arrow_color};
+  color: ${(props) => props.theme.calendar.arrowColor};
 `;
 
 export const CalendarTable = styled.table`
@@ -81,7 +81,7 @@ export const TableData = styled.td`
       props.className?.includes('current-day')
         ? css`
             font-weight: 700;
-            color: ${(props) => props.theme.calendar.current_day_color};
+            color: ${(props) => props.theme.calendar.currentDayColor};
           `
         : ''}
   }
@@ -102,6 +102,6 @@ export const DayItem = styled.p`
 
   &:hover {
     font-weight: 500;
-    color: ${(props) => props.theme.calendar.day_hover};
+    color: ${(props) => props.theme.calendar.dayHover};
   }
 `;

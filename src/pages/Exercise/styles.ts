@@ -52,7 +52,7 @@ export const CirclesContainer = styled.div`
 `;
 
 export const RepeatsCircle = styled.p`
-  border: 5px solid ${(props) => props.theme.exercise.repeats_circle_color};
+  border: 5px solid ${(props) => props.theme.exercise.repeatsCircleColor};
   border-radius: 50%;
 
   cursor: pointer;
@@ -78,7 +78,7 @@ export const RepeatsCircle = styled.p`
 
 export const SetsCircle = styled(RepeatsCircle)`
   cursor: auto;
-  border-color: ${(props) => props.theme.exercise.sets_circle_color};
+  border-color: ${(props) => props.theme.exercise.setsCircleColor};
 
   @media ${DEVICES.desktop} {
     padding: 90px 45px;

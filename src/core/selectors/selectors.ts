@@ -51,5 +51,5 @@ export const selectWorkoutLoading = createSelector(
 
 export const selectTheme = createSelector(
   getAuth,
-  (auth) => auth.creative_theme
+  (auth) => auth.creativeTheme
 );

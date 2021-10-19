@@ -17,10 +17,10 @@ import { useTypedSelector } from './core/hooks/useTypedSelector';
 import { selectTheme } from './core/selectors/selectors';
 
 const App: FC = (): JSX.Element => {
-  const creative_theme = useTypedSelector(selectTheme);
+  const creativeTheme = useTypedSelector(selectTheme);
 
   return (
-    <ThemeProvider theme={creative_theme ? themePink : themeBlack}>
+    <ThemeProvider theme={creativeTheme ? themePink : themeBlack}>
       <Router>
         <Menu />
         <Loader />

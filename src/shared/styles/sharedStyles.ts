@@ -7,10 +7,10 @@ export const Input = styled.input`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  color: ${(props) => props.theme.input.text_color};
+  color: ${(props) => props.theme.input.textColor};
 
-  background-color: ${(props) => props.theme.input.bg_color};
-  border: 1px solid ${(props) => props.theme.input.border_color};
+  background-color: ${(props) => props.theme.input.bgColor};
+  border: 1px solid ${(props) => props.theme.input.borderColor};
   border-radius: 7px;
 
   padding: 6px 12px;
@@ -18,12 +18,12 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 3px 3px ${(props) => props.theme.input.focus_color};
+    box-shadow: 0 0 3px 3px ${(props) => props.theme.input.focusColor};
   }
 `;
 
 export const Warning = styled.p`
-  color: ${(props) => props.theme.warning.text_color};
+  color: ${(props) => props.theme.warning.textColor};
 
   margin: 0px;
 `;
@@ -33,17 +33,17 @@ export const Button = styled.button`
   margin-top: 15px;
   padding: 6px 12px;
 
-  background-color: ${(props) => props.theme.button.bg_color};
+  background-color: ${(props) => props.theme.button.bgColor};
 
-  border: 1px solid ${(props) => props.theme.button.border_color};
+  border: 1px solid ${(props) => props.theme.button.borderColor};
   border-radius: 0.25rem;
 
   font-size: 16px;
-  color: ${(props) => props.theme.button.text_color};
+  color: ${(props) => props.theme.button.textColor};
   font-weight: 400;
 
   &:hover {
-    background-color: ${(props) => props.theme.button.bg_hover_color};
-    border-color: ${(props) => props.theme.button.border_hover_color};
+    background-color: ${(props) => props.theme.button.bgHoverColor};
+    border-color: ${(props) => props.theme.button.borderHoverColor};
   }
 `;

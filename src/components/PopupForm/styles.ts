@@ -11,7 +11,7 @@ export const Form = styled.form`
   transform: translate(-50%, -50%);
 
   border: 1px solid ${(prop) => prop.theme.popup.border};
-  background-color: ${(prop) => prop.theme.popup.bg_color};
+  background-color: ${(prop) => prop.theme.popup.bgColor};
 
   width: 90%;
 

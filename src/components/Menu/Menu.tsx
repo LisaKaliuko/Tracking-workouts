@@ -24,7 +24,7 @@ const Menu: FC = (): JSX.Element => {
   const user = useTypedSelector(selectUser);
   const category = useTypedSelector(selectCurrentCategory);
   const date = useTypedSelector(selectCurrentDate);
-  const creative_theme = useTypedSelector(selectTheme);
+  const creativeTheme = useTypedSelector(selectTheme);
   const dispatch = useDispatch();
 
   const logOutUser = () => dispatch(logOut());
@@ -68,7 +68,7 @@ const Menu: FC = (): JSX.Element => {
             id="checkbox"
             type="checkbox"
             onClick={changeTheme}
-            defaultChecked={creative_theme}
+            defaultChecked={creativeTheme}
           />
           <CheckBoxLabel htmlFor="checkbox" />
         </CheckBoxWrapper>

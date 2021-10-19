@@ -18,7 +18,7 @@ export const Item = styled.div`
   margin: 30px;
   padding: 33% 0px;
 
-  border: 2px solid ${(prop) => prop.theme.categories.item_border};
+  border: 2px solid ${(prop) => prop.theme.categories.itemBorder};
   border-radius: 10px;
 
   background-image: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/woman-works-out-at-home-royalty-free-image-1617639949.');
@@ -48,15 +48,15 @@ export const Item = styled.div`
 export const Title = styled.p`
   display: block;
 
-  background-color: ${(prop) => prop.theme.categories.title_background};
+  background-color: ${(prop) => prop.theme.categories.titleBackground};
 
   font-size: 30px;
   text-align: center;
-  color: ${(prop) => prop.theme.categories.text_color};
+  color: ${(prop) => prop.theme.categories.textColor};
   text-decoration: none;
 
   &:hover {
-    color: ${(prop) => prop.theme.categories.text_hover};
+    color: ${(prop) => prop.theme.categories.textHover};
     cursor: pointer;
   }
 
